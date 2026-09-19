@@ -262,19 +262,27 @@ fun ContaCard(
             estado.aviso?.let { MensagemDeTela(texto = it, erro = false) }
 
             HorizontalDivider(color = AquaBorder, modifier = Modifier.padding(top = 16.dp))
-            TextButton(
-                onClick = { confirmarExclusao = true },
-                enabled = !estado.excluindoConta,
-                // O TextButton tem 12dp de folga interna: puxa para o texto alinhar com a margem do cartão.
-                modifier = Modifier
-                    .offset(x = (-12).dp)
-                    .testTag("excluir_conta")
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = if (estado.excluindoConta) "Excluindo conta…" else "Excluir minha conta",
-                    color = AquaMagenta,
-                    fontSize = 13.sp
-                )
+                TextButton(
+                    onClick = { confirmarExclusao = true },
+                    enabled = !estado.excluindoConta,
+                    // O TextButton tem 12dp de folga interna: puxa para o texto alinhar com a margem do cartão.
+                    modifier = Modifier
+                        .offset(x = (-12).dp)
+                        .testTag("excluir_conta")
+                ) {
+                    Text(
+                        text = if (estado.excluindoConta) "Excluindo conta…" else "Excluir minha conta",
+                        color = AquaMagenta,
+                        fontSize = 13.sp
+                    )
+                }
+                // Mesma folga, do outro lado: o texto termina na margem direita do cartão.
+                LinkDaPolitica(modifier = Modifier.offset(x = 12.dp))
             }
         }
     }

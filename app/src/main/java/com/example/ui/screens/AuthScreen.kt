@@ -54,6 +54,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.model.TrainingLevel
+import com.example.ui.components.LinkDaPolitica
 import com.example.ui.components.MensagemDeTela
 import com.example.ui.components.SeletorDeNivel
 import com.example.ui.theme.AquaBackground
@@ -284,6 +285,23 @@ fun AuthScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(12.dp))
+
+        // A política diz "ao criar uma conta, você declara ter lido": o link fica antes do cadastro.
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            if (cadastro) {
+                Text(
+                    text = "Ao criar a conta, você declara ter lido a",
+                    fontSize = 12.sp,
+                    color = AquaTextSecondary
+                )
+            }
+            LinkDaPolitica()
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
     }
 }
