@@ -18,7 +18,7 @@ natacao-treinos/scripts/programa_aa.py.
 
 Uso:
     python scripts/programa_aa_para_supabase.py
-    python scripts/programa_aa_para_supabase.py --fonte ../natacao-treinos/programa_aa.json
+    python scripts/programa_aa_para_supabase.py --fonte ../carrossel/programa_aa.json
 """
 import argparse
 import json
@@ -32,7 +32,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import programa_nc_para_supabase as nc  # noqa: E402
 
 RAIZ = nc.RAIZ
-FONTE_LOCAL = RAIZ.parent / "natacao-treinos" / "programa_aa.json"
+FONTE_LOCAL = RAIZ.parent / "carrossel" / "programa_aa.json"
 FONTE_REMOTA = "https://raw.githubusercontent.com/Nicevargas/natacao-treinos/main/programa_aa.json"
 SAIDA_SQL = RAIZ / "supabase" / "seed" / "programa_aa.sql"
 SAIDA_JSON = RAIZ / "app" / "src" / "main" / "assets" / "programa_aa.json"
@@ -225,7 +225,7 @@ COMMIT;
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Converte o programa de águas abertas em treinos sugeridos do Aquagenda.")
-    ap.add_argument("--fonte", help="URL ou caminho do programa_aa.json (padrão: ../natacao-treinos/programa_aa.json)")
+    ap.add_argument("--fonte", help="URL ou caminho do programa_aa.json (padrão: ../carrossel/programa_aa.json)")
     args = ap.parse_args()
 
     dados, fonte = ler_fonte(args.fonte)

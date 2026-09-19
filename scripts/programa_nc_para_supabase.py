@@ -20,7 +20,7 @@ confere o que a conversão precisa para não gravar lixo.
 
 Uso:
     python scripts/programa_nc_para_supabase.py
-    python scripts/programa_nc_para_supabase.py --fonte ../natacao-treinos/programa_nc.json
+    python scripts/programa_nc_para_supabase.py --fonte ../carrossel/programa_nc.json
 """
 import argparse
 import json
@@ -37,7 +37,7 @@ for _s in (sys.stdout, sys.stderr):
         pass
 
 RAIZ = Path(__file__).resolve().parent.parent
-FONTE_LOCAL = RAIZ.parent / "natacao-treinos" / "programa_nc.json"
+FONTE_LOCAL = RAIZ.parent / "carrossel" / "programa_nc.json"
 FONTE_REMOTA = "https://raw.githubusercontent.com/Nicevargas/natacao-treinos/main/programa_nc.json"
 SAIDA_SQL = RAIZ / "supabase" / "seed" / "programa_nc.sql"
 SAIDA_JSON = RAIZ / "app" / "src" / "main" / "assets" / "programa_nc.json"
@@ -332,7 +332,7 @@ COMMIT;
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Converte o programa do Método NC em treinos sugeridos do Aquagenda.")
-    ap.add_argument("--fonte", help="URL ou caminho do programa_nc.json (padrão: ../natacao-treinos/programa_nc.json)")
+    ap.add_argument("--fonte", help="URL ou caminho do programa_nc.json (padrão: ../carrossel/programa_nc.json)")
     args = ap.parse_args()
 
     dados, fonte = ler_fonte(args.fonte)

@@ -118,7 +118,7 @@ A partir de 15/09/2026 o carrossel segue o Método NC: o objetivo vem antes da m
 
 Até 14/09 a sugestão vinha do ciclo antigo; de 15/09 em diante, do método. A semana do método começa na terça: Ter Técnica, Qua Resistência, Qui Velocidade, Sex Estilos, Sáb Ritmo, Dom Força específica, Seg Recuperação. Enquanto o seed não roda, tudo continua como antes. O app embarca os dois ciclos (`treinos_ciclo.json` e `programa_nc.json`) e faz a mesma escolha sem rede.
 
-Quando o programa mudar, gere o seed de novo a partir de `../natacao-treinos/programa_nc.json` e repita o passo 2:
+Quando o programa mudar, gere o seed de novo a partir de `../carrossel/programa_nc.json` e repita o passo 2:
 
 ```bash
 python scripts/programa_nc_para_supabase.py

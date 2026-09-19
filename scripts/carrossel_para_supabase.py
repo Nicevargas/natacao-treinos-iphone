@@ -18,7 +18,7 @@ Quando o treinos.json mudar, rode de novo e reaplique o .sql.
 
 Uso:
     python scripts/carrossel_para_supabase.py
-    python scripts/carrossel_para_supabase.py --fonte ../natacao-treinos/treinos.json
+    python scripts/carrossel_para_supabase.py --fonte ../carrossel/treinos.json
 """
 import argparse
 import json
