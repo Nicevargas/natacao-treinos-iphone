@@ -14,7 +14,8 @@ android {
   compileSdk { version = release(36) { minorApiLevel = 1 } }
 
   defaultConfig {
-    applicationId = "com.aistudio.aquagenda.swmact"
+    // Identificador na Play Store: não muda depois da primeira publicação.
+    applicationId = "com.natacaocriativa.treinos"
     minSdk = 24
     targetSdk = 36
     versionCode = 1

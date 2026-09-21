@@ -16,3 +16,10 @@
 local.properties
 .env
 debug.keystore
+# Chave de envio da Play Store: nunca vai para o GitHub.
+*.jks
+*.keystore
+keystore.properties
+# Saídas do Android Studio (.aab assinado) e configurações locais da IDE.
+/app/release/
+/.idea/
