@@ -12,7 +12,7 @@ import java.io.File
 
 class AguasAbertasTest {
 
-    private fun asset(nome: String) = File("src/main/assets/$nome").readText()
+    private fun asset(nome: String) = File("../app/src/main/assets/$nome").readText()
 
     private val treinos = TreinosSugeridosRepository { modo ->
         when (modo) {

@@ -13,8 +13,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import com.example.MainActivity
-import com.example.R
+import com.example.shared.R
 import com.example.data.ciclo.DataCivil
 import java.util.Calendar
 import java.util.TimeZone
@@ -91,7 +90,9 @@ object LembreteDeTreino {
         val abrir = PendingIntent.getActivity(
             context,
             0,
-            Intent(context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP),
+            // O módulo shared não enxerga a MainActivity (fica no módulo do app): abre pela entrada do app.
+            (context.packageManager.getLaunchIntentForPackage(context.packageName) ?: Intent())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP),
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
         val notificacao = NotificationCompat.Builder(context, CANAL)

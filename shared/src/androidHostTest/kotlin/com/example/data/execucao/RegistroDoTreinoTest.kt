@@ -11,7 +11,7 @@ import java.io.File
 
 class RegistroDoTreinoTest {
 
-    private val ciclo = CicloDeTreinos.deJson(File("src/main/assets/treinos_ciclo.json").readText())
+    private val ciclo = CicloDeTreinos.deJson(File("../app/src/main/assets/treinos_ciclo.json").readText())
     private val sugestao = ciclo.sugestao(DataCivil.deIso("2026-09-13"), TrainingLevel.INTERMEDIARIO)!!
 
     @Test

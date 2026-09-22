@@ -10,7 +10,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.R
+import com.example.shared.R
 
 /** Logo "Natação Criativa Treinos" no topo. Embarcado no app: aparece mesmo sem internet. O ícone do app é outro (natacao_criativa_icone). */
 @Composable

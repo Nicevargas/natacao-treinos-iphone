@@ -1,7 +1,6 @@
 package com.example.data.supabase
 
 import android.util.Log
-import com.example.BuildConfig
 import com.example.data.auth.AuthApi
 import com.example.data.auth.RefreshGrantBody
 import com.example.data.auth.SessaoStore
@@ -46,8 +45,8 @@ enum class SupabaseStatus {
 object SupabaseClient {
     private const val TAG = "SupabaseClient"
 
-    val supabaseUrl: String = BuildConfig.SUPABASE_URL.trim()
-    val supabaseAnonKey: String = BuildConfig.SUPABASE_ANON_KEY.trim()
+    val supabaseUrl: String = Configuracao.SUPABASE_URL.trim()
+    val supabaseAnonKey: String = Configuracao.SUPABASE_ANON_KEY.trim()
 
     val isConfigured: Boolean by lazy {
         supabaseUrl.isNotBlank() &&
