@@ -10,7 +10,7 @@ import java.io.File
 
 class RoteiroDeTreinoTest {
 
-    private val ciclo = CicloDeTreinos.deJson(File("../app/src/main/assets/treinos_ciclo.json").readText())
+    private val ciclo = CicloDeTreinos.deJson(File("../shared/src/commonMain/recursos/treinos_ciclo.json").readText())
     private val treino = ciclo.sugestao(DataCivil.deIso("2026-09-13"), TrainingLevel.INTERMEDIARIO)!!
 
     @Test

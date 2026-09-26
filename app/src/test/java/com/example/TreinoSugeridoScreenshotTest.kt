@@ -32,7 +32,7 @@ class TreinoSugeridoScreenshotTest {
 
     // Dia 17 do Método NC: AA na preparação, A3 no desenvolvimento e corretivo.
     private val dia = DataCivil.deIso("2026-10-01")
-    private val ciclo = CicloDeTreinos.deJson(File("src/main/assets/programa_nc.json").readText())
+    private val ciclo = CicloDeTreinos.deJson(File("../shared/src/commonMain/recursos/programa_nc.json").readText())
 
     @Test
     fun treino_sugerido_screenshot() {

@@ -16,8 +16,8 @@ import java.io.File
 
 class MontadorDeTreinoTest {
 
-    private val json = File("../app/src/main/assets/programa_nc.json").readText()
-    private val cicloAntigo = CicloDeTreinos.deJson(File("../app/src/main/assets/treinos_ciclo.json").readText())
+    private val json = File("../shared/src/commonMain/recursos/programa_nc.json").readText()
+    private val cicloAntigo = CicloDeTreinos.deJson(File("../shared/src/commonMain/recursos/treinos_ciclo.json").readText())
 
     @Test
     fun `remontar cada sugestao do metodo NC da a mesma estrutura que o script gerou`() {

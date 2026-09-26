@@ -5,7 +5,7 @@ carrossel) aos treinos sugeridos do Aquagenda, no modo aguas_abertas.
 
     supabase/seed/programa_aa.sql          -> rodar no SQL Editor, DEPOIS da
                                               migração 20260917000001_aguas_abertas.sql
-    app/src/main/assets/programa_aa.json   -> cópia embarcada, usada offline
+    shared/src/commonMain/recursos/programa_aa.json   -> cópia embarcada, usada offline
 
 Cada treino tem as sete partes da arte (Respiração, Corretivos, Ativação,
 Pernas + braço, Desenvolvimento, Consolidação e Recuperação), que viram as fases
@@ -35,7 +35,7 @@ RAIZ = nc.RAIZ
 FONTE_LOCAL = RAIZ.parent / "carrossel" / "programa_aa.json"
 FONTE_REMOTA = "https://raw.githubusercontent.com/Nicevargas/natacao-treinos/main/programa_aa.json"
 SAIDA_SQL = RAIZ / "supabase" / "seed" / "programa_aa.sql"
-SAIDA_JSON = RAIZ / "app" / "src" / "main" / "assets" / "programa_aa.json"
+SAIDA_JSON = RAIZ / "shared" / "src" / "commonMain" / "recursos" / "programa_aa.json"
 
 CICLO_ID = "aguas-abertas"
 CICLO_NOME = "Cada Dia 1 Treino · Águas abertas"

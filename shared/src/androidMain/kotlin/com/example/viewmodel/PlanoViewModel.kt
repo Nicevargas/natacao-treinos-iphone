@@ -1,5 +1,6 @@
 package com.example.viewmodel
 
+import com.example.data.leitorDeArquivosDe
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -74,7 +75,7 @@ data class PlanoUiState(
 class PlanoViewModel(application: Application) : AndroidViewModel(application) {
 
     private val treinosNC by lazy {
-        CicloDeTreinos.treinosDoJson(application.assets.open("programa_nc.json").bufferedReader().use { it.readText() })
+        CicloDeTreinos.treinosDoJson(leitorDeArquivosDe(application).ler("programa_nc.json"))
     }
 
     private val _ui = MutableStateFlow(PlanoUiState())

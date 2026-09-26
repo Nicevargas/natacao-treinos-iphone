@@ -1,5 +1,6 @@
 package com.example.viewmodel
 
+import com.example.data.leitorDeArquivosDe
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -43,12 +44,14 @@ private fun AquagendaUiState.comTreino(workout: Workout): AquagendaUiState =
 
 class AquagendaViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val arquivos = leitorDeArquivosDe(application)
+
     // Piscina: o programa antigo e o do Método NC (desde 15/09/2026). Águas abertas: o seu.
     private val treinos = TreinosSugeridosRepository { modo ->
         when (modo) {
             ModoDeTreino.PISCINA -> listOf("treinos_ciclo.json", "programa_nc.json")
             ModoDeTreino.AGUAS_ABERTAS -> listOf("programa_aa.json")
-        }.map { nome -> application.assets.open(nome).bufferedReader().use { it.readText() } }
+        }.map { nome -> arquivos.ler(nome) }
     }
 
     // O treino de hoje já sai da cópia embarcada no primeiro quadro, sem esperar rede.

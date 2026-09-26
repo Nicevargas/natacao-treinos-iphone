@@ -41,7 +41,7 @@ class TelasDeContaScreenshotTest {
 
     @get:Rule val composeTestRule = createComposeRule()
 
-    private val ciclo = CicloDeTreinos.deJson(File("src/main/assets/programa_nc.json").readText())
+    private val ciclo = CicloDeTreinos.deJson(File("../shared/src/commonMain/recursos/programa_nc.json").readText())
     private val dia = DataCivil.deIso("2026-09-15")
     private val sessao = Sessao("a", "r", 0, "u1", "ana@exemplo.com")
 

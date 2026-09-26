@@ -85,7 +85,7 @@ class LayoutEstreitoScreenshotTest {
 
     @get:Rule val composeTestRule = createComposeRule()
 
-    private val ciclo = CicloDeTreinos.deJson(File("src/main/assets/programa_nc.json").readText())
+    private val ciclo = CicloDeTreinos.deJson(File("../shared/src/commonMain/recursos/programa_nc.json").readText())
     private val dia = DataCivil.deIso("2026-10-01")
     private val intermediario = ciclo.sugestao(dia, TrainingLevel.INTERMEDIARIO)!!
     private val roteiro = RoteiroDeTreino(intermediario)
@@ -141,7 +141,7 @@ class LayoutEstreitoScreenshotTest {
     @Test
     fun home_aguas_abertas() = capturar("home_aguas_abertas.png") {
         HomeScreen(
-            workout = CicloDeTreinos.deJson(File("src/main/assets/programa_aa.json").readText())
+            workout = CicloDeTreinos.deJson(File("../shared/src/commonMain/recursos/programa_aa.json").readText())
                 .sugestao(dia, TrainingLevel.INTERMEDIARIO)!!,
             selectedLevel = TrainingLevel.INTERMEDIARIO,
             calendarDays = WorkoutRepository.diasDoCalendario(DataCivil.deIso("2026-10-03"), dia),
@@ -276,7 +276,7 @@ class LayoutEstreitoScreenshotTest {
     @Test
     fun plano_na_aba() = capturar("plano_aba.png") {
         val config = ConfigDoPlano(6, 3, listOf("Resistência"), true, true, TrainingLevel.INICIANTE, mapOf("1-2" to PlanoDeTreino.trocaPorFoco("Estilos")))
-        val treinosNC = CicloDeTreinos.treinosDoJson(File("src/main/assets/programa_nc.json").readText())
+        val treinosNC = CicloDeTreinos.treinosDoJson(File("../shared/src/commonMain/recursos/programa_nc.json").readText())
         Column {
             PlanoDeTreinoScreen(
                 estado = PlanoUiState(

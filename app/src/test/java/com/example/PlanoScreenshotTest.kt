@@ -39,7 +39,7 @@ class PlanoScreenshotTest {
 
     @get:Rule val composeTestRule = createComposeRule()
 
-    private val treinosNC = CicloDeTreinos.treinosDoJson(File("src/main/assets/programa_nc.json").readText())
+    private val treinosNC = CicloDeTreinos.treinosDoJson(File("../shared/src/commonMain/recursos/programa_nc.json").readText())
     private val config = ConfigDoPlano(8, 3, listOf("Técnica", "Velocidade"), true, true, TrainingLevel.INTERMEDIARIO)
     private val dto = PlanoDto.de(config).copy(id = "p1")
     private val semanas = PlanoDeTreino.montar(config, treinosNC, "p1")

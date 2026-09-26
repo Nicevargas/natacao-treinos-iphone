@@ -48,6 +48,11 @@ android {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
   }
+  // Os programas de treino moram no módulo comum, de onde o iPhone também vai lê-los.
+  sourceSets.getByName("main") {
+    assets.srcDir(rootProject.layout.projectDirectory.dir("shared/src/commonMain/recursos"))
+  }
+
   buildFeatures {
     compose = true
     buildConfig = true

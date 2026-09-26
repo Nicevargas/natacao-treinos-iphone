@@ -16,7 +16,7 @@ import java.io.File
 
 class TreinoCompartilhadoTest {
 
-    private val ciclo = CicloDeTreinos.deJson(File("../app/src/main/assets/programa_nc.json").readText())
+    private val ciclo = CicloDeTreinos.deJson(File("../shared/src/commonMain/recursos/programa_nc.json").readText())
     private val treino = ciclo.sugestao(DataCivil.deIso("2026-10-01"), TrainingLevel.INTERMEDIARIO)!!
 
     @Test

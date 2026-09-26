@@ -8,7 +8,7 @@ que gera o carrossel. Daqui saem, da mesma conversão:
 
     supabase/seed/programa_nc.sql          -> rodar no SQL Editor, DEPOIS da
                                               migração 20260914000001_metodo_nc.sql
-    app/src/main/assets/programa_nc.json   -> cópia embarcada, usada offline
+    shared/src/commonMain/recursos/programa_nc.json   -> cópia embarcada, usada offline
 
 O ciclo antigo (cada-dia-1-treino) continua no banco e no app. A função
 public.treinos_sugeridos escolhe o ciclo pela data: vale o de âncora mais
@@ -40,7 +40,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 FONTE_LOCAL = RAIZ.parent / "carrossel" / "programa_nc.json"
 FONTE_REMOTA = "https://raw.githubusercontent.com/Nicevargas/natacao-treinos/main/programa_nc.json"
 SAIDA_SQL = RAIZ / "supabase" / "seed" / "programa_nc.sql"
-SAIDA_JSON = RAIZ / "app" / "src" / "main" / "assets" / "programa_nc.json"
+SAIDA_JSON = RAIZ / "shared" / "src" / "commonMain" / "recursos" / "programa_nc.json"
 
 CICLO_ID = "metodo-nc"
 CICLO_NOME = "Cada Dia 1 Treino · Método NC"

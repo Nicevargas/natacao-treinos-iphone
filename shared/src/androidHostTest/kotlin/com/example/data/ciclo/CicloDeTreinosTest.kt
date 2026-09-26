@@ -15,7 +15,7 @@ import java.io.File
  */
 class CicloDeTreinosTest {
 
-    private val ciclo = CicloDeTreinos.deJson(File("../app/src/main/assets/treinos_ciclo.json").readText())
+    private val ciclo = CicloDeTreinos.deJson(File("../shared/src/commonMain/recursos/treinos_ciclo.json").readText())
 
     @Test
     fun `escolhe o mesmo dia do carrossel`() {
@@ -86,7 +86,7 @@ class CicloDeTreinosTest {
         assertEquals(600, repetida.distanceMeters)
     }
 
-    private val metodoNc = CicloDeTreinos.deJson(File("../app/src/main/assets/programa_nc.json").readText())
+    private val metodoNc = CicloDeTreinos.deJson(File("../shared/src/commonMain/recursos/programa_nc.json").readText())
 
     @Test
     fun `o metodo NC vale a partir de 15-09 e o ciclo antigo ate 14-09`() {

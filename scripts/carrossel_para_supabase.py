@@ -7,7 +7,7 @@ o carrossel publicado todo dia às 6h. Daqui saem dois arquivos, da mesma
 conversão, para o banco e o app nunca divergirem:
 
     supabase/seed/treinos_ciclo.sql         -> rodar no SQL Editor do Supabase
-    app/src/main/assets/treinos_ciclo.json  -> cópia embarcada, usada offline
+    shared/src/commonMain/recursos/treinos_ciclo.json  -> cópia embarcada, usada offline
 
 Não se grava uma linha por data: o banco guarda os 28 dias x 3 níveis e a
 função public.treinos_sugeridos(data, nível) escolhe o dia com a mesma conta do
@@ -37,7 +37,7 @@ for _s in (sys.stdout, sys.stderr):
 RAIZ = Path(__file__).resolve().parent.parent
 FONTE_PADRAO = "https://raw.githubusercontent.com/Nicevargas/natacao-treinos/main/treinos.json"
 SAIDA_SQL = RAIZ / "supabase" / "seed" / "treinos_ciclo.sql"
-SAIDA_JSON = RAIZ / "app" / "src" / "main" / "assets" / "treinos_ciclo.json"
+SAIDA_JSON = RAIZ / "shared" / "src" / "commonMain" / "recursos" / "treinos_ciclo.json"
 
 CICLO_ID = "cada-dia-1-treino"
 CICLO_NOME = "Cada Dia 1 Treino"

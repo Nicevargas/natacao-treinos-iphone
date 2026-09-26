@@ -14,7 +14,7 @@ import java.io.File
 
 class PlanoDeTreinoTest {
 
-    private val treinosNC = CicloDeTreinos.treinosDoJson(File("../app/src/main/assets/programa_nc.json").readText())
+    private val treinosNC = CicloDeTreinos.treinosDoJson(File("../shared/src/commonMain/recursos/programa_nc.json").readText())
 
     private fun config(
         semanas: Int = 8,
