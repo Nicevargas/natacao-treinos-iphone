@@ -1,8 +1,8 @@
 package com.example.data.auth
 
 import com.example.data.Resultado
-import java.io.IOException
-import java.net.SocketTimeoutException
+import com.example.data.supabase.ehDemora
+import com.example.data.supabase.ehSemRede
 
 /**
  * Esqueci minha senha, sem sair do app:
@@ -22,40 +22,40 @@ class RecuperacaoDeSenha(
 
     suspend fun enviarCodigo(email: String): Resultado<Unit> = protegido {
         val r = api.recover(RecoverBody(email.trim().lowercase()))
-        if (r.isSuccessful) {
+        if (r.sucesso) {
             Resultado.Ok(Unit)
         } else {
-            Resultado.Falha(MensagensAuth.deErroDeAuth(r.code(), r.errorBody()?.string()))
+            Resultado.Falha(MensagensAuth.deErroDeAuth(r.codigo, r.erro))
         }
     }
 
     suspend fun verificarCodigo(email: String, codigo: String): Resultado<Sessao> = protegido {
         val r = api.verify(VerifyOtpBody(type = "recovery", email = email.trim().lowercase(), token = codigo.trim()))
-        val sessao = r.body()?.paraSessao(agoraSegundos())
+        val sessao = r.corpo?.paraSessao(agoraSegundos())
         when {
-            r.isSuccessful && sessao != null -> Resultado.Ok(sessao)
-            r.isSuccessful -> Resultado.Falha("Não foi possível validar o código. Peça um novo.")
-            else -> Resultado.Falha(MensagensAuth.deErroDeAuth(r.code(), r.errorBody()?.string()))
+            r.sucesso && sessao != null -> Resultado.Ok(sessao)
+            r.sucesso -> Resultado.Falha("Não foi possível validar o código. Peça um novo.")
+            else -> Resultado.Falha(MensagensAuth.deErroDeAuth(r.codigo, r.erro))
         }
     }
 
     suspend fun trocarSenha(sessao: Sessao, novaSenha: String): Resultado<Unit> = protegido {
         val r = api.updateUser("Bearer ${sessao.accessToken}", UpdatePasswordBody(novaSenha))
-        if (r.isSuccessful) {
+        if (r.sucesso) {
             Resultado.Ok(Unit)
         } else {
-            Resultado.Falha(MensagensAuth.deErroDeAuth(r.code(), r.errorBody()?.string()))
+            Resultado.Falha(MensagensAuth.deErroDeAuth(r.codigo, r.erro))
         }
     }
 
     private suspend fun <T> protegido(bloco: suspend () -> Resultado<T>): Resultado<T> =
         try {
             bloco()
-        } catch (e: SocketTimeoutException) {
-            Resultado.Falha(MensagensAuth.DEMOROU)
-        } catch (e: IOException) {
-            Resultado.Falha(MensagensAuth.SEM_REDE)
         } catch (e: Exception) {
-            Resultado.Falha("Não foi possível concluir. Tente de novo.")
+            when {
+                e.ehDemora() -> Resultado.Falha(MensagensAuth.DEMOROU)
+                e.ehSemRede() -> Resultado.Falha(MensagensAuth.SEM_REDE)
+                else -> Resultado.Falha("Não foi possível concluir. Tente de novo.")
+            }
         }
 }

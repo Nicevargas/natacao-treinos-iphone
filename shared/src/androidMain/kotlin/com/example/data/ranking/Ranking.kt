@@ -1,43 +1,43 @@
 package com.example.data.ranking
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import com.example.data.Resultado
 import com.example.data.supabase.chamarApi
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /** Uma linha de public.ranking_nadadores(). Só nome escolhido e números: nada sensível. */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class LinhaDoRanking(
-    @Json(name = "posicao") val posicao: Int,
-    @Json(name = "nome") val nome: String,
-    @Json(name = "pontos") val pontos: Int,
-    @Json(name = "metros") val metros: Int,
-    @Json(name = "treinos") val treinos: Int,
-    @Json(name = "semanas") val semanas: Int,
-    @Json(name = "sou_eu") val souEu: Boolean
+    @SerialName("posicao") val posicao: Int,
+    @SerialName("nome") val nome: String,
+    @SerialName("pontos") val pontos: Int,
+    @SerialName("metros") val metros: Int,
+    @SerialName("treinos") val treinos: Int,
+    @SerialName("semanas") val semanas: Int,
+    @SerialName("sou_eu") val souEu: Boolean
 )
 
 /** Parâmetros da função. Nulo fica de fora do JSON e vale o padrão do banco (sem filtro). */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class ParametrosDoRanking(
-    @Json(name = "p_periodo") val periodo: String,
-    @Json(name = "p_faixa") val faixa: String? = null,
-    @Json(name = "p_sexo") val sexo: String? = null,
-    @Json(name = "p_horario") val horario: String? = null,
-    @Json(name = "p_cidade") val cidade: String? = null,
-    @Json(name = "p_local") val local: String? = null,
-    @Json(name = "p_limite") val limite: Int = 100
+    @SerialName("p_periodo") val periodo: String,
+    @SerialName("p_faixa") val faixa: String? = null,
+    @SerialName("p_sexo") val sexo: String? = null,
+    @SerialName("p_horario") val horario: String? = null,
+    @SerialName("p_cidade") val cidade: String? = null,
+    @SerialName("p_local") val local: String? = null,
+    @SerialName("p_limite") val limite: Int = 100
 )
 
 /** Os dados do ranking no perfil, lidos e gravados só pela própria pessoa (RLS). */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class ParticipacaoDto(
-    @Json(name = "ranking_publico") val publico: Boolean = false,
-    @Json(name = "ranking_nome") val nome: String? = null,
-    @Json(name = "ano_nascimento") val anoNascimento: Int? = null,
-    @Json(name = "sexo") val sexo: String? = null,
-    @Json(name = "cidade") val cidade: String? = null,
-    @Json(name = "local_treino") val local: String? = null
+    @SerialName("ranking_publico") val publico: Boolean = false,
+    @SerialName("ranking_nome") val nome: String? = null,
+    @SerialName("ano_nascimento") val anoNascimento: Int? = null,
+    @SerialName("sexo") val sexo: String? = null,
+    @SerialName("cidade") val cidade: String? = null,
+    @SerialName("local_treino") val local: String? = null
 )
 
 enum class PeriodoDoRanking(val chave: String, val rotulo: String) {

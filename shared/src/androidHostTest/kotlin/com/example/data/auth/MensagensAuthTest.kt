@@ -3,6 +3,7 @@ package com.example.data.auth
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
+import kotlinx.serialization.json.JsonPrimitive
 import org.junit.Test
 
 class MensagensAuthTest {
@@ -75,7 +76,7 @@ class MensagensAuthTest {
         assertEquals(Sessao("a", "r", 1_000 + 3600, "u1", "ana@exemplo.com"), login.paraSessao(1_000))
         assertEquals(5_000L, login.copy(expiresAt = 5_000).paraSessao(1_000)!!.expiraEm)
 
-        val cadastroPendente = SessionDto(id = "u2", email = "novo@exemplo.com", identities = listOf(mapOf("id" to "x")))
+        val cadastroPendente = SessionDto(id = "u2", email = "novo@exemplo.com", identities = listOf(JsonPrimitive("x")))
         assertNull(cadastroPendente.paraSessao(1_000))
     }
 }

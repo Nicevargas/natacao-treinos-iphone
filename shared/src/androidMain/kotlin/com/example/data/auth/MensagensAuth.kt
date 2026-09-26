@@ -1,7 +1,6 @@
 package com.example.data.auth
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.example.data.supabase.JsonDoApp
 
 /** Erros do Supabase e validação dos formulários, em português. */
 object MensagensAuth {
@@ -11,14 +10,14 @@ object MensagensAuth {
     const val DEMOROU = "O servidor demorou demais para responder. Tente de novo em instantes."
     const val CADASTRO_DEMOROU = "O servidor demorou para responder. Sua conta pode ter sido criada: confira seu e-mail (e o spam) antes de tentar de novo."
 
-    private val moshi by lazy { Moshi.Builder().add(KotlinJsonAdapterFactory()).build() }
-    private val adapterAuth by lazy { moshi.adapter(AuthErrorDto::class.java) }
-    private val adapterApi by lazy { moshi.adapter(ApiErrorDto::class.java) }
+    // Corpo de erro malformado não pode virar exceção: quem chama quer uma frase.
+    private fun <T> ler(corpo: String?, serializador: kotlinx.serialization.KSerializer<T>): T? =
+        corpo?.let { runCatching { JsonDoApp.decodeFromString(serializador, it) }.getOrNull() }
 
     private val EMAIL = Regex("""^[^@\s]+@[^@\s]+\.[^@\s]+$""")
 
     fun deErroDeAuth(codigoHttp: Int, corpo: String?): String {
-        val erro = corpo?.let { runCatching { adapterAuth.fromJson(it) }.getOrNull() }
+        val erro = ler(corpo, AuthErrorDto.serializer())
         val codigo = erro?.errorCode?.lowercase()
         val texto = listOfNotNull(erro?.msg, erro?.message, erro?.errorDescription, erro?.error)
             .joinToString(" ")
@@ -52,7 +51,7 @@ object MensagensAuth {
     }
 
     fun deErroDaApi(codigoHttp: Int, corpo: String?): String {
-        val erro = corpo?.let { runCatching { adapterApi.fromJson(it) }.getOrNull() }
+        val erro = ler(corpo, ApiErrorDto.serializer())
         return when {
             codigoHttp == 401 -> "Sua sessão expirou. Entre de novo."
             erro?.code == "42501" || codigoHttp == 403 -> "Sem permissão para isso."

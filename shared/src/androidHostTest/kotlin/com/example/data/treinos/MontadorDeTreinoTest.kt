@@ -5,9 +5,9 @@ import com.example.data.ciclo.DataCivil
 import com.example.data.supabase.WorkoutDto
 import com.example.data.supabase.toDomain
 import com.example.model.TrainingLevel
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.example.data.supabase.JsonDoApp
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
@@ -22,12 +22,8 @@ class MontadorDeTreinoTest {
     @Test
     fun `remontar cada sugestao do metodo NC da a mesma estrutura que o script gerou`() {
         // Leitura crua do asset, para comparar com o que o Python gravou no banco.
-        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-        val tipo = Types.newParameterizedType(Map::class.java, String::class.java, Any::class.java)
-        @Suppress("UNCHECKED_CAST")
-        val cru = moshi.adapter<Map<String, Any>>(tipo).fromJson(json)!!["treinos"] as List<Map<String, Any>>
-        val adapterDto = moshi.adapter(WorkoutDto::class.java)
-        val dtos = cru.map { adapterDto.fromJsonValue(it)!! }
+        val cru = JsonDoApp.parseToJsonElement(json).jsonObject.getValue("treinos").jsonArray
+        val dtos = cru.map { JsonDoApp.decodeFromJsonElement(WorkoutDto.serializer(), it) }
 
         assertEquals(84, dtos.size)
         for (dto in dtos) {

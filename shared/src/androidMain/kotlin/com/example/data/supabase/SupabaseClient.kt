@@ -5,16 +5,22 @@ import com.example.data.auth.AuthApi
 import com.example.data.auth.RefreshGrantBody
 import com.example.data.auth.SessaoStore
 import com.example.data.auth.paraSessao
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import okhttp3.Authenticator
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
-import java.io.IOException
-import java.util.concurrent.TimeUnit
+import io.ktor.client.HttpClient
+import io.ktor.client.plugins.HttpSend
+import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.plugin
+import io.ktor.client.request.accept
+import io.ktor.client.request.header
+import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpStatusCode
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
 /**
  * Qual Authorization vai em cada chamada.
@@ -59,116 +65,108 @@ object SupabaseClient {
     @Volatile
     var sessaoStore: SessaoStore? = null
 
-    private val moshi: Moshi by lazy {
-        Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
-    }
-
     private val baseUrl: String
         get() = if (supabaseUrl.endsWith("/")) supabaseUrl else "$supabaseUrl/"
 
-    private val authInterceptor = Interceptor { chain ->
-        val original = chain.request()
-        val requestBuilder = original.newBuilder()
-            .header("apikey", supabaseAnonKey)
-            .header(
-                "Authorization",
+    /** Uma renovação de cada vez: dez chamadas levando 401 juntas não viram dez refreshes. */
+    private val renovando = Mutex()
+
+    private fun montar(comRenovacao: Boolean): HttpClient = HttpClient {
+        expectSuccess = false
+        install(ContentNegotiation) { json(JsonDoApp) }
+        install(Logging) { level = LogLevel.INFO }
+        install(HttpTimeout) {
+            connectTimeoutMillis = 15_000
+            // Cadastro e "esqueci minha senha" só respondem depois que o Supabase
+            // manda o e-mail pelo SMTP, e isso pode levar vários segundos.
+            requestTimeoutMillis = 60_000
+            socketTimeoutMillis = 60_000
+        }
+        defaultRequest {
+            url(baseUrl)
+            header("apikey", supabaseAnonKey)
+            accept(ContentType.Application.Json)
+            val explicito = headers[HttpHeaders.Authorization]
+            headers.remove(HttpHeaders.Authorization)
+            header(
+                HttpHeaders.Authorization,
                 escolherAuthorization(
-                    caminho = original.url.encodedPath,
-                    explicito = original.header("Authorization"),
+                    caminho = caminhoDe(url.encodedPathSegments),
+                    explicito = explicito,
                     tokenDaSessao = sessaoStore?.atual()?.accessToken,
                     chaveAnon = supabaseAnonKey
                 )
             )
-            .header("Content-Type", "application/json")
-            .header("Accept", "application/json")
-        chain.proceed(requestBuilder.build())
-    }
-
-    private val logging = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BASIC
-    }
-
-    // Cliente sem renovação automática: usado para a própria renovação.
-    private val clienteBase: OkHttpClient by lazy {
-        OkHttpClient.Builder()
-            .addInterceptor(authInterceptor)
-            .addInterceptor(logging)
-            // Cadastro e "esqueci minha senha" só respondem depois que o Supabase
-            // manda o e-mail pelo SMTP, e isso pode levar vários segundos.
-            .connectTimeout(15, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS)
-            .writeTimeout(60, TimeUnit.SECONDS)
-            .build()
+        }
+    }.also { cliente ->
+        if (comRenovacao) instalarRenovacao(cliente)
     }
 
     /**
-     * O token de acesso vence em ~1h. Num 401, troca pelo refresh token e
-     * repete a chamada uma vez. Refresh recusado encerra a sessão (o app volta
-     * para o login); falta de rede não encerra, só deixa a chamada falhar.
+     * O token de acesso vence em ~1h. Num 401, troca pelo refresh token e repete a
+     * chamada uma vez. Refresh recusado encerra a sessão (o app volta para o
+     * login); falta de rede não encerra, só deixa a chamada falhar.
      */
-    private val renovador = Authenticator { _, response ->
-        val pedido = response.request
-        if (pedido.url.encodedPath.contains("/auth/v1/")) return@Authenticator null
-        if (response.priorResponse != null) return@Authenticator null
-        val store = sessaoStore ?: return@Authenticator null
-        val tokenUsado = pedido.header("Authorization")?.removePrefix("Bearer ")
+    private fun instalarRenovacao(cliente: HttpClient) {
+        cliente.plugin(HttpSend).intercept { pedido ->
+            val chamada = execute(pedido)
+            val caminho = caminhoDe(pedido.url.encodedPathSegments)
+            if (chamada.response.status != HttpStatusCode.Unauthorized || caminho.contains("/auth/v1/")) {
+                return@intercept chamada
+            }
+            val store = sessaoStore ?: return@intercept chamada
+            val tokenUsado = pedido.headers[HttpHeaders.Authorization]?.removePrefix("Bearer ")
+            val novoToken = renovar(store, tokenUsado) ?: return@intercept chamada
 
-        val novoToken = synchronized(this) {
-            val atual = store.atual() ?: return@Authenticator null
-            if (atual.accessToken != tokenUsado) {
-                atual.accessToken // outra chamada já renovou enquanto esta esperava
-            } else {
-                val api = authApi ?: return@Authenticator null
-                try {
-                    val r = api.refresh(RefreshGrantBody(atual.refreshToken)).execute()
-                    val nova = r.body()?.paraSessao(System.currentTimeMillis() / 1000)
-                    when {
-                        r.isSuccessful && nova != null -> {
-                            store.salvar(nova)
-                            nova.accessToken
-                        }
-                        r.code() in 400..499 -> {
-                            Log.w(TAG, "Refresh token recusado (HTTP ${r.code()}); encerrando a sessão")
-                            store.limpar()
-                            null
-                        }
-                        else -> null
-                    }
-                } catch (e: IOException) {
-                    Log.w(TAG, "Sem rede para renovar a sessão", e)
+            pedido.headers.remove(HttpHeaders.Authorization)
+            pedido.headers.append(HttpHeaders.Authorization, "Bearer $novoToken")
+            execute(pedido)
+        }
+    }
+
+    private suspend fun renovar(store: SessaoStore, tokenUsado: String?): String? = renovando.withLock {
+        val atual = store.atual() ?: return null
+        // Outra chamada já renovou enquanto esta esperava na fila.
+        if (atual.accessToken != tokenUsado) return atual.accessToken
+
+        val api = authApi ?: return null
+        return try {
+            val r = api.refresh(RefreshGrantBody(atual.refreshToken))
+            val nova = r.corpo?.paraSessao(agoraEmSegundos())
+            when {
+                r.sucesso && nova != null -> {
+                    store.salvar(nova)
+                    nova.accessToken
+                }
+                r.codigo in 400..499 -> {
+                    Log.w(TAG, "Refresh token recusado (HTTP ${r.codigo}); encerrando a sessão")
+                    store.limpar()
                     null
                 }
+                else -> null
             }
-        } ?: return@Authenticator null
-
-        pedido.newBuilder().header("Authorization", "Bearer $novoToken").build()
-    }
-
-    private val okHttpClient: OkHttpClient by lazy {
-        clienteBase.newBuilder().authenticator(renovador).build()
-    }
-
-    private fun <T> criar(cliente: OkHttpClient, tipo: Class<T>): T? {
-        if (!isConfigured) {
-            Log.w(TAG, "Supabase credentials are not configured. Falling back to local offline mode.")
-            return null
-        }
-        return try {
-            Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .client(cliente)
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .build()
-                .create(tipo)
         } catch (e: Exception) {
-            Log.e(TAG, "Failed to initialize Supabase Retrofit client", e)
+            Log.w(TAG, "Sem rede para renovar a sessão", e)
             null
         }
     }
 
-    val api: SupabaseApi? by lazy { criar(okHttpClient, SupabaseApi::class.java) }
+    /** "/auth/v1/token" a partir das partes do caminho, como escolherAuthorization espera. */
+    private fun caminhoDe(partes: List<String>): String =
+        partes.filter { it.isNotEmpty() }.joinToString(separator = "/", prefix = "/")
 
-    val authApi: AuthApi? by lazy { criar(clienteBase, AuthApi::class.java) }
+    private fun agoraEmSegundos(): Long = System.currentTimeMillis() / 1000
+
+    // Cliente sem renovação: usado pela própria renovação e pelas telas de conta.
+    private val clienteBase: HttpClient? by lazy { if (isConfigured) montar(comRenovacao = false) else avisar() }
+    private val clienteComRenovacao: HttpClient? by lazy { if (isConfigured) montar(comRenovacao = true) else avisar() }
+
+    private fun avisar(): HttpClient? {
+        Log.w(TAG, "Supabase credentials are not configured. Falling back to local offline mode.")
+        return null
+    }
+
+    val api: SupabaseApi? by lazy { clienteComRenovacao?.let { SupabaseApi(it) } }
+
+    val authApi: AuthApi? by lazy { clienteBase?.let { AuthApi(it) } }
 }

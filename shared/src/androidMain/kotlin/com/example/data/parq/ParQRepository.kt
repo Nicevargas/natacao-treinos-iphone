@@ -1,22 +1,22 @@
 package com.example.data.parq
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import com.example.data.Resultado
 import com.example.data.ciclo.DataCivil
 import com.example.data.supabase.chamarApi
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /** Linha de public.parq_respostas. id, user_id e as datas vêm do banco. */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class ParQRespostaDto(
-    @Json(name = "id") val id: String? = null,
-    @Json(name = "versao") val versao: String,
-    @Json(name = "respostas") val respostas: List<Boolean>,
-    @Json(name = "algum_sim") val algumSim: Boolean,
-    @Json(name = "declaracao_aceita") val declaracaoAceita: Boolean,
-    @Json(name = "termo_aceito") val termoAceito: Boolean,
+    @SerialName("id") val id: String? = null,
+    @SerialName("versao") val versao: String,
+    @SerialName("respostas") val respostas: List<Boolean>,
+    @SerialName("algum_sim") val algumSim: Boolean,
+    @SerialName("declaracao_aceita") val declaracaoAceita: Boolean,
+    @SerialName("termo_aceito") val termoAceito: Boolean,
     // Só na leitura: o gatilho do banco preenche com a data de Brasília.
-    @Json(name = "respondido_no_dia") val respondidoNoDia: String? = null
+    @SerialName("respondido_no_dia") val respondidoNoDia: String? = null
 ) {
     fun dia(): Long? = respondidoNoDia?.let { runCatching { DataCivil.deIso(it) }.getOrNull() }
 }

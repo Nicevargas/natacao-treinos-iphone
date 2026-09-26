@@ -1,183 +1,203 @@
 package com.example.data.supabase
 
-import okhttp3.ResponseBody
-import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.PATCH
-import retrofit2.http.POST
-import retrofit2.http.Query
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.header
+import io.ktor.client.request.request
+import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.ContentType
+import io.ktor.http.HttpMethod
+import io.ktor.http.contentType
+import io.ktor.http.isSuccess
 
-interface SupabaseApi {
+/**
+ * As chamadas ao banco (PostgREST). Os caminhos e os parâmetros são os mesmos de
+ * antes; mudou só quem faz a chamada, do Retrofit para o Ktor, que roda nos dois
+ * sistemas. O RLS do Supabase é quem decide o que cada usuário enxerga.
+ */
+class SupabaseApi(private val http: HttpClient) {
 
-    @GET("rest/v1/workouts")
-    suspend fun pingWorkouts(
-        @Query("select") select: String = "id",
-        @Query("limit") limit: Int = 1
-    ): Response<ResponseBody>
+    suspend fun pingWorkouts(): Resposta<Unit> =
+        pedir(HttpMethod.Get, "rest/v1/workouts", mapOf("select" to "id", "limit" to "1"))
 
-    // Treino do ciclo do carrossel para a data e o nível (função SQL no Supabase).
-    @POST("rest/v1/rpc/treinos_sugeridos")
-    suspend fun getTreinosSugeridos(
-        @Body params: TreinosSugeridosParams
-    ): Response<List<WorkoutDto>>
+    /** Treino do ciclo do carrossel para a data e o nível (função SQL no Supabase). */
+    suspend fun getTreinosSugeridos(params: TreinosSugeridosParams): Resposta<List<WorkoutDto>> =
+        pedir(HttpMethod.Post, "rest/v1/rpc/treinos_sugeridos", corpo = params)
 
     // ---- Meus treinos. O RLS só deixa ver e mexer nos do usuário logado. ----
 
-    @GET("rest/v1/workouts")
     suspend fun getMyWorkouts(
-        @Query("user_id") userFilter: String, // "eq.<uuid>"
-        @Query("select") select: String = "*",
-        @Query("order") order: String = "workout_date.desc,created_at.desc"
-    ): Response<List<WorkoutDto>>
+        userFilter: String, // "eq.<uuid>"
+        select: String = "*",
+        order: String = "workout_date.desc,created_at.desc"
+    ): Resposta<List<WorkoutDto>> =
+        pedir(HttpMethod.Get, "rest/v1/workouts", mapOf("user_id" to userFilter, "select" to select, "order" to order))
 
-    @POST("rest/v1/workouts")
-    @Headers("Prefer: return=representation")
-    suspend fun createWorkout(
-        @Body workout: WorkoutWriteDto
-    ): Response<List<WorkoutDto>>
+    suspend fun createWorkout(workout: WorkoutWriteDto): Resposta<List<WorkoutDto>> =
+        pedir(HttpMethod.Post, "rest/v1/workouts", corpo = workout, prefer = RETORNAR)
 
-    @PATCH("rest/v1/workouts")
-    @Headers("Prefer: return=representation")
-    suspend fun updateWorkout(
-        @Query("id") idFilter: String, // "eq.<id>"
-        @Body workout: WorkoutWriteDto
-    ): Response<List<WorkoutDto>>
+    suspend fun updateWorkout(idFilter: String, workout: WorkoutWriteDto): Resposta<List<WorkoutDto>> =
+        pedir(HttpMethod.Patch, "rest/v1/workouts", mapOf("id" to idFilter), corpo = workout, prefer = RETORNAR)
 
     // Com RLS, apagar o que não é seu responde sucesso sem apagar nada;
     // pedindo as linhas de volta, a lista vazia denuncia.
-    @DELETE("rest/v1/workouts")
-    @Headers("Prefer: return=representation")
-    suspend fun deleteWorkout(
-        @Query("id") idFilter: String
-    ): Response<List<WorkoutDto>>
+    suspend fun deleteWorkout(idFilter: String): Resposta<List<WorkoutDto>> =
+        pedir(HttpMethod.Delete, "rest/v1/workouts", mapOf("id" to idFilter), prefer = RETORNAR)
 
     // ---- Perfil ----
 
-    @GET("rest/v1/profiles")
-    suspend fun getProfile(
-        @Query("id") idFilter: String,
-        @Query("select") select: String = "*"
-    ): Response<List<ProfileDto>>
+    suspend fun getProfile(idFilter: String, select: String = "*"): Resposta<List<ProfileDto>> =
+        pedir(HttpMethod.Get, "rest/v1/profiles", mapOf("id" to idFilter, "select" to select))
 
-    @POST("rest/v1/profiles")
-    @Headers("Prefer: resolution=merge-duplicates,return=representation")
-    suspend fun upsertProfile(
-        @Body profile: ProfileWriteDto
-    ): Response<List<ProfileDto>>
+    suspend fun upsertProfile(profile: ProfileWriteDto): Resposta<List<ProfileDto>> =
+        pedir(
+            HttpMethod.Post, "rest/v1/profiles", corpo = profile,
+            prefer = "resolution=merge-duplicates,return=representation"
+        )
 
-    @POST("rest/v1/rpc/excluir_minha_conta")
-    suspend fun deleteMyAccount(
-        @Body vazio: Map<String, String> = emptyMap()
-    ): Response<ResponseBody>
+    suspend fun deleteMyAccount(): Resposta<Unit> =
+        pedir(HttpMethod.Post, "rest/v1/rpc/excluir_minha_conta", corpo = emptyMap<String, String>())
 
     // ---- Treinos realizados ("Concluir treino") ----
 
-    @POST("rest/v1/treinos_realizados")
-    @Headers("Prefer: return=representation")
     suspend fun registrarTreino(
-        @Body registro: com.example.data.execucao.TreinoRealizadoDto
-    ): Response<List<com.example.data.execucao.TreinoRealizadoDto>>
+        registro: com.example.data.execucao.TreinoRealizadoDto
+    ): Resposta<List<com.example.data.execucao.TreinoRealizadoDto>> =
+        pedir(HttpMethod.Post, "rest/v1/treinos_realizados", corpo = registro, prefer = RETORNAR)
 
     // O RLS devolve só os do usuário logado; sem filtro de user_id aqui.
-    @GET("rest/v1/treinos_realizados")
     suspend fun listarTreinosRealizados(
-        @Query("select") select: String = "*",
-        @Query("order") order: String = "data_treino.desc,created_at.desc",
-        @Query("limit") limite: Int = 1000
-    ): Response<List<com.example.data.execucao.TreinoRealizadoDto>>
+        select: String = "*",
+        order: String = "data_treino.desc,created_at.desc",
+        limite: Int = 1000
+    ): Resposta<List<com.example.data.execucao.TreinoRealizadoDto>> =
+        pedir(
+            HttpMethod.Get, "rest/v1/treinos_realizados",
+            mapOf("select" to select, "order" to order, "limit" to limite.toString())
+        )
 
     // ---- PAR-Q. O RLS só deixa ver e registrar os do usuário logado. ----
 
-    @GET("rest/v1/parq_respostas")
     suspend fun ultimoParQ(
-        @Query("select") select: String = "*",
-        @Query("order") order: String = "respondido_em.desc",
-        @Query("limit") limite: Int = 1
-    ): Response<List<com.example.data.parq.ParQRespostaDto>>
+        select: String = "*",
+        order: String = "respondido_em.desc",
+        limite: Int = 1
+    ): Resposta<List<com.example.data.parq.ParQRespostaDto>> =
+        pedir(
+            HttpMethod.Get, "rest/v1/parq_respostas",
+            mapOf("select" to select, "order" to order, "limit" to limite.toString())
+        )
 
-    @POST("rest/v1/parq_respostas")
-    @Headers("Prefer: return=representation")
     suspend fun registrarParQ(
-        @Body resposta: com.example.data.parq.ParQRespostaDto
-    ): Response<List<com.example.data.parq.ParQRespostaDto>>
+        resposta: com.example.data.parq.ParQRespostaDto
+    ): Resposta<List<com.example.data.parq.ParQRespostaDto>> =
+        pedir(HttpMethod.Post, "rest/v1/parq_respostas", corpo = resposta, prefer = RETORNAR)
 
     // ---- Treino compartilhado por link. Criar é do dono; abrir é pela função, com o código. ----
 
-    @POST("rest/v1/treinos_compartilhados")
-    @Headers("Prefer: return=representation")
     suspend fun compartilharTreino(
-        @Body treino: com.example.data.compartilhar.NovoTreinoCompartilhadoDto,
-        @Query("select") select: String = "codigo,titulo"
-    ): Response<List<com.example.data.compartilhar.TreinoCompartilhadoDto>>
+        treino: com.example.data.compartilhar.NovoTreinoCompartilhadoDto,
+        select: String = "codigo,titulo"
+    ): Resposta<List<com.example.data.compartilhar.TreinoCompartilhadoDto>> =
+        pedir(
+            HttpMethod.Post, "rest/v1/treinos_compartilhados", mapOf("select" to select),
+            corpo = treino, prefer = RETORNAR
+        )
 
-    @POST("rest/v1/rpc/abrir_treino_compartilhado")
     suspend fun abrirTreinoCompartilhado(
-        @Body params: com.example.data.compartilhar.AbrirTreinoParams
-    ): Response<List<com.example.data.compartilhar.TreinoCompartilhadoDto>>
+        params: com.example.data.compartilhar.AbrirTreinoParams
+    ): Resposta<List<com.example.data.compartilhar.TreinoCompartilhadoDto>> =
+        pedir(HttpMethod.Post, "rest/v1/rpc/abrir_treino_compartilhado", corpo = params)
 
     // ---- Ranking. Cada um lê e grava só os próprios dados; a lista vem da função. ----
 
-    @GET("rest/v1/profiles")
     suspend fun lerParticipacaoNoRanking(
-        @Query("id") idFilter: String,
-        @Query("select") select: String = "ranking_publico,ranking_nome,ano_nascimento,sexo,cidade,local_treino"
-    ): Response<List<com.example.data.ranking.ParticipacaoDto>>
+        idFilter: String,
+        select: String = CAMPOS_DO_RANKING
+    ): Resposta<List<com.example.data.ranking.ParticipacaoDto>> =
+        pedir(HttpMethod.Get, "rest/v1/profiles", mapOf("id" to idFilter, "select" to select))
 
-    @PATCH("rest/v1/profiles")
-    @Headers("Prefer: return=representation")
     suspend fun salvarParticipacaoNoRanking(
-        @Query("id") idFilter: String,
-        @Body participacao: com.example.data.ranking.ParticipacaoDto,
-        @Query("select") select: String = "ranking_publico,ranking_nome,ano_nascimento,sexo,cidade,local_treino"
-    ): Response<List<com.example.data.ranking.ParticipacaoDto>>
+        idFilter: String,
+        participacao: com.example.data.ranking.ParticipacaoDto,
+        select: String = CAMPOS_DO_RANKING
+    ): Resposta<List<com.example.data.ranking.ParticipacaoDto>> =
+        pedir(
+            HttpMethod.Patch, "rest/v1/profiles", mapOf("id" to idFilter, "select" to select),
+            corpo = participacao, prefer = RETORNAR
+        )
 
-    @POST("rest/v1/rpc/ranking_nadadores")
     suspend fun rankingNadadores(
-        @Body parametros: com.example.data.ranking.ParametrosDoRanking
-    ): Response<List<com.example.data.ranking.LinhaDoRanking>>
+        parametros: com.example.data.ranking.ParametrosDoRanking
+    ): Resposta<List<com.example.data.ranking.LinhaDoRanking>> =
+        pedir(HttpMethod.Post, "rest/v1/rpc/ranking_nadadores", corpo = parametros)
 
     // ---- Plano de treino. O RLS só deixa ver, criar e apagar os do usuário logado. ----
 
-    @GET("rest/v1/planos_treino")
     suspend fun planoAtual(
-        @Query("select") select: String = "*",
-        @Query("order") order: String = "criado_em.desc",
-        @Query("limit") limite: Int = 1
-    ): Response<List<com.example.data.plano.PlanoDto>>
+        select: String = "*",
+        order: String = "criado_em.desc",
+        limite: Int = 1
+    ): Resposta<List<com.example.data.plano.PlanoDto>> =
+        pedir(
+            HttpMethod.Get, "rest/v1/planos_treino",
+            mapOf("select" to select, "order" to order, "limit" to limite.toString())
+        )
 
-    @POST("rest/v1/planos_treino")
-    @Headers("Prefer: return=representation")
-    suspend fun criarPlano(
-        @Body plano: com.example.data.plano.PlanoDto
-    ): Response<List<com.example.data.plano.PlanoDto>>
+    suspend fun criarPlano(plano: com.example.data.plano.PlanoDto): Resposta<List<com.example.data.plano.PlanoDto>> =
+        pedir(HttpMethod.Post, "rest/v1/planos_treino", corpo = plano, prefer = RETORNAR)
 
-    @PATCH("rest/v1/planos_treino")
-    @Headers("Prefer: return=representation")
     suspend fun trocarTreinosDoPlano(
-        @Query("id") idFilter: String,
-        @Body trocas: com.example.data.plano.TrocasDoPlanoDto
-    ): Response<List<com.example.data.plano.PlanoDto>>
+        idFilter: String,
+        trocas: com.example.data.plano.TrocasDoPlanoDto
+    ): Resposta<List<com.example.data.plano.PlanoDto>> =
+        pedir(HttpMethod.Patch, "rest/v1/planos_treino", mapOf("id" to idFilter), corpo = trocas, prefer = RETORNAR)
 
-    @DELETE("rest/v1/planos_treino")
-    @Headers("Prefer: return=representation")
-    suspend fun excluirPlano(
-        @Query("id") idFilter: String
-    ): Response<List<com.example.data.plano.PlanoDto>>
+    suspend fun excluirPlano(idFilter: String): Resposta<List<com.example.data.plano.PlanoDto>> =
+        pedir(HttpMethod.Delete, "rest/v1/planos_treino", mapOf("id" to idFilter), prefer = RETORNAR)
 
     // ---- Séries cronometradas ----
 
-    @GET("rest/v1/swim_set_records")
     suspend fun getSwimSetRecords(
-        @Query("select") select: String = "*",
-        @Query("order") order: String = "set_number.asc"
-    ): Response<List<SwimSetRecordDto>>
+        select: String = "*",
+        order: String = "set_number.asc"
+    ): Resposta<List<SwimSetRecordDto>> =
+        pedir(HttpMethod.Get, "rest/v1/swim_set_records", mapOf("select" to select, "order" to order))
 
-    @POST("rest/v1/swim_set_records")
-    @Headers("Prefer: return=representation")
-    suspend fun insertSwimSetRecord(
-        @Body record: SwimSetRecordDto
-    ): Response<List<SwimSetRecordDto>>
+    suspend fun insertSwimSetRecord(record: SwimSetRecordDto): Resposta<List<SwimSetRecordDto>> =
+        pedir(HttpMethod.Post, "rest/v1/swim_set_records", corpo = record, prefer = RETORNAR)
+
+    /**
+     * Uma chamada só. Sucesso devolve o corpo já convertido; erro devolve o texto
+     * cru, que MensagensAuth traduz. Exceção de rede sobe para quem chamou tratar.
+     */
+    private suspend inline fun <reified T> pedir(
+        metodo: HttpMethod,
+        caminho: String,
+        consulta: Map<String, String> = emptyMap(),
+        corpo: Any? = null,
+        prefer: String? = null
+    ): Resposta<T> {
+        val resposta = http.request(caminho) {
+            method = metodo
+            url { consulta.forEach { (nome, valor) -> parameters.append(nome, valor) } }
+            if (prefer != null) header("Prefer", prefer)
+            if (corpo != null) {
+                contentType(ContentType.Application.Json)
+                setBody(corpo)
+            }
+        }
+        if (!resposta.status.isSuccess()) {
+            return Resposta(resposta.status.value, null, resposta.bodyAsText())
+        }
+        val valor: T = if (T::class == Unit::class) Unit as T else resposta.body()
+        return Resposta(resposta.status.value, valor, null)
+    }
+
+    companion object {
+        private const val RETORNAR = "return=representation"
+        private const val CAMPOS_DO_RANKING =
+            "ranking_publico,ranking_nome,ano_nascimento,sexo,cidade,local_treino"
+    }
 }

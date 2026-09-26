@@ -1,5 +1,7 @@
 package com.example.data.compartilhar
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import android.content.Intent
 import com.example.data.Resultado
 import com.example.data.supabase.WorkoutDto
@@ -7,29 +9,27 @@ import com.example.data.supabase.chamarApi
 import com.example.data.supabase.toDomain
 import com.example.data.treinos.paraDto
 import com.example.model.Workout
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class NovoTreinoCompartilhadoDto(
-    @Json(name = "titulo") val titulo: String,
-    @Json(name = "treino") val treino: WorkoutDto
+    @SerialName("titulo") val titulo: String,
+    @SerialName("treino") val treino: WorkoutDto
 )
 
 /** Linha de public.treinos_compartilhados ou resposta de abrir_treino_compartilhado(). */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class TreinoCompartilhadoDto(
-    @Json(name = "codigo") val codigo: String,
-    @Json(name = "titulo") val titulo: String? = null,
-    @Json(name = "treino") val treino: WorkoutDto? = null,
-    @Json(name = "enviado_por") val enviadoPor: String? = null
+    @SerialName("codigo") val codigo: String,
+    @SerialName("titulo") val titulo: String? = null,
+    @SerialName("treino") val treino: WorkoutDto? = null,
+    @SerialName("enviado_por") val enviadoPor: String? = null
 )
 
-@JsonClass(generateAdapter = true)
-data class AbrirTreinoParams(@Json(name = "p_codigo") val codigo: String)
+@Serializable
+data class AbrirTreinoParams(@SerialName("p_codigo") val codigo: String)
 
 /**
  * Código e link de um treino compartilhado. O mesmo link serve para mandar a

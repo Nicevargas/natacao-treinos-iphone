@@ -1,83 +1,85 @@
 package com.example.data.auth
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonElement
+
 
 // ---- Corpos das chamadas ao Supabase Auth (GoTrue) ----
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class SignUpBody(
-    @Json(name = "email") val email: String,
-    @Json(name = "password") val password: String,
+    @SerialName("email") val email: String,
+    @SerialName("password") val password: String,
     // Vira raw_user_meta_data: full_name e training_level do perfil.
-    @Json(name = "data") val data: Map<String, String>
+    @SerialName("data") val data: Map<String, String>
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class PasswordGrantBody(
-    @Json(name = "email") val email: String,
-    @Json(name = "password") val password: String
+    @SerialName("email") val email: String,
+    @SerialName("password") val password: String
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class RefreshGrantBody(
-    @Json(name = "refresh_token") val refreshToken: String
+    @SerialName("refresh_token") val refreshToken: String
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class RecoverBody(
-    @Json(name = "email") val email: String
+    @SerialName("email") val email: String
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class VerifyOtpBody(
-    @Json(name = "type") val type: String,
-    @Json(name = "email") val email: String,
-    @Json(name = "token") val token: String
+    @SerialName("type") val type: String,
+    @SerialName("email") val email: String,
+    @SerialName("token") val token: String
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class UpdatePasswordBody(
-    @Json(name = "password") val password: String
+    @SerialName("password") val password: String
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class AuthUserDto(
-    @Json(name = "id") val id: String? = null,
-    @Json(name = "email") val email: String? = null,
-    @Json(name = "identities") val identities: List<Any>? = null
+    @SerialName("id") val id: String? = null,
+    @SerialName("email") val email: String? = null,
+    @SerialName("identities") val identities: List<JsonElement>? = null
 )
 
 /**
  * Resposta de login, renovação e cadastro. No cadastro que exige confirmação
  * por e-mail não vem sessão: o usuário vem solto no topo (id, email, identities).
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class SessionDto(
-    @Json(name = "access_token") val accessToken: String? = null,
-    @Json(name = "refresh_token") val refreshToken: String? = null,
-    @Json(name = "expires_in") val expiresIn: Long? = null,
-    @Json(name = "expires_at") val expiresAt: Long? = null,
-    @Json(name = "user") val user: AuthUserDto? = null,
-    @Json(name = "id") val id: String? = null,
-    @Json(name = "email") val email: String? = null,
-    @Json(name = "identities") val identities: List<Any>? = null
+    @SerialName("access_token") val accessToken: String? = null,
+    @SerialName("refresh_token") val refreshToken: String? = null,
+    @SerialName("expires_in") val expiresIn: Long? = null,
+    @SerialName("expires_at") val expiresAt: Long? = null,
+    @SerialName("user") val user: AuthUserDto? = null,
+    @SerialName("id") val id: String? = null,
+    @SerialName("email") val email: String? = null,
+    @SerialName("identities") val identities: List<JsonElement>? = null
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class AuthErrorDto(
-    @Json(name = "error_code") val errorCode: String? = null,
-    @Json(name = "msg") val msg: String? = null,
-    @Json(name = "message") val message: String? = null,
-    @Json(name = "error") val error: String? = null,
-    @Json(name = "error_description") val errorDescription: String? = null
+    @SerialName("error_code") val errorCode: String? = null,
+    @SerialName("msg") val msg: String? = null,
+    @SerialName("message") val message: String? = null,
+    @SerialName("error") val error: String? = null,
+    @SerialName("error_description") val errorDescription: String? = null
 )
 
 /** Erro do PostgREST: {"code":"42501","message":"..."}. */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class ApiErrorDto(
-    @Json(name = "code") val code: String? = null,
-    @Json(name = "message") val message: String? = null
+    @SerialName("code") val code: String? = null,
+    @SerialName("message") val message: String? = null
 )
 
 // ---- Domínio ----

@@ -1,25 +1,25 @@
 package com.example.data.plano
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import com.example.data.Resultado
 import com.example.data.supabase.chamarApi
 import com.example.model.TrainingLevel
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /** Linha de public.planos_treino. id, user_id e criado_em vêm do banco. */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class PlanoDto(
-    @Json(name = "id") val id: String? = null,
-    @Json(name = "semanas") val semanas: Int,
-    @Json(name = "treinos_por_semana") val treinosPorSemana: Int,
-    @Json(name = "focos") val focos: List<String> = emptyList(),
-    @Json(name = "semanas_relaxadas") val semanasRelaxadas: Boolean,
-    @Json(name = "encerramento_relaxado") val encerramentoRelaxado: Boolean,
-    @Json(name = "nivel") val nivel: String,
+    @SerialName("id") val id: String? = null,
+    @SerialName("semanas") val semanas: Int,
+    @SerialName("treinos_por_semana") val treinosPorSemana: Int,
+    @SerialName("focos") val focos: List<String> = emptyList(),
+    @SerialName("semanas_relaxadas") val semanasRelaxadas: Boolean,
+    @SerialName("encerramento_relaxado") val encerramentoRelaxado: Boolean,
+    @SerialName("nivel") val nivel: String,
     // Nulos ficam fora do JSON: o banco usa 'automatico' e {}.
-    @Json(name = "modo") val modo: String? = null,
-    @Json(name = "trocas") val trocas: Map<String, String>? = null,
-    @Json(name = "criado_em") val criadoEm: String? = null
+    @SerialName("modo") val modo: String? = null,
+    @SerialName("trocas") val trocas: Map<String, String>? = null,
+    @SerialName("criado_em") val criadoEm: String? = null
 ) {
     val manual: Boolean get() = modo == MODO_MANUAL
 
@@ -49,8 +49,8 @@ data class PlanoDto(
 }
 
 /** Corpo do PATCH: só as trocas mudam depois de o plano criado. */
-@JsonClass(generateAdapter = true)
-data class TrocasDoPlanoDto(@Json(name = "trocas") val trocas: Map<String, String>)
+@Serializable
+data class TrocasDoPlanoDto(@SerialName("trocas") val trocas: Map<String, String>)
 
 /** Plano de treino do usuário logado. Quem garante que é só dele é o RLS. */
 object PlanosRepository {

@@ -27,11 +27,11 @@ object SupabaseRepository {
         val api = SupabaseClient.api ?: return@withContext SupabaseStatus.CONFIG_NEEDED
         try {
             val response = api.pingWorkouts()
-            if (response.isSuccessful) {
-                Log.i(TAG, "Supabase connection verified successfully! Status code: ${response.code()}")
+            if (response.sucesso) {
+                Log.i(TAG, "Supabase connection verified successfully! Status code: ${response.codigo}")
                 SupabaseStatus.CONNECTED
             } else {
-                Log.w(TAG, "Supabase returned response code: ${response.code()}")
+                Log.w(TAG, "Supabase returned response code: ${response.codigo}")
                 SupabaseStatus.OFFLINE_LOCAL
             }
         } catch (e: Exception) {
@@ -57,10 +57,10 @@ object SupabaseRepository {
                 modo = modo.valorNoBanco.takeIf { modo != ModoDeTreino.PISCINA }
             )
             val response = api.getTreinosSugeridos(params)
-            if (response.isSuccessful) {
-                response.body()?.firstOrNull()?.toDomain()
+            if (response.sucesso) {
+                response.corpo?.firstOrNull()?.toDomain()
             } else {
-                Log.w(TAG, "treinos_sugeridos returned HTTP ${response.code()}")
+                Log.w(TAG, "treinos_sugeridos returned HTTP ${response.codigo}")
                 null
             }
         } catch (e: Exception) {
@@ -73,8 +73,8 @@ object SupabaseRepository {
         val api = SupabaseClient.api ?: return@withContext emptyList()
         try {
             val response = api.getSwimSetRecords()
-            if (response.isSuccessful && !response.body().isNullOrEmpty()) {
-                val domainLaps = response.body()!!.map { it.toDomain() }
+            if (response.sucesso && !response.corpo.isNullOrEmpty()) {
+                val domainLaps = response.corpo!!.map { it.toDomain() }
                 Log.i(TAG, "Retrieved ${domainLaps.size} swim set records from Supabase")
                 domainLaps
             } else {
@@ -96,11 +96,11 @@ object SupabaseRepository {
         try {
             val dto = record.toDto(workoutId = workoutId, repDescription = repDescription, distanceMeters = distanceMeters)
             val response = api.insertSwimSetRecord(dto)
-            if (response.isSuccessful) {
+            if (response.sucesso) {
                 Log.i(TAG, "Swim set S${record.setNumber} successfully stored in Supabase!")
                 true
             } else {
-                Log.w(TAG, "Failed to save swim set in Supabase. HTTP ${response.code()}")
+                Log.w(TAG, "Failed to save swim set in Supabase. HTTP ${response.codigo}")
                 false
             }
         } catch (e: Exception) {

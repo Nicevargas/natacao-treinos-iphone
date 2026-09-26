@@ -1,20 +1,19 @@
 package com.example.data.ciclo
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import com.example.data.supabase.WorkoutDto
 import com.example.data.supabase.toDomain
 import com.example.model.TrainingLevel
 import com.example.model.Workout
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.example.data.supabase.JsonDoApp
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class CicloDto(
-    @Json(name = "id") val id: String,
-    @Json(name = "ancora") val ancora: String,
-    @Json(name = "dias") val dias: Int,
-    @Json(name = "treinos") val treinos: List<WorkoutDto>
+    @SerialName("id") val id: String,
+    @SerialName("ancora") val ancora: String,
+    @SerialName("dias") val dias: Int,
+    @SerialName("treinos") val treinos: List<WorkoutDto>
 )
 
 /**
@@ -46,16 +45,13 @@ class CicloDeTreinos(
     }
 
     companion object {
-        private val adapter by lazy {
-            Moshi.Builder().add(KotlinJsonAdapterFactory()).build().adapter(CicloDto::class.java)
-        }
+        private fun lerCiclo(json: String): CicloDto = JsonDoApp.decodeFromString(CicloDto.serializer(), json)
 
         /** Os treinos do programa, sem data: é daqui que o plano de treino escolhe. */
-        fun treinosDoJson(json: String): List<WorkoutDto> =
-            requireNotNull(adapter.fromJson(json)) { "ciclo embarcado vazio" }.treinos
+        fun treinosDoJson(json: String): List<WorkoutDto> = lerCiclo(json).treinos
 
         fun deJson(json: String): CicloDeTreinos {
-            val dto = requireNotNull(adapter.fromJson(json)) { "ciclo embarcado vazio" }
+            val dto = lerCiclo(json)
             return CicloDeTreinos(DataCivil.deIso(dto.ancora), dto.dias, dto.treinos)
         }
 

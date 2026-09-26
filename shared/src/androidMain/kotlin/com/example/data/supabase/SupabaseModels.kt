@@ -1,5 +1,7 @@
 package com.example.data.supabase
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import com.example.model.CompletedSetRecord
 import com.example.model.Corretivo
 import com.example.model.PhaseStatus
@@ -7,69 +9,67 @@ import com.example.model.TrainingLevel
 import com.example.model.Workout
 import com.example.model.WorkoutPhase
 import com.example.model.WorkoutSet
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class WorkoutDto(
-    @Json(name = "id") val id: String? = null,
-    @Json(name = "user_id") val userId: String? = null,
-    @Json(name = "title") val title: String? = null,
-    @Json(name = "subtitle") val subtitle: String? = null,
-    @Json(name = "tag") val tag: String? = "Treino Principal",
-    @Json(name = "workout_date") val workoutDate: String? = null,
-    @Json(name = "total_distance_meters") val totalDistanceMeters: Int? = null,
-    @Json(name = "estimated_minutes") val estimatedMinutes: Int? = null,
-    @Json(name = "calories") val calories: Int? = null,
-    @Json(name = "level") val level: String? = "INTERMEDIARIO",
-    @Json(name = "is_completed") val isCompleted: Boolean? = false,
-    @Json(name = "phases") val phases: List<WorkoutPhaseDto>? = null,
+    @SerialName("id") val id: String? = null,
+    @SerialName("user_id") val userId: String? = null,
+    @SerialName("title") val title: String? = null,
+    @SerialName("subtitle") val subtitle: String? = null,
+    @SerialName("tag") val tag: String? = "Treino Principal",
+    @SerialName("workout_date") val workoutDate: String? = null,
+    @SerialName("total_distance_meters") val totalDistanceMeters: Int? = null,
+    @SerialName("estimated_minutes") val estimatedMinutes: Int? = null,
+    @SerialName("calories") val calories: Int? = null,
+    @SerialName("level") val level: String? = "INTERMEDIARIO",
+    @SerialName("is_completed") val isCompleted: Boolean? = false,
+    @SerialName("phases") val phases: List<WorkoutPhaseDto>? = null,
     // Campos de public.treinos_sugeridos (o ciclo do carrossel).
-    @Json(name = "ciclo_dia") val cicloDia: Int? = null,
-    @Json(name = "bloco") val bloco: String? = null,
-    @Json(name = "foco") val foco: String? = null,
-    @Json(name = "motivational_tip") val motivationalTip: String? = null,
-    @Json(name = "is_suggestion") val isSuggestion: Boolean? = false,
+    @SerialName("ciclo_dia") val cicloDia: Int? = null,
+    @SerialName("bloco") val bloco: String? = null,
+    @SerialName("foco") val foco: String? = null,
+    @SerialName("motivational_tip") val motivationalTip: String? = null,
+    @SerialName("is_suggestion") val isSuggestion: Boolean? = false,
     // Método NC (ciclo metodo-nc, desde 15/09/2026).
-    @Json(name = "objetivo") val objetivo: String? = null,
-    @Json(name = "zona") val zona: String? = null,
-    @Json(name = "ajuste") val ajuste: String? = null
+    @SerialName("objetivo") val objetivo: String? = null,
+    @SerialName("zona") val zona: String? = null,
+    @SerialName("ajuste") val ajuste: String? = null
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class WorkoutPhaseDto(
-    @Json(name = "id") val id: String? = null,
-    @Json(name = "title") val title: String? = null,
-    @Json(name = "summary") val summary: String? = null,
-    @Json(name = "distanceMeters") val distanceMeters: Int? = null,
-    @Json(name = "percentage") val percentage: Int? = null,
-    @Json(name = "status") val status: String? = null,
-    @Json(name = "sets") val sets: List<WorkoutSetDto>? = null
+    @SerialName("id") val id: String? = null,
+    @SerialName("title") val title: String? = null,
+    @SerialName("summary") val summary: String? = null,
+    @SerialName("distanceMeters") val distanceMeters: Int? = null,
+    @SerialName("percentage") val percentage: Int? = null,
+    @SerialName("status") val status: String? = null,
+    @SerialName("sets") val sets: List<WorkoutSetDto>? = null
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class WorkoutSetDto(
-    @Json(name = "id") val id: String? = null,
-    @Json(name = "repsDescription") val repsDescription: String? = null,
-    @Json(name = "stroke") val stroke: String? = null,
-    @Json(name = "interval") val interval: String? = null,
-    @Json(name = "intensity") val intensity: String? = null,
-    @Json(name = "restSeconds") val restSeconds: Int? = null,
-    @Json(name = "equipment") val equipment: String? = null,
-    @Json(name = "isDone") val isDone: Boolean? = false,
-    @Json(name = "serie") val serie: String? = null,
-    @Json(name = "details") val details: List<String>? = null,
-    @Json(name = "distanceMeters") val distanceMeters: Int? = null,
-    @Json(name = "zona") val zona: String? = null,
-    @Json(name = "pse") val pse: String? = null,
-    @Json(name = "corretivo") val corretivo: CorretivoDto? = null
+    @SerialName("id") val id: String? = null,
+    @SerialName("repsDescription") val repsDescription: String? = null,
+    @SerialName("stroke") val stroke: String? = null,
+    @SerialName("interval") val interval: String? = null,
+    @SerialName("intensity") val intensity: String? = null,
+    @SerialName("restSeconds") val restSeconds: Int? = null,
+    @SerialName("equipment") val equipment: String? = null,
+    @SerialName("isDone") val isDone: Boolean? = false,
+    @SerialName("serie") val serie: String? = null,
+    @SerialName("details") val details: List<String>? = null,
+    @SerialName("distanceMeters") val distanceMeters: Int? = null,
+    @SerialName("zona") val zona: String? = null,
+    @SerialName("pse") val pse: String? = null,
+    @SerialName("corretivo") val corretivo: CorretivoDto? = null
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class CorretivoDto(
-    @Json(name = "nome") val nome: String? = null,
-    @Json(name = "objetivo") val objetivo: String? = null,
-    @Json(name = "dica") val dica: String? = null
+    @SerialName("nome") val nome: String? = null,
+    @SerialName("objetivo") val objetivo: String? = null,
+    @SerialName("dica") val dica: String? = null
 )
 
 /**
@@ -77,59 +77,59 @@ data class CorretivoDto(
  * de leitura traz campos da sugestão (is_suggestion, ciclo_dia...) que o
  * PostgREST recusaria. id e user_id vêm do banco (gen_random_uuid, auth.uid()).
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class WorkoutWriteDto(
-    @Json(name = "title") val title: String,
-    @Json(name = "subtitle") val subtitle: String?,
-    @Json(name = "tag") val tag: String,
-    @Json(name = "workout_date") val workoutDate: String,
-    @Json(name = "total_distance_meters") val totalDistanceMeters: Int,
-    @Json(name = "estimated_minutes") val estimatedMinutes: Int,
-    @Json(name = "calories") val calories: Int,
-    @Json(name = "level") val level: String,
-    @Json(name = "phases") val phases: List<WorkoutPhaseDto>
+    @SerialName("title") val title: String,
+    @SerialName("subtitle") val subtitle: String?,
+    @SerialName("tag") val tag: String,
+    @SerialName("workout_date") val workoutDate: String,
+    @SerialName("total_distance_meters") val totalDistanceMeters: Int,
+    @SerialName("estimated_minutes") val estimatedMinutes: Int,
+    @SerialName("calories") val calories: Int,
+    @SerialName("level") val level: String,
+    @SerialName("phases") val phases: List<WorkoutPhaseDto>
 )
 
 /** Corpo do upsert do próprio perfil. O e-mail o banco copia da conta. */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class ProfileWriteDto(
-    @Json(name = "id") val id: String,
-    @Json(name = "full_name") val fullName: String?,
-    @Json(name = "preferred_pool_meters") val preferredPoolMeters: Int,
-    @Json(name = "training_level") val trainingLevel: String
+    @SerialName("id") val id: String,
+    @SerialName("full_name") val fullName: String?,
+    @SerialName("preferred_pool_meters") val preferredPoolMeters: Int,
+    @SerialName("training_level") val trainingLevel: String
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class TreinosSugeridosParams(
-    @Json(name = "p_data") val data: String,
-    @Json(name = "p_level") val level: String?,
+    @SerialName("p_data") val data: String,
+    @SerialName("p_level") val level: String?,
     // Só vai no modo águas abertas (null não é enviado): o banco sem a migração de
     // águas abertas continua respondendo o treino de piscina.
-    @Json(name = "p_modo") val modo: String? = null
+    @SerialName("p_modo") val modo: String? = null
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class SwimSetRecordDto(
-    @Json(name = "id") val id: String? = null,
-    @Json(name = "user_id") val userId: String? = null,
-    @Json(name = "workout_id") val workoutId: String? = null,
-    @Json(name = "set_number") val setNumber: Int? = null,
-    @Json(name = "rep_description") val repDescription: String? = null,
-    @Json(name = "distance_meters") val distanceMeters: Int? = 100,
-    @Json(name = "time_formatted") val timeFormatted: String? = null,
-    @Json(name = "time_millis") val timeMillis: Long? = null,
-    @Json(name = "pace_per_100m") val pacePer100m: String? = null,
-    @Json(name = "split_difference") val splitDifference: String? = null
+    @SerialName("id") val id: String? = null,
+    @SerialName("user_id") val userId: String? = null,
+    @SerialName("workout_id") val workoutId: String? = null,
+    @SerialName("set_number") val setNumber: Int? = null,
+    @SerialName("rep_description") val repDescription: String? = null,
+    @SerialName("distance_meters") val distanceMeters: Int? = 100,
+    @SerialName("time_formatted") val timeFormatted: String? = null,
+    @SerialName("time_millis") val timeMillis: Long? = null,
+    @SerialName("pace_per_100m") val pacePer100m: String? = null,
+    @SerialName("split_difference") val splitDifference: String? = null
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class ProfileDto(
-    @Json(name = "id") val id: String? = null,
-    @Json(name = "email") val email: String? = null,
-    @Json(name = "full_name") val fullName: String? = null,
-    @Json(name = "avatar_url") val avatarUrl: String? = null,
-    @Json(name = "preferred_pool_meters") val preferredPoolMeters: Int? = 25,
-    @Json(name = "training_level") val trainingLevel: String? = "INTERMEDIARIO"
+    @SerialName("id") val id: String? = null,
+    @SerialName("email") val email: String? = null,
+    @SerialName("full_name") val fullName: String? = null,
+    @SerialName("avatar_url") val avatarUrl: String? = null,
+    @SerialName("preferred_pool_meters") val preferredPoolMeters: Int? = 25,
+    @SerialName("training_level") val trainingLevel: String? = "INTERMEDIARIO"
 )
 
 // "8x100" -> 800; "400" -> 400.

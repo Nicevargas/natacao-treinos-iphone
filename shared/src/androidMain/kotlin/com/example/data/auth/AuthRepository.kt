@@ -8,8 +8,8 @@ import com.example.model.TrainingLevel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
-import java.io.IOException
-import java.net.SocketTimeoutException
+import com.example.data.supabase.ehDemora
+import com.example.data.supabase.ehSemRede
 
 object AuthRepository {
     private const val TAG = "AuthRepository"
@@ -37,20 +37,22 @@ object AuthRepository {
         val api = SupabaseClient.authApi ?: return@withContext ResultadoAuth.Erro(MensagensAuth.SEM_CONFIGURACAO)
         try {
             val r = api.signIn(PasswordGrantBody(email.trim().lowercase(), senha))
-            val nova = r.body()?.paraSessao(agora())
-            if (r.isSuccessful && nova != null) {
+            val nova = r.corpo?.paraSessao(agora())
+            if (r.sucesso && nova != null) {
                 store().salvar(nova)
                 ResultadoAuth.Entrou
             } else {
-                ResultadoAuth.Erro(MensagensAuth.deErroDeAuth(r.code(), r.errorBody()?.string()))
+                ResultadoAuth.Erro(MensagensAuth.deErroDeAuth(r.codigo, r.erro))
             }
-        } catch (e: SocketTimeoutException) {
-            ResultadoAuth.Erro(MensagensAuth.DEMOROU)
-        } catch (e: IOException) {
-            ResultadoAuth.Erro(MensagensAuth.SEM_REDE)
         } catch (e: Exception) {
-            Log.e(TAG, "Falha inesperada no login", e)
-            ResultadoAuth.Erro("Não foi possível entrar. Tente de novo.")
+            when {
+                e.ehDemora() -> ResultadoAuth.Erro(MensagensAuth.DEMOROU)
+                e.ehSemRede() -> ResultadoAuth.Erro(MensagensAuth.SEM_REDE)
+                else -> {
+                    Log.e(TAG, "Falha inesperada no login", e)
+                    ResultadoAuth.Erro("Não foi possível entrar. Tente de novo.")
+                }
+            }
         }
     }
 
@@ -68,10 +70,10 @@ object AuthRepository {
                     )
                 )
                 val r = api.signUp(corpo)
-                if (!r.isSuccessful) {
-                    return@withContext ResultadoAuth.Erro(MensagensAuth.deErroDeAuth(r.code(), r.errorBody()?.string()))
+                if (!r.sucesso) {
+                    return@withContext ResultadoAuth.Erro(MensagensAuth.deErroDeAuth(r.codigo, r.erro))
                 }
-                val resposta = r.body()
+                val resposta = r.corpo
                 val nova = resposta?.paraSessao(agora())
                 if (nova != null) {
                     store().salvar(nova)
@@ -85,16 +87,22 @@ object AuthRepository {
                 } else {
                     ResultadoAuth.ConfirmarEmail
                 }
-            } catch (e: SocketTimeoutException) {
-                // O Supabase cria a conta e depois manda o e-mail; a demora costuma ser o envio.
-                Log.w(TAG, "Cadastro sem resposta a tempo", e)
-                ResultadoAuth.Erro(MensagensAuth.CADASTRO_DEMOROU)
-            } catch (e: IOException) {
-                Log.w(TAG, "Cadastro sem rede", e)
-                ResultadoAuth.Erro(MensagensAuth.SEM_REDE)
             } catch (e: Exception) {
-                Log.e(TAG, "Falha inesperada no cadastro", e)
-                ResultadoAuth.Erro("Não foi possível criar a conta. Tente de novo.")
+                when {
+                    // O Supabase cria a conta e depois manda o e-mail; a demora costuma ser o envio.
+                    e.ehDemora() -> {
+                        Log.w(TAG, "Cadastro sem resposta a tempo", e)
+                        ResultadoAuth.Erro(MensagensAuth.CADASTRO_DEMOROU)
+                    }
+                    e.ehSemRede() -> {
+                        Log.w(TAG, "Cadastro sem rede", e)
+                        ResultadoAuth.Erro(MensagensAuth.SEM_REDE)
+                    }
+                    else -> {
+                        Log.e(TAG, "Falha inesperada no cadastro", e)
+                        ResultadoAuth.Erro("Não foi possível criar a conta. Tente de novo.")
+                    }
+                }
             }
         }
 

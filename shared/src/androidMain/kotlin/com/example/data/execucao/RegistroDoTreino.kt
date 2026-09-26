@@ -1,34 +1,34 @@
 package com.example.data.execucao
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import com.example.data.compartilhar.ResumoDoTreino
 import com.example.model.TrainingLevel
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /** Linha de public.treinos_realizados. user_id e id vêm do banco. */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class TreinoRealizadoDto(
-    @Json(name = "id") val id: String? = null,
-    @Json(name = "workout_id") val workoutId: String? = null,
-    @Json(name = "treino_ciclo_id") val treinoCicloId: String? = null,
-    @Json(name = "titulo") val titulo: String,
-    @Json(name = "foco") val foco: String? = null,
-    @Json(name = "nivel") val nivel: String,
-    @Json(name = "data_treino") val dataTreino: String,
-    @Json(name = "metros_planejados") val metrosPlanejados: Int,
-    @Json(name = "metros_feitos") val metrosFeitos: Int,
-    @Json(name = "series_planejadas") val seriesPlanejadas: Int,
-    @Json(name = "series_feitas") val seriesFeitas: Int,
-    @Json(name = "duracao_segundos") val duracaoSegundos: Int,
-    @Json(name = "intensidade") val intensidade: Int? = null,
-    @Json(name = "complexidade") val complexidade: Int? = null,
-    @Json(name = "observacao") val observacao: String? = null,
+    @SerialName("id") val id: String? = null,
+    @SerialName("workout_id") val workoutId: String? = null,
+    @SerialName("treino_ciclo_id") val treinoCicloId: String? = null,
+    @SerialName("titulo") val titulo: String,
+    @SerialName("foco") val foco: String? = null,
+    @SerialName("nivel") val nivel: String,
+    @SerialName("data_treino") val dataTreino: String,
+    @SerialName("metros_planejados") val metrosPlanejados: Int,
+    @SerialName("metros_feitos") val metrosFeitos: Int,
+    @SerialName("series_planejadas") val seriesPlanejadas: Int,
+    @SerialName("series_feitas") val seriesFeitas: Int,
+    @SerialName("duracao_segundos") val duracaoSegundos: Int,
+    @SerialName("intensidade") val intensidade: Int? = null,
+    @SerialName("complexidade") val complexidade: Int? = null,
+    @SerialName("observacao") val observacao: String? = null,
     // Treino de um plano: qual plano, semana e número do treino.
-    @Json(name = "plano_id") val planoId: String? = null,
-    @Json(name = "plano_semana") val planoSemana: Int? = null,
-    @Json(name = "plano_treino") val planoTreino: Int? = null,
+    @SerialName("plano_id") val planoId: String? = null,
+    @SerialName("plano_semana") val planoSemana: Int? = null,
+    @SerialName("plano_treino") val planoTreino: Int? = null,
     // Só na leitura; no registro o banco preenche.
-    @Json(name = "created_at") val criadoEm: String? = null
+    @SerialName("created_at") val criadoEm: String? = null
 )
 
 object RegistroDoTreino {

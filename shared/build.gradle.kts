@@ -6,7 +6,7 @@ plugins {
   alias(libs.plugins.kotlin.multiplatform)
   alias(libs.plugins.android.kotlin.multiplatform.library)
   alias(libs.plugins.kotlin.compose)
-  alias(libs.plugins.google.devtools.ksp)
+  alias(libs.plugins.kotlin.serialization)
 }
 
 // ------------------------------------------------------------------------------
@@ -90,23 +90,22 @@ kotlin {
         api(libs.androidx.lifecycle.runtime.ktx)
         api(libs.androidx.lifecycle.viewmodel.compose)
         api(libs.coil.compose)
-        api(libs.converter.moshi)
+        api(libs.ktor.client.core)
+        api(libs.ktor.client.okhttp)
+        api(libs.ktor.client.content.negotiation)
+        api(libs.ktor.serialization.kotlinx.json)
+        api(libs.ktor.client.logging)
+        api(libs.kotlinx.serialization.json)
+        api(libs.kotlinx.datetime)
         api(libs.kotlinx.coroutines.android)
         api(libs.kotlinx.coroutines.core)
-        api(libs.logging.interceptor)
-        api(libs.moshi.kotlin)
-        api(libs.okhttp)
-        api(libs.retrofit)
       }
     }
     getByName("androidHostTest").dependencies {
       implementation(libs.junit)
       implementation(libs.kotlinx.coroutines.test)
-      implementation(libs.mockwebserver)
+      // Servidor de mentira do Ktor: funciona também no iPhone, ao contrário do MockWebServer.
+      implementation(libs.ktor.client.mock)
     }
   }
-}
-
-dependencies {
-  add("kspAndroid", libs.moshi.kotlin.codegen)
 }
