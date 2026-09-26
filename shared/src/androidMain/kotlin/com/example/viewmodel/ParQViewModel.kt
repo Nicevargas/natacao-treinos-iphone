@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.Resultado
 import com.example.data.ciclo.DataCivil
+import com.example.data.guardadosDe
 import com.example.data.parq.ParQ
 import com.example.data.parq.ParQRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -38,7 +39,7 @@ data class ParQUiState(
  */
 class ParQViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val prefs = application.getSharedPreferences(ARQUIVO, Context.MODE_PRIVATE)
+    private val guardados = guardadosDe(application, ARQUIVO)
 
     private val _ui = MutableStateFlow(ParQUiState())
     val ui: StateFlow<ParQUiState> = _ui.asStateFlow()
@@ -139,10 +140,10 @@ class ParQViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun lerDoAparelho(id: String): Long? =
-        prefs.getString(CHAVE + id, null)?.let { runCatching { DataCivil.deIso(it) }.getOrNull() }
+        guardados.texto(CHAVE + id)?.let { runCatching { DataCivil.deIso(it) }.getOrNull() }
 
     private fun guardar(id: String, dia: Long) {
-        prefs.edit().putString(CHAVE + id, DataCivil.paraIso(dia)).apply()
+        guardados.salvarTexto(CHAVE + id, DataCivil.paraIso(dia))
         if (id == usuario) _ui.update { it.copy(ultimoDia = dia) }
     }
 

@@ -15,6 +15,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.example.shared.R
 import com.example.data.ciclo.DataCivil
+import com.example.data.guardadosDe
 import kotlin.time.ExperimentalTime
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
@@ -28,6 +29,9 @@ object LembreteDeTreino {
 
     const val HORA_DO_AVISO = 7
     private const val ARQUIVO = "lembrete_de_treino"
+
+    private fun guardados(context: Context) = guardadosDe(context, ARQUIVO)
+
     private const val CHAVE_DIA = "dia"
     private const val CANAL = "lembretes_de_treino"
     private const val ID_NOTIFICACAO = 7001
@@ -56,13 +60,13 @@ object LembreteDeTreino {
     }
 
     fun agendar(context: Context, dia: Long) {
-        context.getSharedPreferences(ARQUIVO, Context.MODE_PRIVATE).edit().putLong(CHAVE_DIA, dia).apply()
+        guardados(context).salvarNumero(CHAVE_DIA, dia)
         programarAlarme(context, dia)
     }
 
     /** Depois de reiniciar o celular o Android apaga os alarmes: o do dia combinado volta. */
     fun reprogramar(context: Context) {
-        val dia = context.getSharedPreferences(ARQUIVO, Context.MODE_PRIVATE).getLong(CHAVE_DIA, Long.MIN_VALUE)
+        val dia = guardados(context).numero(CHAVE_DIA, Long.MIN_VALUE)
         if (dia != Long.MIN_VALUE && horarioDoAviso(dia) > System.currentTimeMillis()) programarAlarme(context, dia)
     }
 
@@ -107,7 +111,7 @@ object LembreteDeTreino {
             .setAutoCancel(true)
             .build()
         runCatching { NotificationManagerCompat.from(context).notify(ID_NOTIFICACAO, notificacao) }
-        context.getSharedPreferences(ARQUIVO, Context.MODE_PRIVATE).edit().remove(CHAVE_DIA).apply()
+        guardados(context).remover(CHAVE_DIA)
     }
 }
 

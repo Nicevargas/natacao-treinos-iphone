@@ -3,6 +3,7 @@ package com.example.data.auth
 import android.content.Context
 import android.util.Log
 import com.example.data.Resultado
+import com.example.data.guardadosDe
 import com.example.data.supabase.SupabaseClient
 import com.example.model.TrainingLevel
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +20,7 @@ object AuthRepository {
         if (SupabaseClient.sessaoStore == null) {
             synchronized(this) {
                 if (SupabaseClient.sessaoStore == null) {
-                    SupabaseClient.sessaoStore = SessaoStore(context)
+                    SupabaseClient.sessaoStore = SessaoStore(guardadosDe(context, SessaoStore.ARQUIVO))
                 }
             }
         }
