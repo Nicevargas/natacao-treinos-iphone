@@ -73,6 +73,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -1138,7 +1139,8 @@ private fun TelaPublicar(
 ) {
     BackHandler(onBack = onFechar)
     var formato by rememberSaveable { mutableStateOf(FormatoDoCartao.FEED) }
-    val imagem = remember(resumo, formato) { CartaoDoTreino.desenhar(resumo, formato).asImageBitmap() }
+    val medidor = rememberTextMeasurer()
+    val imagem = remember(resumo, formato) { CartaoDoTreino.desenhar(resumo, formato, medidor) }
     val legenda = remember(resumo) { TextosDoTreino.legenda(resumo) }
 
     Column(

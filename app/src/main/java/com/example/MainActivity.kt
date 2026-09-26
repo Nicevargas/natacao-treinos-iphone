@@ -70,6 +70,7 @@ import android.util.Log
 import com.example.data.Registro
 import com.example.data.auth.SessaoStore
 import android.content.Intent
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.lifecycle.ViewModel
 import com.example.data.guardadosDe
 import com.example.data.leitorDeArquivosDe
@@ -161,6 +162,8 @@ fun AquagendaApp(
     ranking: RankingViewModel = viewModel(),
     compartilhar: CompartilharTreinoViewModel = viewModel()
 ) {
+    // Quem sabe medir e desenhar texto no cartão de compartilhar.
+    val medidor = rememberTextMeasurer()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val meus by meusTreinos.ui.collectAsStateWithLifecycle()
     val estadoExecucao by execucao.ui.collectAsStateWithLifecycle()
@@ -237,7 +240,7 @@ fun AquagendaApp(
     // Treino pronto: abre a janela de compartilhar do Android (WhatsApp, redes...) com imagem e link.
     LaunchedEffect(estadoCompartilhar.envio) {
         estadoCompartilhar.envio?.let { envio ->
-            compartilharTreinoParaFazer(contexto, envio.treino, envio.codigo, envio.mensagem)
+            compartilharTreinoParaFazer(contexto, envio.treino, envio.codigo, envio.mensagem, medidor)
             compartilhar.textoEnviado()
         }
     }
@@ -316,7 +319,7 @@ fun AquagendaApp(
             onObservacao = execucao::definirObservacao,
             onSalvar = { execucao.salvar() },
             onCompartilhar = { formato ->
-                estadoExecucao.resumo?.let { compartilharTreino(contexto, it, formato) }
+                estadoExecucao.resumo?.let { compartilharTreino(contexto, it, formato, medidor) }
             },
             onFechar = execucao::encerrar,
             onLembrete = agendarLembrete

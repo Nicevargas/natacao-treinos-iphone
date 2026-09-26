@@ -1,6 +1,12 @@
 package com.example
 
 import android.graphics.Bitmap
+import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.text.TextMeasurer
+import androidx.compose.ui.text.font.createFontFamilyResolver
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.test.core.app.ApplicationProvider
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onRoot
 import com.example.data.ciclo.CicloDeTreinos
@@ -35,6 +41,13 @@ import java.io.FileOutputStream
 class ExecucaoScreenshotTest {
 
     @get:Rule val composeTestRule = createComposeRule()
+
+    /** Mede o texto com as fontes do aparelho, como a tela faria. */
+    private fun medidor() = TextMeasurer(
+        defaultFontFamilyResolver = createFontFamilyResolver(ApplicationProvider.getApplicationContext()),
+        defaultDensity = Density(1f),
+        defaultLayoutDirection = LayoutDirection.Ltr
+    )
 
     private val ciclo = CicloDeTreinos.deJson(File("../shared/src/commonMain/recursos/programa_nc.json").readText())
     private val roteiro = RoteiroDeTreino(ciclo.sugestao(DataCivil.deIso("2026-09-15"), TrainingLevel.INTERMEDIARIO)!!)
@@ -100,10 +113,10 @@ class ExecucaoScreenshotTest {
             Triple(resumoCompleto, FormatoDoCartao.STORIES, "cartao_stories.png"),
             Triple(parcial, FormatoDoCartao.FEED, "cartao_parcial.png")
         ).forEach { (resumo, formato, arquivo) ->
-            val imagem = CartaoDoTreino.desenhar(resumo, formato)
+            val imagem = CartaoDoTreino.desenhar(resumo, formato, medidor())
             assertEquals(formato.largura, imagem.width)
             assertEquals(formato.altura, imagem.height)
-            FileOutputStream("src/test/screenshots/$arquivo").use { imagem.compress(Bitmap.CompressFormat.PNG, 100, it) }
+            FileOutputStream("src/test/screenshots/$arquivo").use { imagem.asAndroidBitmap().compress(Bitmap.CompressFormat.PNG, 100, it) }
         }
     }
 
@@ -115,9 +128,9 @@ class ExecucaoScreenshotTest {
             Triple("2026-09-20", TrainingLevel.INICIANTE, "cartao_convite_inicio.png")
         ).forEach { (dia, nivel, arquivo) ->
             val treino = ciclo.sugestao(DataCivil.deIso(dia), nivel)!!
-            val imagem = CartaoDoConvite.desenhar(treino, "a1b2c3d4e5")
+            val imagem = CartaoDoConvite.desenhar(treino, "a1b2c3d4e5", medidor())
             assertEquals(FormatoDoCartao.FEED.altura, imagem.height)
-            FileOutputStream("src/test/screenshots/$arquivo").use { imagem.compress(Bitmap.CompressFormat.PNG, 100, it) }
+            FileOutputStream("src/test/screenshots/$arquivo").use { imagem.asAndroidBitmap().compress(Bitmap.CompressFormat.PNG, 100, it) }
         }
     }
 }
