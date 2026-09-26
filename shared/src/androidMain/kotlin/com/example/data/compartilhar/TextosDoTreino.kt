@@ -1,8 +1,7 @@
 package com.example.data.compartilhar
 
 import com.example.model.TrainingLevel
-import java.text.NumberFormat
-import java.util.Locale
+import com.example.data.Formato
 
 /** O que vai para a imagem e para a legenda de um treino concluído. */
 data class ResumoDoTreino(
@@ -31,13 +30,11 @@ enum class FormatoDoCartao(val largura: Int, val altura: Int, val rotulo: String
 
 object TextosDoTreino {
 
-    private val numeros = NumberFormat.getIntegerInstance(Locale.forLanguageTag("pt-BR"))
-
     // Mesmas hashtags do carrossel; a do app é a própria #NatacaoCriativa.
     const val HASHTAGS = "#CadaDia1Treino #NatacaoCriativa #TreinoDeNatacao #Natacao"
 
     /** 1800 -> "1.800m" */
-    fun metros(m: Int): String = numeros.format(m) + "m"
+    fun metros(m: Int): String = Formato.milhar(m) + "m"
 
     /** 2520 -> "42 min"; 3900 -> "1h05" */
     fun duracao(segundos: Long): String {
@@ -45,7 +42,7 @@ object TextosDoTreino {
         return when {
             minutos < 1 -> "menos de 1 min"
             minutos < 60 -> "$minutos min"
-            else -> String.format(Locale.US, "%dh%02d", minutos / 60, minutos % 60)
+            else -> "${minutos / 60}h${Formato.comZeros((minutos % 60).toInt(), 2)}"
         }
     }
 

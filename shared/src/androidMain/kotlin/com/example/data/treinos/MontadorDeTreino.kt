@@ -8,7 +8,6 @@ import com.example.data.supabase.WorkoutWriteDto
 import com.example.model.Corretivo
 import com.example.model.TrainingLevel
 import com.example.model.Workout
-import java.util.Locale
 import kotlin.math.round
 
 /** Uma série como a pessoa digita, no formato do carrossel. */
@@ -98,7 +97,7 @@ object MontadorDeTreino {
         // Minuto cheio sai como no carrossel: #1', não #1'00".
         val tempo = when {
             min > 0 && seg == 0 -> "$min'"
-            min > 0 -> String.format(Locale.US, "%d'%02d\"", min, seg)
+            min > 0 -> "$min'${com.example.data.Formato.comZeros(seg, 2)}\""
             else -> "$seg\""
         }
         return prefixo + tempo to (min * 60 + seg)

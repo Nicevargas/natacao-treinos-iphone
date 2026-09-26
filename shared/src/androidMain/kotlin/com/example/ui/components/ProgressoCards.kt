@@ -73,13 +73,11 @@ import com.example.ui.theme.AquaTextPrimary
 import com.example.ui.theme.AquaTextSecondary
 import com.example.ui.theme.AquaYellow
 import com.example.ui.theme.AquaYellowBg
-import java.util.Locale
-
-private val PT_BR = Locale.forLanguageTag("pt-BR")
+import com.example.data.Formato
 
 private fun semanasSeguidas(n: Int) = if (n == 1) "1 semana seguida" else "$n semanas seguidas"
 
-private fun decimal(valor: Double) = String.format(PT_BR, "%.1f", valor)
+private fun decimal(valor: Double) = Formato.decimal(valor, casas = 1)
 
 @Composable
 private fun CartaoBranco(modifier: Modifier = Modifier, padding: Int = 18, conteudo: @Composable ColumnScope.() -> Unit) {
@@ -256,7 +254,7 @@ fun CartaoDeTotais(painel: PainelDoProgresso, modifier: Modifier = Modifier) {
         }
         Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Numero("TEMPO", TextosDoTreino.duracao(t.segundos), Modifier.weight(1f).fillMaxHeight())
-            Numero("EM ${painel.nomeMesAtual.uppercase(PT_BR)}", TextosDoTreino.metros(t.metrosNoMes), Modifier.weight(1f).fillMaxHeight())
+            Numero("EM ${painel.nomeMesAtual.uppercase()}", TextosDoTreino.metros(t.metrosNoMes), Modifier.weight(1f).fillMaxHeight())
         }
     }
 }
@@ -315,7 +313,7 @@ fun GraficoDoMes(painel: PainelDoProgresso, modifier: Modifier = Modifier) {
     val maior = maxOf(atual.maxOrNull() ?: 0, anterior.maxOrNull() ?: 0, 1000)
     val dias = maxOf(painel.diasNoMesAtual, anterior.size, 2)
     CartaoBranco(modifier.testTag("grafico_do_mes")) {
-        Rotulo("METROS EM ${painel.nomeMesAtual.uppercase(PT_BR)}")
+        Rotulo("METROS EM ${painel.nomeMesAtual.uppercase()}")
         Text(
             text = TextosDoTreino.metros(atual.lastOrNull() ?: 0),
             fontSize = 24.sp,
@@ -531,7 +529,7 @@ fun CartaoDePontos(painel: PainelDoProgresso, modifier: Modifier = Modifier) {
                 Icon(Icons.Filled.Stars, contentDescription = null, tint = AquaYellow, modifier = Modifier.size(30.dp))
             }
             Column(modifier = Modifier.padding(start = 14.dp)) {
-                Rotulo("PONTOS · NÍVEL ${nivel.nome.uppercase(PT_BR)}")
+                Rotulo("PONTOS · NÍVEL ${nivel.nome.uppercase()}")
                 Text("${painel.pontos} pontos", fontSize = 22.sp, fontWeight = FontWeight.Black, color = AquaTextPrimary)
             }
         }

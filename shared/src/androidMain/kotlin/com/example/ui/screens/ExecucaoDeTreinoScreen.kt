@@ -111,11 +111,11 @@ import com.example.ui.theme.AquaTextPrimary
 import com.example.ui.theme.AquaTextSecondary
 import com.example.viewmodel.EtapaExecucao
 import com.example.viewmodel.ExecucaoUiState
-import java.util.Locale
+import com.example.data.Formato
 import kotlin.math.roundToInt
 
 private fun tempoFormatado(segundos: Long): String =
-    String.format(Locale.US, "%02d:%02d:%02d", segundos / 3600, (segundos % 3600) / 60, segundos % 60)
+    "${Formato.comZeros((segundos / 3600).toInt(), 2)}:${Formato.comZeros(((segundos % 3600) / 60).toInt(), 2)}:${Formato.comZeros((segundos % 60).toInt(), 2)}"
 
 /** Execução ao vivo do treino escolhido -> resumo com notas -> publicar nas redes. */
 @Composable

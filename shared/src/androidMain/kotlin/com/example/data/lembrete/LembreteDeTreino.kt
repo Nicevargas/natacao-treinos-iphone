@@ -15,8 +15,10 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.example.shared.R
 import com.example.data.ciclo.DataCivil
-import java.util.Calendar
-import java.util.TimeZone
+import kotlin.time.ExperimentalTime
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 
 /**
  * "Quando você vai voltar a nadar?": a pessoa escolhe o dia depois de salvar o
@@ -43,12 +45,14 @@ object LembreteDeTreino {
     }
 
     /** Instante do aviso: [hora]h do [dia], no fuso do celular. */
-    fun horarioDoAviso(dia: Long, hora: Int = HORA_DO_AVISO, fuso: TimeZone = TimeZone.getDefault()): Long {
+    @OptIn(ExperimentalTime::class)
+    fun horarioDoAviso(
+        dia: Long,
+        hora: Int = HORA_DO_AVISO,
+        fuso: TimeZone = TimeZone.currentSystemDefault()
+    ): Long {
         val (ano, mes, d) = DataCivil.civil(dia)
-        return Calendar.getInstance(fuso).apply {
-            clear()
-            set(ano, mes - 1, d, hora, 0, 0)
-        }.timeInMillis
+        return LocalDateTime(ano, mes, d, hora, 0).toInstant(fuso).toEpochMilliseconds()
     }
 
     fun agendar(context: Context, dia: Long) {

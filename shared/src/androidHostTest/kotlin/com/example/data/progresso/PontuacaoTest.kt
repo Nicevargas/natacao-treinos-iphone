@@ -6,7 +6,7 @@ import com.example.data.ranking.OpcoesDoRanking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
-import java.util.TimeZone
+import kotlinx.datetime.TimeZone
 
 class PontuacaoTest {
 
@@ -72,7 +72,7 @@ class PontuacaoTest {
         // 7h de 16/09/2026 em Brasília (UTC-3) = 10h UTC.
         assertEquals(
             dia("2026-09-16") * 86_400_000L + 10 * 3_600_000L,
-            LembreteDeTreino.horarioDoAviso(dia("2026-09-16"), 7, TimeZone.getTimeZone("America/Sao_Paulo"))
+            LembreteDeTreino.horarioDoAviso(dia("2026-09-16"), 7, TimeZone.of("America/Sao_Paulo"))
         )
     }
 

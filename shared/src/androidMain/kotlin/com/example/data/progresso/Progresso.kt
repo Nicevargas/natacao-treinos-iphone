@@ -260,7 +260,7 @@ object Progresso {
         return (0 until quantas).map { i ->
             val segunda = atual - 7L * i
             val (_, mes, dia) = DataCivil.civil(segunda)
-            linha(segunda, String.format(java.util.Locale.US, "%02d/%02d", dia, mes), atividades.filter { it.dia in segunda..segunda + 6 })
+            linha(segunda, "${com.example.data.Formato.comZeros(dia, 2)}/${com.example.data.Formato.comZeros(mes, 2)}", atividades.filter { it.dia in segunda..segunda + 6 })
         }
     }
 
@@ -273,7 +273,7 @@ object Progresso {
             val mes = indice % 12 + 1
             val primeiro = DataCivil.epochDay(ano, mes, 1)
             val ultimo = primeiro + diasNoMes(ano, mes) - 1
-            linha(primeiro, "${nomeDoMes(mes).take(3)}/${String.format(java.util.Locale.US, "%02d", ano % 100)}", atividades.filter { it.dia in primeiro..ultimo })
+            linha(primeiro, "${nomeDoMes(mes).take(3)}/${com.example.data.Formato.comZeros(ano % 100, 2)}", atividades.filter { it.dia in primeiro..ultimo })
         }
     }
 

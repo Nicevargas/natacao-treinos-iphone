@@ -1,8 +1,12 @@
 package com.example.data.ciclo
 
-import java.util.Calendar
-import java.util.Locale
-import java.util.TimeZone
+import com.example.data.Formato
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.number
+import kotlinx.datetime.toLocalDateTime
 
 /**
  * Datas de calendário como "dias desde 01/01/1970" (epoch day).
@@ -14,7 +18,7 @@ import java.util.TimeZone
 object DataCivil {
 
     // O carrossel sai às 6h de Brasília; "hoje" é o dia de lá, não o do aparelho.
-    private val FUSO_BRASILIA: TimeZone = TimeZone.getTimeZone("America/Sao_Paulo")
+    private val FUSO_BRASILIA: TimeZone = TimeZone.of("America/Sao_Paulo")
 
     private val SIGLAS = listOf("SEG", "TER", "QUA", "QUI", "SEX", "SÁB", "DOM")
 
@@ -44,7 +48,7 @@ object DataCivil {
 
     fun paraIso(epochDay: Long): String {
         val (ano, mes, dia) = civil(epochDay)
-        return String.format(Locale.US, "%04d-%02d-%02d", ano, mes, dia)
+        return "${Formato.comZeros(ano, 4)}-${Formato.comZeros(mes, 2)}-${Formato.comZeros(dia, 2)}"
     }
 
     fun deIso(iso: String): Long {
@@ -55,7 +59,7 @@ object DataCivil {
 
     fun paraBr(epochDay: Long): String {
         val (ano, mes, dia) = civil(epochDay)
-        return String.format(Locale.US, "%02d/%02d/%04d", dia, mes, ano)
+        return "${Formato.comZeros(dia, 2)}/${Formato.comZeros(mes, 2)}/${Formato.comZeros(ano, 4)}"
     }
 
     /** "13/09/2026" -> epoch day; null se não for uma data de calendário de verdade. */
@@ -71,10 +75,10 @@ object DataCivil {
         return epoch.takeIf { civil(it) == Triple(ano, mes, dia) }
     }
 
-    fun hoje(agoraMillis: Long = System.currentTimeMillis()): Long {
-        val c = Calendar.getInstance(FUSO_BRASILIA)
-        c.timeInMillis = agoraMillis
-        return epochDay(c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH))
+    @OptIn(ExperimentalTime::class)
+    fun hoje(agoraMillis: Long = Clock.System.now().toEpochMilliseconds()): Long {
+        val data = Instant.fromEpochMilliseconds(agoraMillis).toLocalDateTime(FUSO_BRASILIA).date
+        return epochDay(data.year, data.month.number, data.day)
     }
 
     /** 0 = segunda ... 6 = domingo. 01/01/1970 foi uma quinta. */
