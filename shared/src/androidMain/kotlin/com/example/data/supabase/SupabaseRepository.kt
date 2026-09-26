@@ -1,6 +1,6 @@
 package com.example.data.supabase
 
-import android.util.Log
+import com.example.data.Registro
 import com.example.data.ciclo.DataCivil
 import com.example.model.CompletedSetRecord
 import com.example.model.ModoDeTreino
@@ -28,14 +28,14 @@ object SupabaseRepository {
         try {
             val response = api.pingWorkouts()
             if (response.sucesso) {
-                Log.i(TAG, "Supabase connection verified successfully! Status code: ${response.codigo}")
+                Registro.aviso(TAG, "Supabase connection verified successfully! Status code: ${response.codigo}")
                 SupabaseStatus.CONNECTED
             } else {
-                Log.w(TAG, "Supabase returned response code: ${response.codigo}")
+                Registro.aviso(TAG, "Supabase returned response code: ${response.codigo}")
                 SupabaseStatus.OFFLINE_LOCAL
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Supabase connection failed, falling back to local mode", e)
+            Registro.erro(TAG, "Supabase connection failed, falling back to local mode", e)
             SupabaseStatus.OFFLINE_LOCAL
         }
     }
@@ -60,11 +60,11 @@ object SupabaseRepository {
             if (response.sucesso) {
                 response.corpo?.firstOrNull()?.toDomain()
             } else {
-                Log.w(TAG, "treinos_sugeridos returned HTTP ${response.codigo}")
+                Registro.aviso(TAG, "treinos_sugeridos returned HTTP ${response.codigo}")
                 null
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Error querying treinos_sugeridos, keeping bundled cycle", e)
+            Registro.erro(TAG, "Error querying treinos_sugeridos, keeping bundled cycle", e)
             null
         }
     }
@@ -75,13 +75,13 @@ object SupabaseRepository {
             val response = api.getSwimSetRecords()
             if (response.sucesso && !response.corpo.isNullOrEmpty()) {
                 val domainLaps = response.corpo!!.map { it.toDomain() }
-                Log.i(TAG, "Retrieved ${domainLaps.size} swim set records from Supabase")
+                Registro.aviso(TAG, "Retrieved ${domainLaps.size} swim set records from Supabase")
                 domainLaps
             } else {
                 emptyList()
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Error fetching swim sets from Supabase", e)
+            Registro.erro(TAG, "Error fetching swim sets from Supabase", e)
             emptyList()
         }
     }
@@ -97,14 +97,14 @@ object SupabaseRepository {
             val dto = record.toDto(workoutId = workoutId, repDescription = repDescription, distanceMeters = distanceMeters)
             val response = api.insertSwimSetRecord(dto)
             if (response.sucesso) {
-                Log.i(TAG, "Swim set S${record.setNumber} successfully stored in Supabase!")
+                Registro.aviso(TAG, "Swim set S${record.setNumber} successfully stored in Supabase!")
                 true
             } else {
-                Log.w(TAG, "Failed to save swim set in Supabase. HTTP ${response.codigo}")
+                Registro.aviso(TAG, "Failed to save swim set in Supabase. HTTP ${response.codigo}")
                 false
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Exception storing swim set in Supabase", e)
+            Registro.erro(TAG, "Exception storing swim set in Supabase", e)
             false
         }
     }

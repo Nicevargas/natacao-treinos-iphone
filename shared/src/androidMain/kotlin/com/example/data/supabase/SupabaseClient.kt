@@ -1,6 +1,6 @@
 package com.example.data.supabase
 
-import android.util.Log
+import com.example.data.Registro
 import com.example.data.auth.AuthApi
 import com.example.data.auth.RefreshGrantBody
 import com.example.data.auth.SessaoStore
@@ -139,14 +139,14 @@ object SupabaseClient {
                     nova.accessToken
                 }
                 r.codigo in 400..499 -> {
-                    Log.w(TAG, "Refresh token recusado (HTTP ${r.codigo}); encerrando a sessão")
+                    Registro.aviso(TAG, "Refresh token recusado (HTTP ${r.codigo}); encerrando a sessão")
                     store.limpar()
                     null
                 }
                 else -> null
             }
         } catch (e: Exception) {
-            Log.w(TAG, "Sem rede para renovar a sessão", e)
+            Registro.aviso(TAG, "Sem rede para renovar a sessão", e)
             null
         }
     }
@@ -162,7 +162,7 @@ object SupabaseClient {
     private val clienteComRenovacao: HttpClient? by lazy { if (isConfigured) montar(comRenovacao = true) else avisar() }
 
     private fun avisar(): HttpClient? {
-        Log.w(TAG, "Supabase credentials are not configured. Falling back to local offline mode.")
+        Registro.aviso(TAG, "Supabase credentials are not configured. Falling back to local offline mode.")
         return null
     }
 

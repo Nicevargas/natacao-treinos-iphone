@@ -1,8 +1,7 @@
 package com.example.viewmodel
 
-import com.example.data.leitorDeArquivosDe
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import com.example.data.LeitorDeArquivos
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.WorkoutRepository
 import com.example.data.ciclo.DataCivil
@@ -42,9 +41,8 @@ data class AquagendaUiState(
 private fun AquagendaUiState.comTreino(workout: Workout): AquagendaUiState =
     copy(currentWorkout = workout)
 
-class AquagendaViewModel(application: Application) : AndroidViewModel(application) {
+class AquagendaViewModel(private val arquivos: LeitorDeArquivos) : ViewModel() {
 
-    private val arquivos = leitorDeArquivosDe(application)
 
     // Piscina: o programa antigo e o do Método NC (desde 15/09/2026). Águas abertas: o seu.
     private val treinos = TreinosSugeridosRepository { modo ->

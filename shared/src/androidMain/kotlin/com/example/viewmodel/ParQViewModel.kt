@@ -1,12 +1,10 @@
 package com.example.viewmodel
 
-import android.app.Application
-import android.content.Context
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.Resultado
 import com.example.data.ciclo.DataCivil
-import com.example.data.guardadosDe
+import com.example.data.Guardados
 import com.example.data.parq.ParQ
 import com.example.data.parq.ParQRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,9 +35,8 @@ data class ParQUiState(
  * O dia do último PAR-Q fica guardado no aparelho por usuário, para "Iniciar
  * treino" não esperar a rede; o Supabase é conferido quando o local não basta.
  */
-class ParQViewModel(application: Application) : AndroidViewModel(application) {
+class ParQViewModel(private val guardados: Guardados) : ViewModel() {
 
-    private val guardados = guardadosDe(application, ARQUIVO)
 
     private val _ui = MutableStateFlow(ParQUiState())
     val ui: StateFlow<ParQUiState> = _ui.asStateFlow()

@@ -1,6 +1,6 @@
 package com.example.data.supabase
 
-import android.util.Log
+import com.example.data.Registro
 import com.example.data.Resultado
 import com.example.data.auth.MensagensAuth
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +24,7 @@ internal suspend fun <T, R> chamarApi(
             e.ehDemora() -> Resultado.Falha(MensagensAuth.DEMOROU)
             e.ehSemRede() -> Resultado.Falha(MensagensAuth.SEM_REDE)
             else -> {
-                Log.e("ChamadaApi", "Falha inesperada na chamada ao Supabase", e)
+                Registro.erro("ChamadaApi", "Falha inesperada na chamada ao Supabase", e)
                 Resultado.Falha("Não foi possível concluir. Tente de novo.")
             }
         }

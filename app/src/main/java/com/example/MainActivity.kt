@@ -65,7 +65,14 @@ import com.example.viewmodel.AquagendaViewModel
 import com.example.viewmodel.ContaUiState
 import com.example.viewmodel.ContaViewModel
 import com.example.viewmodel.MeusTreinosViewModel
+import android.content.Context
+import android.util.Log
+import com.example.data.Registro
+import com.example.data.auth.SessaoStore
 import android.content.Intent
+import androidx.lifecycle.ViewModel
+import com.example.data.guardadosDe
+import com.example.data.leitorDeArquivosDe
 import com.example.data.compartilhar.LinkDeTreino
 import com.example.viewmodel.CompartilharTreinoViewModel
 
@@ -73,7 +80,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Antes de qualquer chamada ao Supabase: é daqui que sai o token do usuário.
-        AuthRepository.init(applicationContext)
+        // O app liga as peças do aparelho: onde guardar a sessão e para onde vão os avisos.
+        AuthRepository.init(guardadosDe(applicationContext, SessaoStore.ARQUIVO))
+        Registro.saida = Registro.Saida { grave, marca, mensagem, causa ->
+            if (grave) Log.e(marca, mensagem, causa) else Log.w(marca, mensagem, causa)
+        }
         // Ícones escuros na barra de status sempre: o app é claro mesmo com o celular no modo escuro.
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.light(android.graphics.Color.TRANSPARENT, android.graphics.Color.TRANSPARENT),
@@ -126,15 +137,26 @@ fun AquagendaRaiz(
     }
 }
 
+/**
+ * Cria um ViewModel entregando o que ele precisa do aparelho. Os ViewModels não
+ * conhecem mais o Android: quem sabe montar as peças é o módulo do app, e no
+ * iPhone será o equivalente de lá.
+ */
+@Composable
+private inline fun <reified VM : ViewModel> comContexto(crossinline criar: (Context) -> VM): VM {
+    val contexto = LocalContext.current.applicationContext
+    return viewModel { criar(contexto) }
+}
+
 @Composable
 fun AquagendaApp(
     conta: ContaViewModel,
     estadoConta: ContaUiState,
-    viewModel: AquagendaViewModel = viewModel(),
+    viewModel: AquagendaViewModel = comContexto { AquagendaViewModel(leitorDeArquivosDe(it)) },
     meusTreinos: MeusTreinosViewModel = viewModel(),
     execucao: ExecucaoViewModel = viewModel(),
-    parq: ParQViewModel = viewModel(),
-    plano: PlanoViewModel = viewModel(),
+    parq: ParQViewModel = comContexto { ParQViewModel(guardadosDe(it, ParQViewModel.ARQUIVO)) },
+    plano: PlanoViewModel = comContexto { PlanoViewModel(leitorDeArquivosDe(it)) },
     progresso: ProgressoViewModel = viewModel(),
     ranking: RankingViewModel = viewModel(),
     compartilhar: CompartilharTreinoViewModel = viewModel()

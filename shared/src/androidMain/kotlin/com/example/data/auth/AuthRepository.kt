@@ -1,9 +1,8 @@
 package com.example.data.auth
 
-import android.content.Context
-import android.util.Log
+import com.example.data.Registro
 import com.example.data.Resultado
-import com.example.data.guardadosDe
+import com.example.data.Guardados
 import com.example.data.supabase.SupabaseClient
 import com.example.model.TrainingLevel
 import kotlinx.coroutines.Dispatchers
@@ -15,12 +14,12 @@ import com.example.data.supabase.ehSemRede
 object AuthRepository {
     private const val TAG = "AuthRepository"
 
-    /** Chamar uma vez, antes de qualquer chamada ao Supabase (MainActivity.onCreate). */
-    fun init(context: Context) {
+    /** Chamar uma vez, antes de qualquer chamada ao Supabase (ao abrir o app). */
+    fun init(guardados: Guardados) {
         if (SupabaseClient.sessaoStore == null) {
             synchronized(this) {
                 if (SupabaseClient.sessaoStore == null) {
-                    SupabaseClient.sessaoStore = SessaoStore(guardadosDe(context, SessaoStore.ARQUIVO))
+                    SupabaseClient.sessaoStore = SessaoStore(guardados)
                 }
             }
         }
@@ -50,7 +49,7 @@ object AuthRepository {
                 e.ehDemora() -> ResultadoAuth.Erro(MensagensAuth.DEMOROU)
                 e.ehSemRede() -> ResultadoAuth.Erro(MensagensAuth.SEM_REDE)
                 else -> {
-                    Log.e(TAG, "Falha inesperada no login", e)
+                    Registro.erro(TAG, "Falha inesperada no login", e)
                     ResultadoAuth.Erro("Não foi possível entrar. Tente de novo.")
                 }
             }
@@ -92,15 +91,15 @@ object AuthRepository {
                 when {
                     // O Supabase cria a conta e depois manda o e-mail; a demora costuma ser o envio.
                     e.ehDemora() -> {
-                        Log.w(TAG, "Cadastro sem resposta a tempo", e)
+                        Registro.aviso(TAG, "Cadastro sem resposta a tempo", e)
                         ResultadoAuth.Erro(MensagensAuth.CADASTRO_DEMOROU)
                     }
                     e.ehSemRede() -> {
-                        Log.w(TAG, "Cadastro sem rede", e)
+                        Registro.aviso(TAG, "Cadastro sem rede", e)
                         ResultadoAuth.Erro(MensagensAuth.SEM_REDE)
                     }
                     else -> {
-                        Log.e(TAG, "Falha inesperada no cadastro", e)
+                        Registro.erro(TAG, "Falha inesperada no cadastro", e)
                         ResultadoAuth.Erro("Não foi possível criar a conta. Tente de novo.")
                     }
                 }
@@ -132,7 +131,7 @@ object AuthRepository {
             try {
                 SupabaseClient.authApi?.signOut()
             } catch (e: Exception) {
-                Log.w(TAG, "Logout no servidor falhou; encerrando só no aparelho", e)
+                Registro.aviso(TAG, "Logout no servidor falhou; encerrando só no aparelho", e)
             }
         }
         store().limpar()

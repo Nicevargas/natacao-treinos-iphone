@@ -1,8 +1,7 @@
 package com.example.viewmodel
 
-import com.example.data.leitorDeArquivosDe
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import com.example.data.LeitorDeArquivos
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.Resultado
 import com.example.data.ciclo.CicloDeTreinos
@@ -72,10 +71,10 @@ data class PlanoUiState(
 }
 
 /** Plano de treino: criar, acompanhar, trocar treinos e excluir. */
-class PlanoViewModel(application: Application) : AndroidViewModel(application) {
+class PlanoViewModel(private val arquivos: LeitorDeArquivos) : ViewModel() {
 
     private val treinosNC by lazy {
-        CicloDeTreinos.treinosDoJson(leitorDeArquivosDe(application).ler("programa_nc.json"))
+        CicloDeTreinos.treinosDoJson(arquivos.ler("programa_nc.json"))
     }
 
     private val _ui = MutableStateFlow(PlanoUiState())

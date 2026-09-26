@@ -1,6 +1,6 @@
 package com.example.viewmodel
 
-import android.os.SystemClock
+import kotlin.time.TimeSource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.Resultado
@@ -65,9 +65,15 @@ private data class Celebracao(
     val nivel: String
 )
 
+/**
+ * Marco monotônico do app: não anda para trás quando o celular acerta a hora,
+ * que é o que o cronômetro do treino precisa.
+ */
+private val INICIO_DO_APP = TimeSource.Monotonic.markNow()
+
 /** Execução ao vivo do treino escolhido, "Concluir treino" e o resumo para publicar. */
 class ExecucaoViewModel(
-    private val relogio: () -> Long = { SystemClock.elapsedRealtime() }
+    private val relogio: () -> Long = { INICIO_DO_APP.elapsedNow().inWholeMilliseconds }
 ) : ViewModel() {
 
     private val _ui = MutableStateFlow(ExecucaoUiState())

@@ -1,7 +1,6 @@
 package com.example.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.Resultado
 import com.example.data.auth.AuthRepository
@@ -46,7 +45,7 @@ data class ContaUiState(
 )
 
 /** Login, cadastro, esqueci minha senha, sair, e o CRUD do próprio perfil. */
-class ContaViewModel(application: Application) : AndroidViewModel(application) {
+class ContaViewModel : ViewModel() {
 
     private val _ui = MutableStateFlow(ContaUiState())
     val ui: StateFlow<ContaUiState> = _ui.asStateFlow()
@@ -55,7 +54,6 @@ class ContaViewModel(application: Application) : AndroidViewModel(application) {
     private var sessaoDeRecuperacao: Sessao? = null
 
     init {
-        AuthRepository.init(application)
         viewModelScope.launch {
             AuthRepository.sessao.collect { sessao ->
                 // Renovar o token emite uma sessão nova da MESMA conta: não recarrega o perfil.
