@@ -27,6 +27,9 @@ targets:
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         UILaunchScreen: {}
+        # Exigido pelo Compose no iPhone (sem ela o app fecha ao abrir): libera
+        # os 120 quadros por segundo das telas ProMotion.
+        CADisableMinimumFrameDurationOnPhone: true
         UIRequiresFullScreen: false
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         ITSAppUsesNonExemptEncryption: false
