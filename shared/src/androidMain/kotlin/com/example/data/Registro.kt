@@ -1,5 +1,7 @@
 package com.example.data
 
+import kotlin.concurrent.Volatile
+
 /**
  * Anotações de diagnóstico do app: token recusado, cadastro sem resposta, falha
  * inesperada. Não aparecem para quem usa; servem para entender um problema

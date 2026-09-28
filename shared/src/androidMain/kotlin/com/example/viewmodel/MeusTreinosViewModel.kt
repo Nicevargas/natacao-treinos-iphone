@@ -1,5 +1,6 @@
 package com.example.viewmodel
 
+import com.example.data.agoraEmMillis
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.Resultado
@@ -110,7 +111,7 @@ class MeusTreinosViewModel : ViewModel() {
             is Montagem.Pronto -> montagem.treino
         }
         val origem = editor.origem
-        val ajustado = treino.paraWorkout("ajustado_${System.currentTimeMillis()}").copy(
+        val ajustado = treino.paraWorkout("ajustado_${agoraEmMillis()}").copy(
             tag = "Treino ajustado",
             focus = origem?.focus,
             objetivo = origem?.objetivo,

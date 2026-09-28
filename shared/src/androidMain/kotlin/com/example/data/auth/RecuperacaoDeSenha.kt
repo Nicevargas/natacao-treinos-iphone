@@ -1,5 +1,6 @@
 package com.example.data.auth
 
+import com.example.data.agoraEmSegundos
 import com.example.data.Resultado
 import com.example.data.supabase.ehDemora
 import com.example.data.supabase.ehSemRede
@@ -17,7 +18,7 @@ import com.example.data.supabase.ehSemRede
  */
 class RecuperacaoDeSenha(
     private val api: AuthApi,
-    private val agoraSegundos: () -> Long = { System.currentTimeMillis() / 1000 }
+    private val agoraSegundos: () -> Long = { agoraEmSegundos() }
 ) {
 
     suspend fun enviarCodigo(email: String): Resultado<Unit> = protegido {

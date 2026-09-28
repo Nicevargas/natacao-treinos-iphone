@@ -1,6 +1,8 @@
 package com.example.data.supabase
 
+import com.example.data.agoraEmSegundos
 import com.example.data.Registro
+import kotlin.concurrent.Volatile
 import com.example.data.auth.AuthApi
 import com.example.data.auth.RefreshGrantBody
 import com.example.data.auth.SessaoStore
@@ -155,7 +157,6 @@ object SupabaseClient {
     private fun caminhoDe(partes: List<String>): String =
         partes.filter { it.isNotEmpty() }.joinToString(separator = "/", prefix = "/")
 
-    private fun agoraEmSegundos(): Long = System.currentTimeMillis() / 1000
 
     // Cliente sem renovação: usado pela própria renovação e pelas telas de conta.
     private val clienteBase: HttpClient? by lazy { if (isConfigured) montar(comRenovacao = false) else avisar() }

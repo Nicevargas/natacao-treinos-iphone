@@ -97,6 +97,8 @@ kotlin {
         api(libs.ktor.client.logging)
         api(libs.kotlinx.serialization.json)
         api(libs.kotlinx.datetime)
+        // Travas que funcionam também no iPhone (o synchronized é só do Java).
+        api(libs.atomicfu)
         api(libs.kotlinx.coroutines.android)
         api(libs.kotlinx.coroutines.core)
       }

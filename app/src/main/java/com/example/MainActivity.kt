@@ -75,6 +75,7 @@ import androidx.lifecycle.ViewModel
 import com.example.data.guardadosDe
 import com.example.data.leitorDeArquivosDe
 import com.example.data.compartilhar.LinkDeTreino
+import com.example.data.lembrete.AgendaDeLembretesAndroid
 import com.example.viewmodel.CompartilharTreinoViewModel
 
 class MainActivity : ComponentActivity() {
@@ -92,7 +93,7 @@ class MainActivity : ComponentActivity() {
             navigationBarStyle = SystemBarStyle.light(android.graphics.Color.TRANSPARENT, android.graphics.Color.TRANSPARENT)
         )
         // Link de treino compartilhado (natacaocriativa://treino/<código>) que abriu o app.
-        LinkDeTreino.receber(intent)
+        LinkDeTreino.receber(intent?.data?.toString())
         setContent {
             MyApplicationTheme {
                 AquagendaRaiz()
@@ -103,7 +104,7 @@ class MainActivity : ComponentActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
-        LinkDeTreino.receber(intent)
+        LinkDeTreino.receber(intent?.data?.toString())
     }
 }
 
@@ -185,7 +186,7 @@ fun AquagendaApp(
         ) {
             pedirPermissaoDeAviso.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
-        LembreteDeTreino.agendar(contexto, dia)
+        AgendaDeLembretesAndroid(contexto).agendar(dia)
     }
 
     LaunchedEffect(estadoConta.sessao?.userId) {

@@ -2,7 +2,6 @@ package com.example.data.compartilhar
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import android.content.Intent
 import com.example.data.Resultado
 import com.example.data.supabase.WorkoutDto
 import com.example.data.supabase.chamarApi
@@ -84,13 +83,10 @@ object LinkDeTreino {
     private val _pendente = MutableStateFlow<String?>(null)
     val pendente: StateFlow<String?> = _pendente.asStateFlow()
 
-    fun receber(intent: Intent?) {
-        val dados = intent?.data ?: return
-        val codigo = when {
-            dados.scheme == CodigoDoTreino.ESQUEMA && dados.host == "treino" -> CodigoDoTreino.extrair(dados.lastPathSegment)
-            else -> CodigoDoTreino.extrair(dados.toString())
-        }
-        if (codigo != null) _pendente.value = codigo
+    /** Recebe o link cru que abriu o app; ignora o que não for um treino. */
+    fun receber(link: String?) {
+        val codigo = CodigoDoTreino.extrair(link) ?: return
+        _pendente.value = codigo
     }
 
     fun consumido() {

@@ -3,7 +3,7 @@ package com.example.data.supabase
 import io.ktor.client.network.sockets.ConnectTimeoutException
 import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.plugins.HttpRequestTimeoutException
-import java.io.IOException
+import kotlinx.io.IOException
 
 /**
  * Nem toda falha de rede é igual: "o servidor demorou" e "você está sem internet"

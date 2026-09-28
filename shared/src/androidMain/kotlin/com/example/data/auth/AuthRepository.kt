@@ -1,8 +1,11 @@
 package com.example.data.auth
 
+import com.example.data.agoraEmSegundos
 import com.example.data.Registro
 import com.example.data.Resultado
 import com.example.data.Guardados
+import kotlinx.atomicfu.locks.SynchronizedObject
+import kotlinx.atomicfu.locks.synchronized
 import com.example.data.supabase.SupabaseClient
 import com.example.model.TrainingLevel
 import kotlinx.coroutines.Dispatchers
@@ -12,12 +15,14 @@ import com.example.data.supabase.ehDemora
 import com.example.data.supabase.ehSemRede
 
 object AuthRepository {
+
+    private val trava = SynchronizedObject()
     private const val TAG = "AuthRepository"
 
     /** Chamar uma vez, antes de qualquer chamada ao Supabase (ao abrir o app). */
     fun init(guardados: Guardados) {
         if (SupabaseClient.sessaoStore == null) {
-            synchronized(this) {
+            synchronized(trava) {
                 if (SupabaseClient.sessaoStore == null) {
                     SupabaseClient.sessaoStore = SessaoStore(guardados)
                 }
@@ -31,7 +36,7 @@ object AuthRepository {
     val sessao: StateFlow<Sessao?>
         get() = store().sessao
 
-    private fun agora(): Long = System.currentTimeMillis() / 1000
+    private fun agora(): Long = agoraEmSegundos()
 
     suspend fun entrar(email: String, senha: String): ResultadoAuth = withContext(Dispatchers.IO) {
         val api = SupabaseClient.authApi ?: return@withContext ResultadoAuth.Erro(MensagensAuth.SEM_CONFIGURACAO)

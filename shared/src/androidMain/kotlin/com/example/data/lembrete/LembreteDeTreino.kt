@@ -1,21 +1,6 @@
 package com.example.data.lembrete
 
-import android.Manifest
-import android.app.AlarmManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat
-import com.example.shared.R
 import com.example.data.ciclo.DataCivil
-import com.example.data.guardadosDe
 import kotlin.time.ExperimentalTime
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
@@ -24,17 +9,18 @@ import kotlinx.datetime.toInstant
 /**
  * "Quando você vai voltar a nadar?": a pessoa escolhe o dia depois de salvar o
  * treino e o celular avisa às 7h desse dia. Fica só no aparelho, sem banco.
+ *
+ * Aqui está a parte que vale nos dois sistemas: que dias oferecer, como
+ * escrevê-los e a que horas avisar. Quem sabe mandar o aviso é a
+ * [AgendaDeLembretes] de cada sistema.
  */
 object LembreteDeTreino {
 
     const val HORA_DO_AVISO = 7
-    private const val ARQUIVO = "lembrete_de_treino"
 
-    private fun guardados(context: Context) = guardadosDe(context, ARQUIVO)
-
-    private const val CHAVE_DIA = "dia"
-    private const val CANAL = "lembretes_de_treino"
-    private const val ID_NOTIFICACAO = 7001
+    /** Mesmo arquivo de sempre, para o dia combinado sobreviver à atualização. */
+    const val ARQUIVO = "lembrete_de_treino"
+    const val CHAVE_DIA = "dia"
 
     private val DIAS = listOf("segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo")
 
@@ -59,71 +45,23 @@ object LembreteDeTreino {
         return LocalDateTime(ano, mes, d, hora, 0).toInstant(fuso).toEpochMilliseconds()
     }
 
-    fun agendar(context: Context, dia: Long) {
-        guardados(context).salvarNumero(CHAVE_DIA, dia)
-        programarAlarme(context, dia)
-    }
-
-    /** Depois de reiniciar o celular o Android apaga os alarmes: o do dia combinado volta. */
-    fun reprogramar(context: Context) {
-        val dia = guardados(context).numero(CHAVE_DIA, Long.MIN_VALUE)
-        if (dia != Long.MIN_VALUE && horarioDoAviso(dia) > System.currentTimeMillis()) programarAlarme(context, dia)
-    }
-
-    private fun programarAlarme(context: Context, dia: Long) {
-        val alarmes = context.getSystemService(AlarmManager::class.java) ?: return
-        val quando = horarioDoAviso(dia)
-        if (quando <= System.currentTimeMillis()) return
-        // Inexato de propósito: não precisa de permissão especial e economiza bateria.
-        alarmes.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, quando, intencaoDoAlarme(context))
-    }
-
-    private fun intencaoDoAlarme(context: Context): PendingIntent = PendingIntent.getBroadcast(
-        context,
-        0,
-        Intent(context, LembreteReceiver::class.java).setAction(LembreteReceiver.ACAO_AVISAR),
-        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-    )
-
-    fun avisar(context: Context) {
-        if (Build.VERSION.SDK_INT >= 33 &&
-            ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
-        ) return
-
-        if (Build.VERSION.SDK_INT >= 26) {
-            context.getSystemService(NotificationManager::class.java)?.createNotificationChannel(
-                NotificationChannel(CANAL, "Lembretes de treino", NotificationManager.IMPORTANCE_DEFAULT)
-            )
-        }
-        val abrir = PendingIntent.getActivity(
-            context,
-            0,
-            // O módulo shared não enxerga a MainActivity (fica no módulo do app): abre pela entrada do app.
-            (context.packageManager.getLaunchIntentForPackage(context.packageName) ?: Intent())
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP),
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-        val notificacao = NotificationCompat.Builder(context, CANAL)
-            .setSmallIcon(R.drawable.ic_notificacao)
-            .setContentTitle("Hoje é dia de nadar!")
-            .setContentText("Você combinou de voltar hoje. O treino do dia já está no app.")
-            .setContentIntent(abrir)
-            .setAutoCancel(true)
-            .build()
-        runCatching { NotificationManagerCompat.from(context).notify(ID_NOTIFICACAO, notificacao) }
-        guardados(context).remover(CHAVE_DIA)
-    }
+    /** Texto do aviso, igual nos dois sistemas. */
+    const val TITULO_DO_AVISO = "Hoje é dia de nadar!"
+    const val TEXTO_DO_AVISO = "Você combinou de voltar hoje. O treino do dia já está no app."
 }
 
-class LembreteReceiver : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent) {
-        when (intent.action) {
-            ACAO_AVISAR -> LembreteDeTreino.avisar(context)
-            Intent.ACTION_BOOT_COMPLETED -> LembreteDeTreino.reprogramar(context)
-        }
-    }
+/**
+ * Quem de fato agenda o aviso no aparelho. No Android é o AlarmManager; no
+ * iPhone serão as notificações locais do sistema.
+ */
+interface AgendaDeLembretes {
 
-    companion object {
-        const val ACAO_AVISAR = "com.example.LEMBRETE_DE_TREINO"
-    }
+    /** Guarda o dia combinado e programa o aviso das 7h. */
+    fun agendar(dia: Long)
+
+    /**
+     * Reprograma o aviso guardado, se ainda estiver no futuro. O Android apaga os
+     * alarmes quando o celular reinicia; o iPhone não precisa disso.
+     */
+    fun reprogramar()
 }

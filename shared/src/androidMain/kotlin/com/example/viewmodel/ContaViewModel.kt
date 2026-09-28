@@ -1,5 +1,6 @@
 package com.example.viewmodel
 
+import com.example.data.agoraEmMillis
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.Resultado
@@ -125,7 +126,7 @@ class ContaViewModel : ViewModel() {
         atualizarRecuperacao { it.copy(etapa = EtapaRecuperacao.EMAIL, erro = null, aviso = null, codigoValidado = false) }
     }
 
-    fun enviarCodigo(email: String, agoraMillis: Long = System.currentTimeMillis()) {
+    fun enviarCodigo(email: String, agoraMillis: Long = agoraEmMillis()) {
         val atual = _ui.value.recuperacao ?: return
         if (atual.enviando) return
         if (atual.etapa == EtapaRecuperacao.CODIGO && agoraMillis < atual.reenviarLiberadoEm) return
@@ -146,7 +147,7 @@ class ContaViewModel : ViewModel() {
                         codigoValidado = false,
                         // O Supabase não conta se o e-mail tem conta; a tela também não.
                         aviso = "Se houver uma conta com ${email.trim()}, o código chega em instantes. Confira também o spam.",
-                        reenviarLiberadoEm = System.currentTimeMillis() + 60_000
+                        reenviarLiberadoEm = agoraEmMillis() + 60_000
                     )
                 }
                 is Resultado.Falha -> atualizarRecuperacao { it.copy(enviando = false, erro = r.mensagem) }

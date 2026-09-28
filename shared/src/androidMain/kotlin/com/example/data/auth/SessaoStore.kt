@@ -1,6 +1,8 @@
 package com.example.data.auth
 
 import com.example.data.Guardados
+import kotlinx.atomicfu.locks.SynchronizedObject
+import kotlinx.atomicfu.locks.synchronized
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,13 +16,14 @@ import kotlinx.coroutines.flow.asStateFlow
  */
 class SessaoStore(private val guardados: Guardados) {
 
+    // Uma gravação de cada vez: a sessão tem cinco campos e não pode ficar meio velha, meio nova.
+    private val trava = SynchronizedObject()
     private val _sessao = MutableStateFlow(ler())
     val sessao: StateFlow<Sessao?> = _sessao.asStateFlow()
 
     fun atual(): Sessao? = _sessao.value
 
-    @Synchronized
-    fun salvar(sessao: Sessao) {
+    fun salvar(sessao: Sessao) = synchronized(trava) {
         guardados.salvarTexto(ACESSO, sessao.accessToken)
         guardados.salvarTexto(RENOVACAO, sessao.refreshToken)
         guardados.salvarNumero(EXPIRA_EM, sessao.expiraEm)
@@ -29,8 +32,7 @@ class SessaoStore(private val guardados: Guardados) {
         _sessao.value = sessao
     }
 
-    @Synchronized
-    fun limpar() {
+    fun limpar() = synchronized(trava) {
         guardados.limparTudo()
         _sessao.value = null
     }
