@@ -13,8 +13,9 @@ targets:
   iosApp:
     type: application
     platform: iOS
-    # Gera o esquema "iosApp", que o xcodebuild do CI usa.
-    scheme: {}
+    # Gera o esquema "iosApp", que o xcodebuild do CI usa, com o roteiro de telas.
+    scheme:
+      testTargets: [iosAppUITests]
     sources:
       - path: iosApp
       # Os programas de treino: os mesmos JSON que o Android embarca.
@@ -53,3 +54,16 @@ targets:
         script: |
           cd "$SRCROOT/.."
           ./gradlew :shared:embedAndSignAppleFrameworkForXcode
+
+  # Roteiro que percorre e fotografa as telas no simulador (Fase 5).
+  iosAppUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [iosAppUITests]
+    dependencies:
+      - target: iosApp
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.natacaocriativa.treinos.uitests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: iosApp

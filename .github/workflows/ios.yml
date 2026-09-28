@@ -101,6 +101,20 @@ jobs:
           sleep 5
           xcrun simctl io "$UDID" screenshot capturas/03-link-de-treino.png
 
+      # Entra com a conta de teste e fotografa cada tela (iosAppUITests).
+      # O registro deste passo fica só na tela da rodada, onde o GitHub esconde os
+      # segredos; ele NÃO vai para arquivo, porque o Xcode anota o texto digitado.
+      - name: Percorrer as telas
+        continue-on-error: true
+        working-directory: iosApp
+        env:
+          TEST_RUNNER_TESTE_EMAIL: ${{ secrets.TESTE_EMAIL }}
+          TEST_RUNNER_TESTE_SENHA: ${{ secrets.TESTE_SENHA }}
+        run: |
+          set -o pipefail
+          export TEST_RUNNER_CAPTURAS_DIR="$GITHUB_WORKSPACE/capturas"
+          xcodebuild test             -project iosApp.xcodeproj             -scheme iosApp             -configuration Debug             -destination "id=$UDID"             -derivedDataPath build             2>&1 | grep -E "error:|Test Case|Executed|Não achei|Não chegou|não abriu|TEST (SUCCEEDED|FAILED)|Testing failed"
+
       - name: Registro do app
         if: always()
         run: |
