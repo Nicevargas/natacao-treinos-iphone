@@ -1,0 +1,6 @@
+# Scripts que rodam no Mac do GitHub precisam de fim de linha Unix.
+gradlew text eol=lf
+*.sh text eol=lf
+*.swift text eol=lf
+*.yml text eol=lf
+gradlew.bat text eol=crlf

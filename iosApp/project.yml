@@ -1,0 +1,50 @@
+# Projeto do Xcode, descrito em texto. O XcodeGen gera o iosApp.xcodeproj a
+# partir daqui (no Mac do CI: `xcodegen generate`). Não se edita o .xcodeproj.
+name: iosApp
+options:
+  bundleIdPrefix: com.natacaocriativa
+  deploymentTarget:
+    iOS: "15.0"
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  iosApp:
+    type: application
+    platform: iOS
+    sources:
+      - path: iosApp
+      # Os programas de treino: os mesmos JSON que o Android embarca.
+      - path: ../shared/src/commonMain/recursos
+        buildPhase: resources
+    info:
+      path: iosApp/Info.plist
+      properties:
+        CFBundleDisplayName: Natação Criativa
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UILaunchScreen: {}
+        UIRequiresFullScreen: false
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        ITSAppUsesNonExemptEncryption: false
+        # O mesmo esquema de link do Android, para abrir o treino compartilhado.
+        CFBundleURLTypes:
+          - CFBundleURLName: com.natacaocriativa.treinos
+            CFBundleURLSchemes: [natacaocriativa]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.natacaocriativa.treinos
+        PRODUCT_NAME: NatacaoCriativa
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        TARGETED_DEVICE_FAMILY: "1"
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+        # O framework do Kotlin (módulo shared), gerado pelo Gradle antes de compilar.
+        FRAMEWORK_SEARCH_PATHS: $(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)
+        OTHER_LDFLAGS: [$(inherited), -framework, Shared]
+    preBuildScripts:
+      - name: Compilar o código Kotlin
+        basedOnDependencyAnalysis: false
+        script: |
+          cd "$SRCROOT/.."
+          ./gradlew :shared:embedAndSignAppleFrameworkForXcode

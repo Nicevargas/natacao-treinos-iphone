@@ -24,3 +24,8 @@ keystore.properties
 # Saídas do Android Studio (.aab assinado) e configurações locais da IDE.
 /app/release/
 /.idea/
+# iPhone: o projeto do Xcode é gerado pelo XcodeGen a partir de iosApp/project.yml.
+/iosApp/iosApp.xcodeproj/
+/iosApp/iosApp/Info.plist
+xcuserdata/
+DerivedData/
