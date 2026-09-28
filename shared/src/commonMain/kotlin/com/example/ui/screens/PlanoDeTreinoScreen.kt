@@ -1,7 +1,7 @@
 package com.example.ui.screens
 
 import com.example.ui.components.BotaoContornado
-import androidx.activity.compose.BackHandler
+import com.example.ui.sistema.AoVoltar
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -129,7 +129,7 @@ fun PlanoDeTreinoScreen(
         TrocaDeTreino(estado, trocando, onEscolherTroca, onFecharTroca, modifier)
         return
     }
-    BackHandler(enabled = !emAba, onBack = onVoltar)
+    AoVoltar(ativo = !emAba, aoVoltar = onVoltar)
     val plano = estado.plano
     val resumo = estado.resumo
 
@@ -519,7 +519,7 @@ private fun TrocaDeTreino(
     onFechar: () -> Unit,
     modifier: Modifier
 ) {
-    BackHandler(enabled = !estado.salvandoTroca, onBack = onFechar)
+    AoVoltar(ativo = !estado.salvandoTroca, aoVoltar = onFechar)
     val habilitado = !estado.salvandoTroca
     Column(
         modifier = modifier
@@ -664,7 +664,7 @@ fun CriarPlanoScreen(
     onFechar: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    BackHandler(enabled = !assistente.salvando, onBack = onVoltar)
+    AoVoltar(ativo = !assistente.salvando, aoVoltar = onVoltar)
     val passo = assistente.etapa.ordinal + 1
     val totalDePassos = EtapaDoPlano.entries.size
     val habilitado = !assistente.salvando

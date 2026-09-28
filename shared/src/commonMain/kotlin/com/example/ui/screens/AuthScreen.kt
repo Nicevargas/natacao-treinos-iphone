@@ -3,8 +3,9 @@ package com.example.ui.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material3.TextButton
-import androidx.compose.ui.res.painterResource
-import com.example.shared.R
+import org.jetbrains.compose.resources.painterResource
+import com.example.recursos.Res
+import com.example.recursos.natacao_criativa_logo
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -98,7 +99,7 @@ fun AuthScreen(
         Spacer(modifier = Modifier.height(40.dp))
 
         Image(
-            painter = painterResource(R.drawable.natacao_criativa_logo),
+            painter = painterResource(Res.drawable.natacao_criativa_logo),
             contentDescription = "Natação Criativa Treinos",
             modifier = Modifier.height(120.dp)
         )

@@ -132,3 +132,9 @@ kotlin {
     }
   }
 }
+
+// Recursos de tela (o logo) num pacote com nome próprio, o mesmo no Android e no iPhone.
+compose.resources {
+  packageOfResClass = "com.example.recursos"
+  publicResClass = true
+}

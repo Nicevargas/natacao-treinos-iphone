@@ -1,6 +1,6 @@
 package com.example.ui.screens
 
-import androidx.activity.compose.BackHandler
+import com.example.ui.sistema.AoVoltar
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -67,10 +67,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalView
+import com.example.ui.sistema.ManterTelaAcesa
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
@@ -140,11 +139,7 @@ fun ExecucaoDeTreinoScreen(
     val roteiro = estado.roteiro ?: return
 
     // Na piscina, com a mão molhada, a tela não pode apagar no meio da série.
-    val view = LocalView.current
-    DisposableEffect(view) {
-        view.keepScreenOn = true
-        onDispose { view.keepScreenOn = false }
-    }
+    ManterTelaAcesa()
 
     when (estado.etapa) {
         EtapaExecucao.EXECUTANDO -> TelaExecutando(
@@ -171,7 +166,7 @@ private fun TelaExecutando(
     modifier: Modifier
 ) {
     var confirmarSaida by remember { mutableStateOf(false) }
-    BackHandler { confirmarSaida = true }
+    AoVoltar { confirmarSaida = true }
 
     val progresso = estado.progresso
     val metrosFeitos = roteiro.metrosFeitos(progresso)
@@ -882,7 +877,7 @@ private fun TelaResumo(
     onVoltarAoTreino: () -> Unit,
     modifier: Modifier
 ) {
-    BackHandler(enabled = !estado.salvando, onBack = onVoltarAoTreino)
+    AoVoltar(ativo = !estado.salvando, aoVoltar = onVoltarAoTreino)
     val progresso = estado.progresso
     val metros = roteiro.metrosFeitos(progresso)
     val completo = roteiro.terminou(progresso)
@@ -1137,7 +1132,7 @@ private fun TelaPublicar(
     onFechar: () -> Unit,
     modifier: Modifier
 ) {
-    BackHandler(onBack = onFechar)
+    AoVoltar(aoVoltar = onFechar)
     var formato by rememberSaveable { mutableStateOf(FormatoDoCartao.FEED) }
     val medidor = rememberTextMeasurer()
     val imagem = remember(resumo, formato) { CartaoDoTreino.desenhar(resumo, formato, medidor) }

@@ -1,5 +1,6 @@
 package com.example.data.auth
 
+import kotlinx.coroutines.IO
 import com.example.data.agoraEmSegundos
 import com.example.data.Registro
 import com.example.data.Resultado

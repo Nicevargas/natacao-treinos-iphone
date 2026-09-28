@@ -1,6 +1,6 @@
 package com.example.ui.screens
 
-import androidx.activity.compose.BackHandler
+import com.example.ui.sistema.AoVoltar
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -68,7 +68,7 @@ fun ParQScreen(
     onFechar: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    BackHandler(enabled = !estado.enviando, onBack = onFechar)
+    AoVoltar(ativo = !estado.enviando, aoVoltar = onFechar)
     val habilitado = !estado.enviando
     val algumSim = ParQ.algumSim(estado.respostas)
     val faltam = ParQ.faltam(estado.respostas)

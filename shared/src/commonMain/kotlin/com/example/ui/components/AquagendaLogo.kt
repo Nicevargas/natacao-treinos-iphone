@@ -7,10 +7,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
+import org.jetbrains.compose.resources.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.shared.R
+import com.example.recursos.Res
+import com.example.recursos.natacao_criativa_logo
 
 /** Logo "Natação Criativa Treinos" no topo. Embarcado no app: aparece mesmo sem internet. O ícone do app é outro (natacao_criativa_icone). */
 @Composable
@@ -19,7 +20,7 @@ fun AquagendaLogo(
     height: Dp = 36.dp
 ) {
     Image(
-        painter = painterResource(R.drawable.natacao_criativa_logo),
+        painter = painterResource(Res.drawable.natacao_criativa_logo),
         contentDescription = "Natação Criativa Treinos",
         contentScale = ContentScale.Fit,
         alignment = Alignment.CenterStart,

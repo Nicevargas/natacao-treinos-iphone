@@ -1,5 +1,6 @@
 package com.example.data.supabase
 
+import kotlinx.coroutines.IO
 import com.example.data.Registro
 import com.example.data.Resultado
 import com.example.data.auth.MensagensAuth

@@ -1,7 +1,7 @@
 package com.example.ui.screens
 
 import com.example.ui.components.BotaoContornado
-import androidx.activity.compose.BackHandler
+import com.example.ui.sistema.AoVoltar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -75,7 +75,7 @@ fun EditorDeTreinoScreen(
     modifier: Modifier = Modifier,
     onUsarParaNadar: () -> Unit = {}
 ) {
-    BackHandler(onBack = onCancelar)
+    AoVoltar(aoVoltar = onCancelar)
     val digitado = editor.digitado
     val total = digitado.fases.values.flatten().sumOf { metros(it) }
 

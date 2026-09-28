@@ -240,7 +240,8 @@ object Progresso {
             ultima = notas.lastOrNull(),
             porNota = (0..10).map { n -> notas.count { it == n } },
             porSemana = comNota.groupBy { DataCivil.segundaDaSemana(it.dia) }
-                .toSortedMap()
+                .entries
+                .sortedBy { it.key }
                 .map { (semana, lista) -> semana to lista.map { it.esforco!!.coerceIn(0, 10) }.average() }
         )
     }

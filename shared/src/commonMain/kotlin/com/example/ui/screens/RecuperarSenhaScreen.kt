@@ -1,6 +1,7 @@
 package com.example.ui.screens
 
-import androidx.activity.compose.BackHandler
+import com.example.data.agoraEmMillis
+import com.example.ui.sistema.AoVoltar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -67,7 +68,7 @@ fun RecuperarSenhaScreen(
     onVoltar: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    BackHandler(enabled = !estado.enviando, onBack = onVoltar)
+    AoVoltar(ativo = !estado.enviando, aoVoltar = onVoltar)
 
     var email by rememberSaveable(estado.etapa) { mutableStateOf(estado.email) }
     var codigo by rememberSaveable { mutableStateOf("") }
@@ -76,12 +77,12 @@ fun RecuperarSenhaScreen(
     var senhaVisivel by rememberSaveable { mutableStateOf(false) }
 
     // Contagem para liberar o reenvio.
-    var agora by androidx.compose.runtime.remember { mutableLongStateOf(System.currentTimeMillis()) }
+    var agora by androidx.compose.runtime.remember { mutableLongStateOf(agoraEmMillis()) }
     LaunchedEffect(estado.reenviarLiberadoEm) {
-        agora = System.currentTimeMillis()
+        agora = agoraEmMillis()
         while (agora < estado.reenviarLiberadoEm) {
             delay(1_000)
-            agora = System.currentTimeMillis()
+            agora = agoraEmMillis()
         }
     }
     val faltamSegundos = ((estado.reenviarLiberadoEm - agora + 999) / 1000).coerceAtLeast(0)

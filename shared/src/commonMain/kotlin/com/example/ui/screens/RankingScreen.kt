@@ -1,7 +1,7 @@
 package com.example.ui.screens
 
 import com.example.ui.components.BotaoContornado
-import androidx.activity.compose.BackHandler
+import com.example.ui.sistema.AoVoltar
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -88,7 +88,7 @@ fun RankingScreen(
     modifier: Modifier = Modifier
 ) {
     val formulario = estado.formulario
-    BackHandler(onBack = if (formulario != null) onCancelarFormulario else onVoltar)
+    AoVoltar(aoVoltar = if (formulario != null) onCancelarFormulario else onVoltar)
 
     Column(
         modifier = modifier
