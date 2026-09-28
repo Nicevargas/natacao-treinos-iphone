@@ -84,8 +84,7 @@ final class PercorrerTelas: XCTestCase {
             let etiquetas = app.descendants(matching: .any).allElementsBoundByIndex
                 .map(\.identifier).filter { !$0.isEmpty }
             anotar("ranking", (abriu ? "O ranking abriu." : "O ranking NÃO abriu.")
-                + "
-Etiquetas na tela: " + etiquetas.joined(separator: ", "))
+                + " | Etiquetas na tela: " + etiquetas.joined(separator: ", "))
             XCTAssertTrue(abriu, "O ranking não abriu")
             app.terminate()
             app.launch()
