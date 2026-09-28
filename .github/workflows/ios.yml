@@ -100,6 +100,8 @@ jobs:
           xcrun simctl openurl "$UDID" "natacaocriativa://treino/TESTE1"
           sleep 5
           xcrun simctl io "$UDID" screenshot capturas/03-link-de-treino.png
+          # O registro do sistema é guardado agora, antes do roteiro digitar o login.
+          xcrun simctl spawn "$UDID" log show --last 5m --style compact             --predicate 'process == "NatacaoCriativa"' > capturas/registro-do-app.txt 2>&1 || true
 
       # Entra com a conta de teste e fotografa cada tela (iosAppUITests).
       # O registro deste passo fica só na tela da rodada, onde o GitHub esconde os
@@ -118,26 +120,25 @@ jobs:
       - name: Registro do app
         if: always()
         run: |
-          xcrun simctl spawn "$UDID" log show --last 5m --style compact \
+          # Só se o app falhou antes de fotografar (depois disso o roteiro digitou o login).
+          [ -f capturas/registro-do-app.txt ] || xcrun simctl spawn "$UDID" log show --last 5m --style compact \
             --predicate 'process == "NatacaoCriativa"' > capturas/registro-do-app.txt 2>&1 || true
           ls ~/Library/Logs/DiagnosticReports/ 2>/dev/null | grep -i natacao \
             && cp ~/Library/Logs/DiagnosticReports/*atacao* capturas/ || true
           echo "--- saída do app ---"; cat capturas/saida-do-app.txt || true
 
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: iphone-capturas
-          path: |
-            capturas/
-            xcodebuild.log
-          if-no-files-found: warn
-
       # As capturas também vão para o ramo "capturas", que se baixa sem login.
       - name: Publicar as capturas no ramo capturas
         if: always()
+        env:
+          TESTE_EMAIL: ${{ secrets.TESTE_EMAIL }}
         run: |
           cp xcodebuild.log capturas/ 2>/dev/null || true
+          # Trava de segurança: o ramo é público, o e-mail de teste não pode ir junto.
+          if [ -n "$TESTE_EMAIL" ]; then
+            grep -rlF "$TESTE_EMAIL" capturas | xargs -r perl -pi -e 's/\Q$ENV{TESTE_EMAIL}\E/<e-mail de teste>/gi' || true
+            ! grep -rqiF "$TESTE_EMAIL" capturas
+          fi
           cd capturas
           git init -q -b capturas
           git config user.name "github-actions"

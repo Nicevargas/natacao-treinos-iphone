@@ -1,3 +1,4 @@
+import UIKit
 import XCTest
 
 /// Percorre as telas do app no simulador e fotografa cada uma, para conferir o
@@ -57,13 +58,21 @@ final class PercorrerTelas: XCTestCase {
 
         for (aba, nome) in [("nav_tab_plan", "plano"),
                             ("nav_tab_workouts", "treinos"),
-                            ("nav_tab_my_workouts", "meus-treinos"),
-                            ("nav_tab_profile", "perfil")] {
+                            ("nav_tab_my_workouts", "meus-treinos")] {
             tocar(aba)
             esperar(3)
             fotografar(nome)
             rolarEFotografar(nome)
         }
+
+        // Perfil: o cartão da conta mostra nome e e-mail. As capturas são
+        // públicas, então ele sai coberto e a árvore não é gravada.
+        tocar("nav_tab_profile")
+        esperar(3)
+        fotografar("perfil", cobrir: ["conta_card"], arvore: false)
+        app.swipeUp()
+        esperar(1)
+        fotografar("perfil-rolado", cobrir: ["conta_card"], arvore: false)
 
         // Ranking: só conferir que abre. Sem foto nem árvore, porque ele mostra
         // nomes de alunos e as capturas vão para um repositório público.
@@ -71,7 +80,12 @@ final class PercorrerTelas: XCTestCase {
             tocar("abrir_ranking")
             let abriu = item("participar_do_ranking").waitForExistence(timeout: 10)
                 || item("sair_do_ranking").exists
-            anotar("ranking", abriu ? "O ranking abriu." : "O ranking NÃO abriu.")
+            // Só as etiquetas, nunca os textos (que trazem nomes de alunos).
+            let etiquetas = app.descendants(matching: .any).allElementsBoundByIndex
+                .map(\.identifier).filter { !$0.isEmpty }
+            anotar("ranking", (abriu ? "O ranking abriu." : "O ranking NÃO abriu.")
+                + "
+Etiquetas na tela: " + etiquetas.joined(separator: ", "))
             XCTAssertTrue(abriu, "O ranking não abriu")
             app.terminate()
             app.launch()
@@ -135,13 +149,21 @@ final class PercorrerTelas: XCTestCase {
 
     private func procurarRolando(_ etiqueta: String) -> Bool {
         for _ in 0..<8 {
-            let alvo = item(etiqueta)
-            if alvo.exists && alvo.isHittable { return true }
+            if visivel(item(etiqueta)) { return true }
             app.swipeUp()
             esperar(0.5)
         }
         anotarArvore("faltou-\(etiqueta)")
         return false
+    }
+
+    /// No Compose tudo é uma superfície só: "isHittable" diz sim mesmo quando o
+    /// elemento está atrás da barra de abas. Visível é estar acima dela.
+    private func visivel(_ alvo: XCUIElement) -> Bool {
+        guard alvo.exists, alvo.isHittable else { return false }
+        let barra = item("nav_tab_home")
+        let limite = barra.exists ? barra.frame.minY - 8 : app.frame.maxY
+        return alvo.frame.minY > app.frame.minY + 80 && alvo.frame.maxY < limite
     }
 
     private func rolarEFotografar(_ nome: String) {
@@ -157,16 +179,25 @@ final class PercorrerTelas: XCTestCase {
     }
 
     /// Guarda a tela como PNG na pasta das capturas, e também no relatório do teste.
-    private func fotografar(_ nome: String) {
+    private func fotografar(_ nome: String, cobrir: [String] = [], arvore: Bool = true) {
         numero += 1
-        let foto = XCUIScreen.main.screenshot()
+        var imagem = XCUIScreen.main.screenshot().image
+        let areas = cobrir.map(item).filter(\.exists).map(\.frame)
+        if !areas.isEmpty { imagem = cobrirAreas(imagem, areas) }
         let arquivo = pasta.appendingPathComponent(String(format: "%02d-%@.png", 10 + numero, nome))
-        try? foto.pngRepresentation.write(to: arquivo)
-        let anexo = XCTAttachment(screenshot: foto)
-        anexo.name = nome
-        anexo.lifetime = .keepAlways
-        add(anexo)
-        anotarArvore(nome)
+        try? imagem.pngData()?.write(to: arquivo)
+        if arvore { anotarArvore(nome) }
+    }
+
+    /// Pinta uma tarja cinza por cima das áreas (em pontos da tela).
+    private func cobrirAreas(_ imagem: UIImage, _ areas: [CGRect]) -> UIImage {
+        let formato = UIGraphicsImageRendererFormat()
+        formato.scale = imagem.scale
+        return UIGraphicsImageRenderer(size: imagem.size, format: formato).image { _ in
+            imagem.draw(at: .zero)
+            UIColor.systemGray3.setFill()
+            areas.forEach { UIRectFill($0) }
+        }
     }
 
     private func anotar(_ nome: String, _ texto: String) {
