@@ -115,7 +115,7 @@ jobs:
         run: |
           set -o pipefail
           export TEST_RUNNER_CAPTURAS_DIR="$GITHUB_WORKSPACE/capturas"
-          xcodebuild test             -project iosApp.xcodeproj             -scheme iosApp             -configuration Debug             -destination "id=$UDID"             -derivedDataPath build             2>&1 | grep -E "error:|Test Case|Executed|Não achei|Não chegou|não abriu|TEST (SUCCEEDED|FAILED)|Testing failed"
+          xcodebuild test             -project iosApp.xcodeproj             -scheme iosApp             -configuration Debug             -destination "id=$UDID"             -derivedDataPath build             2>&1 | grep -E "error:|Test Case|Executed|Não achei|Não chegou|não abriu|TEST (SUCCEEDED|FAILED)|Testing failed"             | tee "$GITHUB_WORKSPACE/capturas/roteiro.txt"
 
       - name: Registro do app
         if: always()
@@ -132,12 +132,17 @@ jobs:
         if: always()
         env:
           TESTE_EMAIL: ${{ secrets.TESTE_EMAIL }}
+          TESTE_SENHA: ${{ secrets.TESTE_SENHA }}
         run: |
           cp xcodebuild.log capturas/ 2>/dev/null || true
           # Trava de segurança: o ramo é público, o e-mail de teste não pode ir junto.
           if [ -n "$TESTE_EMAIL" ]; then
             grep -rlF "$TESTE_EMAIL" capturas | xargs -r perl -pi -e 's/\Q$ENV{TESTE_EMAIL}\E/<e-mail de teste>/gi' || true
             ! grep -rqiF "$TESTE_EMAIL" capturas
+          fi
+          if [ -n "$TESTE_SENHA" ]; then
+            grep -rlF "$TESTE_SENHA" capturas | xargs -r perl -pi -e 's/\Q$ENV{TESTE_SENHA}\E/<senha>/g' || true
+            ! grep -rqF "$TESTE_SENHA" capturas
           fi
           cd capturas
           git init -q -b capturas
