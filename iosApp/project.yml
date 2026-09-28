@@ -13,6 +13,8 @@ targets:
   iosApp:
     type: application
     platform: iOS
+    # Gera o esquema "iosApp", que o xcodebuild do CI usa.
+    scheme: {}
     sources:
       - path: iosApp
       # Os programas de treino: os mesmos JSON que o Android embarca.
