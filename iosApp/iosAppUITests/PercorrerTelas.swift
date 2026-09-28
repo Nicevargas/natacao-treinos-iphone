@@ -162,7 +162,8 @@ final class PercorrerTelas: XCTestCase {
         guard alvo.exists, alvo.isHittable else { return false }
         let barra = item("nav_tab_home")
         let limite = barra.exists ? barra.frame.minY - 8 : app.frame.maxY
-        return alvo.frame.minY > app.frame.minY + 80 && alvo.frame.maxY < limite
+        // O centro basta: algumas etiquetas cobrem um cartão inteiro, não só o botão.
+        return alvo.frame.midY > app.frame.minY + 80 && alvo.frame.midY < limite
     }
 
     private func rolarEFotografar(_ nome: String) {
