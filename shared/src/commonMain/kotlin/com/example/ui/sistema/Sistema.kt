@@ -19,3 +19,11 @@ expect fun AoVoltar(ativo: Boolean = true, aoVoltar: () -> Unit)
  */
 @Composable
 expect fun ManterTelaAcesa()
+
+/**
+ * Prepara o pedido de permissão para o aviso de treino e devolve quem o faz. No
+ * Android 13+ e no iPhone, notificar exige a pessoa autorizar; o pedido sai na
+ * hora em que ela escolhe o dia, que é quando faz sentido perguntar.
+ */
+@Composable
+expect fun lembrarPedidoDeAviso(): () -> Unit
