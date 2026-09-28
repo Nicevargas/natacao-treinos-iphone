@@ -1,5 +1,6 @@
 package com.example.ui.screens
 
+import com.example.ui.components.BotaoContornado
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -34,7 +35,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -46,13 +46,14 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.SubcomposeAsyncImage
-import coil.request.ImageRequest
+import coil3.compose.LocalPlatformContext
+import coil3.compose.SubcomposeAsyncImage
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 import com.example.data.AquagendaConstants
 import com.example.data.treinos.MetodoNC
 import com.example.model.Workout
@@ -100,7 +101,7 @@ fun WorkoutsScreen(
                 .height(280.dp)
         ) {
             SubcomposeAsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
+                model = ImageRequest.Builder(LocalPlatformContext.current)
                     .data(AquagendaConstants.URL_SWIMMER_HERO_DETAILS)
                     .crossfade(true)
                     .build(),
@@ -377,7 +378,7 @@ fun WorkoutsScreen(
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     onEditar?.let { editar ->
-                        OutlinedButton(
+                        BotaoContornado(
                             onClick = editar,
                             modifier = Modifier
                                 .weight(1f)
@@ -392,7 +393,7 @@ fun WorkoutsScreen(
                         }
                     }
                     onCompartilhar?.let { compartilhar ->
-                        OutlinedButton(
+                        BotaoContornado(
                             onClick = compartilhar,
                             enabled = !compartilhando,
                             modifier = Modifier
@@ -416,7 +417,7 @@ fun WorkoutsScreen(
             }
 
             if (onSaveToMyWorkouts != null && workout.isSuggestion) {
-                OutlinedButton(
+                BotaoContornado(
                     onClick = onSaveToMyWorkouts,
                     modifier = Modifier
                         .fillMaxWidth()

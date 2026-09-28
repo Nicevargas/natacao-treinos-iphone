@@ -59,13 +59,14 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.SubcomposeAsyncImage
-import coil.request.ImageRequest
+import coil3.compose.LocalPlatformContext
+import coil3.compose.SubcomposeAsyncImage
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 import com.example.data.AquagendaConstants
 import com.example.model.CalendarDay
 import com.example.model.ModoDeTreino
@@ -393,7 +394,7 @@ private fun HeroSwimmerCard(
         Box(modifier = Modifier.fillMaxSize()) {
             // Direct Image URL from the HTML using Coil
             SubcomposeAsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
+                model = ImageRequest.Builder(LocalPlatformContext.current)
                     .data(AquagendaConstants.URL_SWIMMER_HERO_HOME)
                     .crossfade(true)
                     .build(),

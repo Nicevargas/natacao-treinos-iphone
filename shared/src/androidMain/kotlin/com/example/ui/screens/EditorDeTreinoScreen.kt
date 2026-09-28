@@ -1,5 +1,6 @@
 package com.example.ui.screens
 
+import com.example.ui.components.BotaoContornado
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -35,7 +36,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -239,7 +239,7 @@ fun EditorDeTreinoScreen(
                     Text("Usar este treino", fontSize = 16.sp, fontWeight = FontWeight.Bold)
                 }
                 Spacer(modifier = Modifier.height(10.dp))
-                OutlinedButton(
+                BotaoContornado(
                     onClick = onSalvar,
                     enabled = !editor.salvando,
                     modifier = Modifier

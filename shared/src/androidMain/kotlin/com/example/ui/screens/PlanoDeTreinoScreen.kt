@@ -1,5 +1,6 @@
 package com.example.ui.screens
 
+import com.example.ui.components.BotaoContornado
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -41,7 +42,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Surface
@@ -253,7 +253,7 @@ fun PlanoDeTreinoScreen(
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
-                OutlinedButton(
+                BotaoContornado(
                     onClick = onNovoPlano,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -842,7 +842,7 @@ fun CriarPlanoScreen(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            OutlinedButton(
+            BotaoContornado(
                 onClick = onVoltar,
                 enabled = habilitado,
                 modifier = Modifier

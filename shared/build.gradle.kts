@@ -7,6 +7,7 @@ plugins {
   alias(libs.plugins.android.kotlin.multiplatform.library)
   alias(libs.plugins.kotlin.compose)
   alias(libs.plugins.kotlin.serialization)
+  alias(libs.plugins.compose.multiplatform)
 }
 
 // ------------------------------------------------------------------------------
@@ -72,35 +73,55 @@ kotlin {
     compilerOptions { jvmTarget.set(JvmTarget.JVM_11) }
   }
 
+  // iPhone: aparelho de verdade e simulador. Só compilam num Mac (fase 5, no CI);
+  // no Windows o Kotlin desliga estes alvos e segue com o Android.
+  listOf(iosArm64(), iosSimulatorArm64()).forEach { alvo ->
+    alvo.binaries.framework {
+      baseName = "Shared"
+      isStatic = true
+    }
+  }
+
   sourceSets {
-    androidMain {
+    commonMain {
       kotlin.srcDir(gerarConfiguracao)
       dependencies {
-        // api: o módulo do app (MainActivity e testes de tela) usa as mesmas bibliotecas.
-        api(project.dependencies.platform(libs.androidx.compose.bom))
-        api(libs.androidx.activity.compose)
-        api(libs.androidx.compose.material.icons.core)
-        api(libs.androidx.compose.material.icons.extended)
-        api(libs.androidx.compose.material3)
-        api(libs.androidx.compose.ui)
-        api(libs.androidx.compose.ui.graphics)
-        api(libs.androidx.compose.ui.tooling.preview)
-        api(libs.androidx.core.ktx)
-        api(libs.androidx.lifecycle.runtime.compose)
-        api(libs.androidx.lifecycle.runtime.ktx)
-        api(libs.androidx.lifecycle.viewmodel.compose)
-        api(libs.coil.compose)
+        // Telas: Compose Multiplatform. No Android ele usa por baixo o mesmo
+        // Jetpack Compose de antes; no iPhone, o motor de desenho próprio.
+        api(compose.runtime)
+        api(compose.foundation)
+        api(compose.material3)
+        api(compose.ui)
+        api(compose.components.resources)
+        api(libs.mp.icones.extended)
+        api(libs.mp.lifecycle.viewmodel.compose)
+        api(libs.mp.lifecycle.runtime.compose)
+        api(libs.coil3.compose)
+        api(libs.coil3.network.ktor3)
         api(libs.ktor.client.core)
-        api(libs.ktor.client.okhttp)
         api(libs.ktor.client.content.negotiation)
         api(libs.ktor.serialization.kotlinx.json)
         api(libs.ktor.client.logging)
         api(libs.kotlinx.serialization.json)
         api(libs.kotlinx.datetime)
+        api(libs.kotlinx.coroutines.core)
         // Travas que funcionam também no iPhone (o synchronized é só do Java).
         api(libs.atomicfu)
+      }
+    }
+    androidMain {
+      dependencies {
+        // Só do Android: a Activity, o motor de rede OkHttp e as corrotinas na thread principal.
+        api(libs.androidx.activity.compose)
+        api(libs.androidx.core.ktx)
+        api(libs.ktor.client.okhttp)
         api(libs.kotlinx.coroutines.android)
-        api(libs.kotlinx.coroutines.core)
+      }
+    }
+    iosMain {
+      dependencies {
+        // Motor de rede do próprio iPhone.
+        implementation(libs.ktor.client.darwin)
       }
     }
     getByName("androidHostTest").dependencies {

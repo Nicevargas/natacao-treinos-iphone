@@ -1,5 +1,6 @@
 package com.example.ui.screens
 
+import com.example.ui.components.BotaoContornado
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -37,7 +38,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -134,7 +134,7 @@ fun RankingScreen(
                             verticalArrangement = Arrangement.spacedBy(4.dp),
                             modifier = Modifier.padding(top = 8.dp)
                         ) {
-                            OutlinedButton(onClick = onParticipar, shape = RoundedCornerShape(12.dp)) { Text("Editar meus dados") }
+                            BotaoContornado(onClick = onParticipar, shape = RoundedCornerShape(12.dp)) { Text("Editar meus dados") }
                             TextButton(onClick = onSairDoRanking, modifier = Modifier.testTag("sair_do_ranking")) {
                                 Text("Sair do ranking", color = AquaMagenta)
                             }
