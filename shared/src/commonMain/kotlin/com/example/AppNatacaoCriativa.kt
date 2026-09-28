@@ -60,7 +60,7 @@ import com.example.viewmodel.RankingViewModel
 @Composable
 fun AquagendaRaiz(
     pecas: PecasDoSistema,
-    conta: ContaViewModel = viewModel()
+    conta: ContaViewModel = viewModel { ContaViewModel() }
 ) {
     val estadoConta by conta.ui.collectAsStateWithLifecycle()
 
@@ -94,13 +94,13 @@ fun AquagendaApp(
     conta: ContaViewModel,
     estadoConta: ContaUiState,
     viewModel: AquagendaViewModel = viewModel { AquagendaViewModel(pecas.arquivos) },
-    meusTreinos: MeusTreinosViewModel = viewModel(),
-    execucao: ExecucaoViewModel = viewModel(),
+    meusTreinos: MeusTreinosViewModel = viewModel { MeusTreinosViewModel() },
+    execucao: ExecucaoViewModel = viewModel { ExecucaoViewModel() },
     parq: ParQViewModel = viewModel { ParQViewModel(pecas.guardados(ParQViewModel.ARQUIVO)) },
     plano: PlanoViewModel = viewModel { PlanoViewModel(pecas.arquivos) },
-    progresso: ProgressoViewModel = viewModel(),
-    ranking: RankingViewModel = viewModel(),
-    compartilhar: CompartilharTreinoViewModel = viewModel()
+    progresso: ProgressoViewModel = viewModel { ProgressoViewModel() },
+    ranking: RankingViewModel = viewModel { RankingViewModel() },
+    compartilhar: CompartilharTreinoViewModel = viewModel { CompartilharTreinoViewModel() }
 ) {
     // Quem sabe medir e desenhar texto no cartão de compartilhar.
     val medidor = rememberTextMeasurer()

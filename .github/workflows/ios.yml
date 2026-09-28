@@ -88,7 +88,8 @@ jobs:
           xcrun simctl boot "$UDID"
           xcrun simctl bootstatus "$UDID" -b
           xcrun simctl install "$UDID" iosApp/build/Build/Products/Debug-iphonesimulator/NatacaoCriativa.app
-          xcrun simctl launch "$UDID" com.natacaocriativa.treinos
+          # A saída do app (inclui a mensagem de qualquer erro do Kotlin).
+          xcrun simctl launch --stdout="$PWD/capturas/saida-do-app.txt" --stderr="$PWD/capturas/saida-do-app.txt" "$UDID" com.natacaocriativa.treinos
           sleep 8
           xcrun simctl io "$UDID" screenshot capturas/01-abertura.png
           sleep 15
@@ -107,7 +108,7 @@ jobs:
             --predicate 'process == "NatacaoCriativa"' > capturas/registro-do-app.txt 2>&1 || true
           ls ~/Library/Logs/DiagnosticReports/ 2>/dev/null | grep -i natacao \
             && cp ~/Library/Logs/DiagnosticReports/*atacao* capturas/ || true
-          tail -50 capturas/registro-do-app.txt || true
+          echo "--- saída do app ---"; cat capturas/saida-do-app.txt || true
 
       - uses: actions/upload-artifact@v4
         if: always()
