@@ -8,7 +8,9 @@ struct iOSApp: App {
     var body: some Scene {
         WindowGroup {
             TelaDoApp()
-                .ignoresSafeArea(.keyboard)
+                // O Compose cuida das bordas (barra de status, teclado e a barrinha de baixo),
+                // como no Android com edge-to-edge.
+                .ignoresSafeArea()
                 // Link de treino compartilhado: natacaocriativa://treino/<código>.
                 .onOpenURL { url in
                     MainViewControllerKt.receberLink(url: url.absoluteString)
