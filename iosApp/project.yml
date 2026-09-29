@@ -21,6 +21,9 @@ targets:
       # Os programas de treino: os mesmos JSON que o Android embarca.
       - path: ../shared/src/commonMain/recursos
         buildPhase: resources
+      # Manifesto de privacidade exigido pela Apple.
+      - path: Privacidade/PrivacyInfo.xcprivacy
+        buildPhase: resources
     info:
       path: iosApp/Info.plist
       properties:
