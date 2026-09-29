@@ -1,0 +1,212 @@
+getpwuid_r did not find a match for uid 501
+Timestamp               Ty Process[PID:TID]
+2026-09-29 12:21:06.070 Df NatacaoCriativa[17044:d2b6] [com.apple.xpc:connection] [0x1020056a0] activating connection: mach=true listener=false peer=false name=com.apple.cfprefsd.daemon
+2026-09-29 12:21:06.072 Df NatacaoCriativa[17044:d2a7] (libMobileGestalt.dylib) No persisted cache on this platform.
+2026-09-29 12:21:06.072 Df NatacaoCriativa[17044:d2b9] [com.apple.BoardServices:XPCErrors] [C:1] Alloc com.apple.frontboard.systemappservices
+2026-09-29 12:21:06.074 Df NatacaoCriativa[17044:d2b9] [com.apple.xpc:connection] [0x102006160] activating connection: mach=false listener=false peer=false name=(anonymous)
+2026-09-29 12:21:06.076 Df NatacaoCriativa[17044:d2b6] [com.apple.UIKit:BackgroundTask] Creating new assertion because there is no existing background assertion.
+2026-09-29 12:21:06.076 Df NatacaoCriativa[17044:d2b6] [com.apple.UIKit:BackgroundTask] Creating new background assertion
+2026-09-29 12:21:06.076 Df NatacaoCriativa[17044:d2b6] [com.apple.UIKit:BackgroundTask] Created new background assertion <BKSProcessAssertion: 0x6000021072a0>
+2026-09-29 12:21:06.077 Df NatacaoCriativa[17044:d2b6] [com.apple.runningboard:connection] Initializing connection
+2026-09-29 12:21:06.078 A  NatacaoCriativa[17044:d2ba] (CoreFoundation) Loading Preferences From User Session CFPrefsD
+2026-09-29 12:21:06.083 Df NatacaoCriativa[17044:d2b6] [com.apple.runningboard:process] Removing all cached process handles
+2026-09-29 12:21:06.083 Df NatacaoCriativa[17044:d2b6] [com.apple.runningboard:connection] Creating connection to com.apple.runningboard
+2026-09-29 12:21:06.083 Df NatacaoCriativa[17044:d2b6] [com.apple.xpc:connection] [0x1020057b0] activating connection: mach=true listener=false peer=false name=com.apple.runningboard
+2026-09-29 12:21:06.084 Df NatacaoCriativa[17044:d2be] [com.apple.runningboard:connection] Sending handshake request attempt #1 to server
+2026-09-29 12:21:06.085 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:Application] Deactivation reason added: 10; deactivation reasons: 0 -> 1024; animating application lifecycle event: 0
+2026-09-29 12:21:06.086 Df NatacaoCriativa[17044:d2a7] [com.apple.BoardServices:Injection] activating monitor for service com.apple.frontboard.open
+2026-09-29 12:21:06.086 Df NatacaoCriativa[17044:d2a7] [com.apple.BoardServices:Injection] activating monitor for service com.apple.frontboard.workspace-service
+2026-09-29 12:21:06.087 Df NatacaoCriativa[17044:d2a7] [com.apple.FrontBoard:Common] FBSWorkspace registering source: com.apple.frontboard.systemappservices
+2026-09-29 12:21:06.087 Df NatacaoCriativa[17044:d2be] [com.apple.runningboard:connection] Handshake succeeded
+2026-09-29 12:21:06.087 Df NatacaoCriativa[17044:d2be] [com.apple.runningboard:connection] Identity resolved as app<com.natacaocriativa.treinos((null))>
+2026-09-29 12:21:06.088 Df NatacaoCriativa[17044:d2a7] [com.apple.FrontBoard:Common] FBSWorkspace connected to endpoint : <BSServiceConnectionEndpoint: 0x60000020d0e0; target: com.apple.frontboard.systemappservices; service: com.apple.frontboard.workspace-service>
+2026-09-29 12:21:06.088 Df NatacaoCriativa[17044:d2a7] [com.apple.FrontBoard:Common] <FBSWorkspaceScenesClient:0x600003000480 com.apple.frontboard.systemappservices> attempting immediate handshake from activate
+2026-09-29 12:21:06.088 Df NatacaoCriativa[17044:d2a7] [com.apple.FrontBoard:Common] <FBSWorkspaceScenesClient:0x600003000480 com.apple.frontboard.systemappservices> sent handshake
+2026-09-29 12:21:06.089 Df NatacaoCriativa[17044:d2a7] [com.apple.runningboard:general] Added observer for process assertions expiration warning: <_RBSExpirationWarningClient: 0x60000020e700>
+2026-09-29 12:21:06.089 Df NatacaoCriativa[17044:d2b6] [com.apple.UIKit:BackgroundTask] Incrementing reference count for background assertion <BKSProcessAssertion: 0x6000021072a0>
+2026-09-29 12:21:06.089 Df NatacaoCriativa[17044:d2b6] [com.apple.UIKit:BackgroundTask] Created background task <_UIBackgroundTaskInfo: 0x600001700580>: taskID = 1, taskName = Launch Background Task for Coalescing, creationTime = 874 (elapsed = 0).
+2026-09-29 12:21:06.089 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UIApplicationSceneKeyboardSettings on FBSSceneSettings
+2026-09-29 12:21:06.091 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneOcclusionSettings> on FBSSceneSettings
+2026-09-29 12:21:06.092 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneInterfaceProtectionSettings> on FBSSceneSettings
+2026-09-29 12:21:06.092 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneLayoutPreferencesHostSettingsExtension on FBSSceneSettings
+2026-09-29 12:21:06.093 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneSafeAreaSettingsExtension on FBSSceneSettings
+2026-09-29 12:21:06.094 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneLayoutPreferenceClientSettingsExtension on FBSSceneClientSettings
+2026-09-29 12:21:06.094 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UIHomeAffordanceHostSceneSettings> on FBSSceneSettings
+2026-09-29 12:21:06.094 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISystemShellSceneHostingEnvironmentSettings on FBSSceneSettings
+2026-09-29 12:21:06.094 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneRenderingEnvironmentSettings on FBSSceneSettings
+2026-09-29 12:21:06.094 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneRenderingEnvironmentClientSettings> on FBSSceneClientSettings
+2026-09-29 12:21:06.095 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneTransitioningHostSettings> on FBSSceneSettings
+2026-09-29 12:21:06.095 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneFocusSystemSettings> on FBSSceneSettings
+2026-09-29 12:21:06.095 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneOrientationSettingsExtension on FBSSceneSettings
+2026-09-29 12:21:06.096 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneOrientationClientSettingsExtension on FBSSceneClientSettings
+2026-09-29 12:21:06.096 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneWindowingControlClientSettings on FBSSceneClientSettings
+2026-09-29 12:21:06.097 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneHostingContentSizePreferenceClientSettings> on FBSSceneClientSettings
+2026-09-29 12:21:06.097 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:UIScreen] Evaluated capturing state as 0 on <UIScreen: 0x102106c50> for initial
+2026-09-29 12:21:06.098 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension _UISceneHostingTraitCollectionPropagationSettings on FBSSceneSettings
+2026-09-29 12:21:06.098 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:UIScreen] Evaluated capturing state as 0 on <UIScreen: 0x102106c50> for CADisplay KVO
+2026-09-29 12:21:06.099 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneHostingSheetPresentationSettings> on FBSSceneSettings
+2026-09-29 12:21:06.100 A  NatacaoCriativa[17044:d2bd] (RunningBoardServices) didChangeInheritances
+2026-09-29 12:21:06.101 Df NatacaoCriativa[17044:d2a7] [com.apple.Accessibility:AXSupportCommon] Read CategoryName: per-app = 1, category name = (null)
+2026-09-29 12:21:06.101 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneHostingSheetPresentationClientSettings> on FBSSceneClientSettings
+2026-09-29 12:21:06.101 Df NatacaoCriativa[17044:d2a7] [com.apple.Accessibility:AXSupportCommon] Read CategoryName: per-app = 0, category name = (null)
+2026-09-29 12:21:06.101 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneHostingEventDeferringSettings> on FBSSceneSettings
+2026-09-29 12:21:06.103 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <UIKit__UITypedKeyValueSceneSettings> on FBSSceneSettings
+2026-09-29 12:21:06.103 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <UIKit__UITypedKeyValueSceneSettings> on FBSSceneClientSettings
+2026-09-29 12:21:06.104 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneHostingViewControllerPreferencePropagationClientSettings> on FBSSceneClientSettings
+2026-09-29 12:21:06.106 Df NatacaoCriativa[17044:d2b6] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneZoomTransitionSettings> on FBSSceneSettings
+2026-09-29 12:21:06.106 Df NatacaoCriativa[17044:d2be] [com.apple.FrontBoard:SceneExtension] Realizing settings extension FBSSceneSettingsCore on FBSSceneSettings
+2026-09-29 12:21:06.107 Df NatacaoCriativa[17044:d2be] [com.apple.FrontBoard:SceneExtension] Realizing settings extension FBSSceneClientSettingsCore on FBSSceneClientSettings
+2026-09-29 12:21:06.109 Df NatacaoCriativa[17044:d2a7] [com.apple.dt.xctest:Default] Registering for test daemon availability notify post.
+2026-09-29 12:21:06.109 Df NatacaoCriativa[17044:d2a7] [com.apple.dt.xctest:Default] notify_get_state check indicated test daemon not ready.
+2026-09-29 12:21:06.109 Df NatacaoCriativa[17044:d2a7] [com.apple.dt.xctest:Default] notify_get_state check indicated test daemon not ready.
+2026-09-29 12:21:06.109 Df NatacaoCriativa[17044:d2a7] [com.apple.dt.xctest:Default] notify_get_state check indicated test daemon not ready.
+2026-09-29 12:21:06.110 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:Application] Deactivation reason added: 11; deactivation reasons: 1024 -> 3072; animating application lifecycle event: 0
+2026-09-29 12:21:06.113 Df NatacaoCriativa[17044:d2be] [com.apple.FrontBoard:SceneExtension] UIMutableApplicationSceneSettings setting counterpart class: UIApplicationSceneSettings
+2026-09-29 12:21:06.114 Df NatacaoCriativa[17044:d2be] [com.apple.FrontBoard:SceneExtension] UIMutableApplicationSceneClientSettings setting counterpart class: UIApplicationSceneClientSettings
+2026-09-29 12:21:06.114 Df NatacaoCriativa[17044:d2be] [com.apple.FrontBoard:SceneExtension] Realizing settings extension FBSSceneTransitionContextCore on FBSSceneTransitionContext
+2026-09-29 12:21:06.118 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:Application] Deactivation reason removed: 10; deactivation reasons: 3072 -> 2048; animating application lifecycle event: 0
+2026-09-29 12:21:06.119 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:EventBus] Event Timing Profile for Touch: not found, path="/System/Library/EventTimingProfiles/Sim.Touch.plist"
+2026-09-29 12:21:06.120 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:EventBus] Event Timing Profile for Pencil: not found, path="/System/Library/EventTimingProfiles/Sim.Pencil.plist"
+2026-09-29 12:21:06.120 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:UpdateScheduler] Selected display: name=LCD (PurpleMain), id=1
+2026-09-29 12:21:06.153 Df NatacaoCriativa[17044:d2a7] [com.apple.xpc:connection] [0x102109660] activating connection: mach=true listener=false peer=false name=com.apple.lsd.mapdb
+2026-09-29 12:21:06.280 Df NatacaoCriativa[17044:d2a7] [com.apple.BoardServices:XPCErrors] [C:2] Alloc com.apple.backboard.hid-services.xpc
+2026-09-29 12:21:06.280 Df NatacaoCriativa[17044:d2a7] [com.apple.xpc:connection] [0x10200da10] activating connection: mach=false listener=false peer=false name=(anonymous)
+2026-09-29 12:21:06.285 Df NatacaoCriativa[17044:d2bb] [com.apple.BackBoard:EventDelivery] BKSHIDEventDeliveryManager - connection activation
+2026-09-29 12:21:06.319 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:BackgroundTask] Will add backgroundTask with taskName: Persistent SceneSession Map Update, expirationHandler: <__NSGlobalBlock__: 0x1e61729e0>
+2026-09-29 12:21:06.319 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:BackgroundTask] Reusing background assertion <BKSProcessAssertion: 0x6000021072a0>
+2026-09-29 12:21:06.319 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:BackgroundTask] Incrementing reference count for background assertion <BKSProcessAssertion: 0x6000021072a0>
+2026-09-29 12:21:06.320 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:BackgroundTask] Created background task <_UIBackgroundTaskInfo: 0x600001718140>: taskID = 2, taskName = Persistent SceneSession Map Update, creationTime = 874 (elapsed = 0).
+2026-09-29 12:21:06.320 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:Application] Deactivation reason added: 5; deactivation reasons: 2048 -> 2080; animating application lifecycle event: 1
+2026-09-29 12:21:06.320 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:InterfaceStyle] Should send trait collection or coordinate space update, interface style 1 -> 1, <UIWindowScene: 0x102009b00> (E0E6D7F4-621E-4C03-94D3-78E83B7AF054)
+2026-09-29 12:21:06.322 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 1, <UIWindowScene: 0x102009b00> (E0E6D7F4-621E-4C03-94D3-78E83B7AF054)
+2026-09-29 12:21:06.322 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:HomeAffordanceObservation] Initializing: <_UIHomeAffordanceSceneNotifier: 0x600002915570>; with scene: <UIWindowScene: 0x102009b00>
+2026-09-29 12:21:06.323 Df NatacaoCriativa[17044:d2a7] [com.apple.BacklightServices:scenes] 0x600000c0b4e0 setDelegate:<0x600000c07090 _UIBacklightEnvironment> hasDelegate:YES for environment:sceneID:com.natacaocriativa.treinos-default
+2026-09-29 12:21:06.325 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 1, <UIWindowScene: 0x102009b00> (E0E6D7F4-621E-4C03-94D3-78E83B7AF054)
+2026-09-29 12:21:06.325 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:EventDeferring] [0x600002915650] Initialized with scene: <UIWindowScene: 0x102009b00>; behavior: <_UIEventDeferringBehavior_iOS: 0x600000220a40>; availableForProcess: 1, systemShellManagesKeyboardFocus: 1
+2026-09-29 12:21:06.327 Df NatacaoCriativa[17044:d2a7] [com.apple.BackBoard:EventDelivery] policyStatus:<BKSHIDEventDeliveryPolicyObserver: 0x600002605740; process scope; status: target> was:none
+2026-09-29 12:21:06.327 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:KeyWindow] Setting default evaluation strategy for UIUserInterfaceIdiomPhone to LastOneWins
+2026-09-29 12:21:06.327 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:KeyWindow] Scene target of keyboard event deferring environment did change: 1; scene: UIWindowScene: 0x102009b00; scene identity: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.natacaocriativa.treinos-default
+2026-09-29 12:21:06.327 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:EventDeferring] [0x600002915650] Scene target of event deferring environments did update: scene: 0x102009b00; current systemShellManagesKeyboardFocus: 1; systemShellManagesKeyboardFocusForScene: 1; eligibleForRecordRemoval: 1;
+2026-09-29 12:21:06.327 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:KeyWindow] Scene became target of keyboard event deferring environment: UIWindowScene: 0x102009b00; scene identity: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.natacaocriativa.treinos-default
+2026-09-29 12:21:06.327 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:KeyWindow] Stack[KeyWindow] 0x600000c1c810: Taking no further action for migration from LastOneWins -> SystemShellManaged as there are no scenes
+2026-09-29 12:21:06.327 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:KeyWindow] Setting default evaluation strategy for UIUserInterfaceIdiomPhone to SystemShellManaged
+2026-09-29 12:21:06.328 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:KeyWindow] Key window needs update: 0; currentKeyWindowScene: 0x0; evaluatedKeyWindowScene: 0x102009b00; currentApplicationKeyWindow: 0x0; evaluatedApplicationKeyWindow: 0x0; reason: UIWindowScene: 0x102009b00: Window scene became target of keyboard environment
+2026-09-29 12:21:06.330 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 1, <UIWindowScene: 0x102009b00> (E0E6D7F4-621E-4C03-94D3-78E83B7AF054)
+2026-09-29 12:21:06.330 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 1, <UIWindowScene: 0x102009b00> (E0E6D7F4-621E-4C03-94D3-78E83B7AF054)
+2026-09-29 12:21:06.331 Df NatacaoCriativa[17044:d2bd] [com.apple.BackBoard:EventDelivery] BKSHIDEventObserver - connection activation
+2026-09-29 12:21:06.462 Df NatacaoCriativa[17044:d2a7] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UIApplicationSceneDisplaySettings> on FBSSceneSettings
+2026-09-29 12:21:06.786 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:Orientation] <UIWindowScene: 0x102009b00> (E0E6D7F4-621E-4C03-94D3-78E83B7AF054) Scene updated orientation preferences: none -> ( Pu )
+2026-09-29 12:21:06.790 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:KeyWindow] Key window API is scene-level: YES
+2026-09-29 12:21:06.790 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:KeyWindow] UIWindowScene: 0x102009b00: Window became key in scene: UIWindow: 0x10210dc30; contextId: 0x9E5406E1: reason: UIWindowScene: 0x102009b00: Window requested to become key in scene: 0x10210dc30
+2026-09-29 12:21:06.791 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:KeyWindow] Key window needs update: 1; currentKeyWindowScene: 0x0; evaluatedKeyWindowScene: 0x102009b00; currentApplicationKeyWindow: 0x0; evaluatedApplicationKeyWindow: 0x10210dc30; reason: UIWindowScene: 0x102009b00: Window requested to become key in scene: 0x10210dc30
+2026-09-29 12:21:06.791 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:KeyWindow] Window did become application key: UIWindow: 0x10210dc30; contextId: 0x9E5406E1; scene identity: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.natacaocriativa.treinos-default
+2026-09-29 12:21:06.791 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:EventDeferring] [0x600002915650] Begin local event deferring requested for token: 0x60000260cea0; environments: 1; reason: UIWindowScene: 0x102009b00: Begin event deferring in keyboardFocus for window: 0x10210dc30
+2026-09-29 12:21:06.809 Df NatacaoCriativa[17044:d2bb] [com.apple.BackBoard:EventDelivery] policyStatus:<BKSHIDEventDeliveryPolicyObserver: 0x600002605740; token: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.natacaocriativa.treinos-default; status: ancestor> was:target
+2026-09-29 12:21:06.811 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 1, <UIWindowScene: 0x102009b00> (E0E6D7F4-621E-4C03-94D3-78E83B7AF054)
+2026-09-29 12:21:06.859 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:AppLifecycle] sceneOfRecord: sceneID: sceneID:com.natacaocriativa.treinos-default  persistentID: E0E6D7F4-621E-4C03-94D3-78E83B7AF054
+2026-09-29 12:21:06.887 Df NatacaoCriativa[17044:d2b6] [com.apple.UIKit:BackgroundTask] Ending background task with UIBackgroundTaskIdentifier: 2
+2026-09-29 12:21:06.887 Df NatacaoCriativa[17044:d2b6] [com.apple.UIKit:BackgroundTask] Ending task with identifier 2 and description: <_UIBackgroundTaskInfo: 0x600001718140>: taskID = 2, taskName = Persistent SceneSession Map Update, creationTime = 874 (elapsed = 1), _expireHandler: <__NSGlobalBlock__: 0x1e61729e0>
+2026-09-29 12:21:06.888 Df NatacaoCriativa[17044:d2b6] [com.apple.UIKit:BackgroundTask] Decrementing reference count for assertion <BKSProcessAssertion: 0x6000021072a0> (used by background task with identifier 2: <_UIBackgroundTaskInfo: 0x600001718140>: taskID = 2, taskName = Persistent SceneSession Map Update, creationTime = 874 (elapsed = 1))
+2026-09-29 12:21:07.098 Df NatacaoCriativa[17044:d2bb] [com.apple.UIKit:BackgroundTask] Ending background task with UIBackgroundTaskIdentifier: 1
+2026-09-29 12:21:07.110 Df NatacaoCriativa[17044:d2bb] [com.apple.UIKit:BackgroundTask] Ending task with identifier 1 and description: <_UIBackgroundTaskInfo: 0x600001700580>: taskID = 1, taskName = Launch Background Task for Coalescing, creationTime = 874 (elapsed = 1), _expireHandler: (null)
+2026-09-29 12:21:07.110 Df NatacaoCriativa[17044:d2bb] [com.apple.UIKit:BackgroundTask] Decrementing reference count for assertion <BKSProcessAssertion: 0x6000021072a0> (used by background task with identifier 1: <_UIBackgroundTaskInfo: 0x600001700580>: taskID = 1, taskName = Launch Background Task for Coalescing, creationTime = 874 (elapsed = 1))
+2026-09-29 12:21:07.110 Df NatacaoCriativa[17044:d2bb] [com.apple.UIKit:BackgroundTask] Will invalidate assertion: <BKSProcessAssertion: 0x6000021072a0> for task identifier: 1
+2026-09-29 12:21:07.242 A  NatacaoCriativa[17044:d2bb] (RunningBoardServices) didChangeInheritances
+2026-09-29 12:21:29.069 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:Application] Ignoring already applied deactivation reason: 5; deactivation reasons: 2080
+2026-09-29 12:21:29.079 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:Application] Deactivation reason added: 12; deactivation reasons: 2080 -> 6176; animating application lifecycle event: 1
+2026-09-29 12:21:29.080 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:Application] Deactivation reason removed: 11; deactivation reasons: 6176 -> 4128; animating application lifecycle event: 1
+2026-09-29 12:21:29.091 Df NatacaoCriativa[17044:d2a7] [com.apple.FrontBoard:SceneExtension] Realizing settings extension <_UISceneIntelligenceSupportSettings> on FBSSceneSettings
+2026-09-29 12:21:29.116 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 1, <UIWindowScene: 0x102009b00> (E0E6D7F4-621E-4C03-94D3-78E83B7AF054)
+2026-09-29 12:21:29.177 Df NatacaoCriativa[17044:d2b9] [com.apple.UIIntelligenceSupport:xpc] establishing connection to agent
+2026-09-29 12:21:29.190 A  NatacaoCriativa[17044:d2a7] (CoreFoundation) Updating Key-Value Observers Of Preferences
+2026-09-29 12:21:29.530 Df NatacaoCriativa[17044:d2b9] [com.apple.xpc:session] [0x600002115a90] Session created.
+2026-09-29 12:21:29.530 Df NatacaoCriativa[17044:d2b9] [com.apple.xpc:session] [0x600002115a90] Session created from connection [0x10200db50]
+2026-09-29 12:21:29.564 Df NatacaoCriativa[17044:d2b9] [com.apple.xpc:connection] [0x10200db50] activating connection: mach=true listener=false peer=false name=com.apple.uiintelligencesupport.agent
+2026-09-29 12:21:29.591 Df NatacaoCriativa[17044:d2b9] [com.apple.xpc:session] [0x600002115a90] Session activated
+2026-09-29 12:21:30.001 Df NatacaoCriativa[17044:d2a7] [com.apple.xpc:connection] [0x10210c120] activating connection: mach=true listener=false peer=false name=com.apple.metal.simulator
+2026-09-29 12:21:30.018 Df NatacaoCriativa[17044:d2a7] [com.apple.xpc:connection] [0x102016f70] activating connection: mach=true listener=false peer=false name=com.apple.metal.simulator
+2026-09-29 12:21:30.018 Df NatacaoCriativa[17044:d2a7] [com.apple.xpc:connection] [0x10210c250] activating connection: mach=true listener=false peer=false name=com.apple.metal.simulator
+2026-09-29 12:21:30.300 Df NatacaoCriativa[17044:dd00] [com.apple.xpc:connection] [0x102018190] activating connection: mach=true listener=false peer=false name=com.apple.fontservicesd
+2026-09-29 12:21:30.424 Df NatacaoCriativa[17044:d2a7] [com.apple.UserNotifications:Connections] [com.natacaocriativa.treinos] Creating a user notification center
+2026-09-29 12:21:30.826 Df NatacaoCriativa[17044:d2a7] [com.apple.xpc:connection] [0x102125590] activating connection: mach=true listener=false peer=false name=com.apple.IOSurface.Remote
+2026-09-29 12:21:30.866 E  NatacaoCriativa[17044:d2a7] (libCoreFSCache.dylib) fopen failed for data file: errno = 2 (No such file or directory)
+2026-09-29 12:21:30.866 E  NatacaoCriativa[17044:d2a7] (libCoreFSCache.dylib) Errors found! Invalidating cache...
+2026-09-29 12:21:30.867 Df NatacaoCriativa[17044:d2a7] [com.apple.xpc:connection] [0x1021422b0] activating connection: mach=false listener=false peer=false name=com.apple.MTLCompilerService
+2026-09-29 12:21:30.956 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.532 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.596 E  NatacaoCriativa[17044:d2a7] (libCoreFSCache.dylib) fopen failed for data file: errno = 2 (No such file or directory)
+2026-09-29 12:22:33.597 E  NatacaoCriativa[17044:d2a7] (libCoreFSCache.dylib) Errors found! Invalidating cache...
+2026-09-29 12:22:33.597 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.645 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.697 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.710 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.724 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.726 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.733 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.745 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.758 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.760 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.772 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.784 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.817 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.820 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.827 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.839 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.844 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.857 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.870 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.871 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.877 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.906 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.934 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.936 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.943 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.958 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.968 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:33.970 A  NatacaoCriativa[17044:d2a7] (Metal) compiling shader
+2026-09-29 12:22:34.180 Df NatacaoCriativa[17044:d2a7] [com.apple.network:activity] Create activity from XPC object <nw_activity 50:1 [D10E83A8-6A41-4DDC-A4FC-F54CB404EECA] (reporting strategy default)>
+2026-09-29 12:22:34.180 Df NatacaoCriativa[17044:d2a7] [com.apple.network:activity] Create activity from XPC object <nw_activity 50:2 [B9983D53-906A-462C-8CFE-B10A5008B5DC] (reporting strategy default)>
+2026-09-29 12:22:34.180 Df NatacaoCriativa[17044:d2a7] [com.apple.network:activity] Set activity <nw_activity 50:1 [D10E83A8-6A41-4DDC-A4FC-F54CB404EECA] (reporting strategy default)> as the global parent
+2026-09-29 12:22:34.185 Df NatacaoCriativa[17044:dd00] [com.apple.CoreAnalytics:client] No XPC connection in Simulator
+2026-09-29 12:22:34.185 E  NatacaoCriativa[17044:dd00] [com.apple.app_launch_measurement:General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+2026-09-29 12:22:34.189 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:AppLifecycle] sceneOfRecord: sceneID: sceneID:com.natacaocriativa.treinos-default  persistentID: E0E6D7F4-621E-4C03-94D3-78E83B7AF054
+2026-09-29 12:22:34.198 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 1, <UIWindowScene: 0x102009b00> (E0E6D7F4-621E-4C03-94D3-78E83B7AF054)
+2026-09-29 12:22:34.199 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:UpdateScheduler] Target list changed: <CADisplay:LCD PurpleMain>
+2026-09-29 12:22:34.205 Df NatacaoCriativa[17044:d2a7] [com.apple.Accessibility:AXCommon] Read Per-App on Init: Smart invert = (null)
+2026-09-29 12:22:34.242 A  NatacaoCriativa[17044:dcee] (RunningBoardServices) didChangeInheritances
+2026-09-29 12:22:34.250 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:EventDeferring] [0x600002915650] Scene target of event deferring environments did update: scene: 0x102009b00; current systemShellManagesKeyboardFocus: 1; systemShellManagesKeyboardFocusForScene: 1; eligibleForRecordRemoval: 1;
+2026-09-29 12:22:34.250 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:KeyWindow] Scene became target of keyboard event deferring environment: UIWindowScene: 0x102009b00; scene identity: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.natacaocriativa.treinos-default
+2026-09-29 12:22:34.269 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 1, <UIWindowScene: 0x102009b00> (E0E6D7F4-621E-4C03-94D3-78E83B7AF054)
+2026-09-29 12:22:34.283 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:AppLifecycle] sceneOfRecord: sceneID: sceneID:com.natacaocriativa.treinos-default  persistentID: E0E6D7F4-621E-4C03-94D3-78E83B7AF054
+2026-09-29 12:22:34.283 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:Application] Deactivation reason removed: 12; deactivation reasons: 4128 -> 32; animating application lifecycle event: 1
+2026-09-29 12:22:34.284 Df NatacaoCriativa[17044:d2a7] [com.apple.KeyboardArbiter:Client] Send setDeactivating: N (-DeactivationReason:SuspendedEventsOnly)
+2026-09-29 12:22:34.285 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:Application] Deactivation reason removed: 5; deactivation reasons: 32 -> 0; animating application lifecycle event: 0
+2026-09-29 12:22:34.298 Df NatacaoCriativa[17044:d2a7] [com.apple.KeyboardArbiter:Client] startConnection
+2026-09-29 12:22:34.303 Df NatacaoCriativa[17044:d2a7] [com.apple.xpc:connection] [0x100635fc0] activating connection: mach=true listener=false peer=false name=com.apple.UIKit.KeyboardManagement.hosted
+2026-09-29 12:22:34.304 A  NatacaoCriativa[17044:dcec] (RunningBoardServices) didChangeInheritances
+2026-09-29 12:22:34.307 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:AppLifecycle] sceneOfRecord: sceneID: sceneID:com.natacaocriativa.treinos-default  persistentID: E0E6D7F4-621E-4C03-94D3-78E83B7AF054
+2026-09-29 12:22:34.382 Df NatacaoCriativa[17044:d2a7] [com.apple.network:activity] <nw_activity 50:1 [D10E83A8-6A41-4DDC-A4FC-F54CB404EECA] (global parent) (reporting strategy default) complete (reason success)> complete with reason 2 (success), duration 89123ms
+2026-09-29 12:22:34.382 Df NatacaoCriativa[17044:d2a7] [com.apple.network:activity] <nw_activity 50:2 [B9983D53-906A-462C-8CFE-B10A5008B5DC] (reporting strategy default) complete (reason success)> complete with reason 2 (success), duration 89123ms
+2026-09-29 12:22:34.382 Df NatacaoCriativa[17044:d2a7] [com.apple.network:activity] Unsetting the global parent activity <nw_activity 50:1 [D10E83A8-6A41-4DDC-A4FC-F54CB404EECA] (global parent) (reporting strategy default) complete (reason success)>
+2026-09-29 12:22:34.382 Df NatacaoCriativa[17044:d2a7] [com.apple.network:activity] Unset the global parent activity
+2026-09-29 12:22:34.383 E  NatacaoCriativa[17044:dd01] [com.apple.app_launch_measurement:General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+2026-09-29 12:22:34.405 A  NatacaoCriativa[17044:dd01] (RunningBoardServices) didChangeInheritances
+2026-09-29 12:22:34.446 Df NatacaoCriativa[17044:d2a7] [com.apple.KeyboardArbiter:Client] handleKeyboardChange: set currentKeyboard:N (wasKeyboard:N)
+2026-09-29 12:22:34.473 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:KeyboardArbiterClientLog] isWritingToolsHandlingKeyboardTracking:Y (WT ready:Y, Arbiter ready:Y)
+2026-09-29 12:22:47.118 Df NatacaoCriativa[17044:d2be] [com.apple.BackBoard:EventDelivery] policyStatus:<BKSHIDEventDeliveryPolicyObserver: 0x600002605740; token: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.natacaocriativa.treinos-default; status: none> was:ancestor
+2026-09-29 12:22:47.120 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:KeyWindow] Scene target of keyboard event deferring environment did change: 0; scene: UIWindowScene: 0x102009b00; scene identity: com.apple.frontboard.systemappservices/FBSceneManager:sceneID%3Acom.natacaocriativa.treinos-default
+2026-09-29 12:22:47.232 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:AppLifecycle] sceneOfRecord: sceneID: sceneID:com.natacaocriativa.treinos-default  persistentID: E0E6D7F4-621E-4C03-94D3-78E83B7AF054
+2026-09-29 12:22:47.538 Df NatacaoCriativa[17044:d2a7] [com.apple.runningboard:connection] Creating side-channel connection to com.apple.runningboard
+2026-09-29 12:22:47.538 Df NatacaoCriativa[17044:d2a7] [com.apple.xpc:connection] [0x10213cfc0] activating connection: mach=true listener=false peer=false name=com.apple.runningboard
+2026-09-29 12:22:47.540 Df NatacaoCriativa[17044:d2a7] [com.apple.runningboard:process] Hit the server for a process handle 12ac724200004294 that resolved to: [app<com.natacaocriativa.treinos((null))>:17044]
+2026-09-29 12:22:47.543 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:AppLifecycle] sceneOfRecord: sceneID: sceneID:com.natacaocriativa.treinos-default  persistentID: E0E6D7F4-621E-4C03-94D3-78E83B7AF054
+2026-09-29 12:22:47.543 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:UIAlertControllerStackManager] canShowAlerts Updated: <FBSSceneSettingsDiff: 0x60000173e1c0; UIApplicationSceneSettings> {
+    subclassSettings = <BSSettingsDiff: 0x600000c4ef40> {
+        canShowAlerts = NO;
+    };
+}
+2026-09-29 12:22:47.545 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:InterfaceStyle] Not push traits update to screen for new style 1, <UIWindowScene: 0x102009b00> (E0E6D7F4-621E-4C03-94D3-78E83B7AF054)
+2026-09-29 12:22:47.562 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:AppLifecycle] sceneOfRecord: sceneID: sceneID:com.natacaocriativa.treinos-default  persistentID: E0E6D7F4-621E-4C03-94D3-78E83B7AF054
+2026-09-29 12:22:47.562 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:Application] Deactivation reason added: 13; deactivation reasons: 0 -> 8192; animating application lifecycle event: 0
+2026-09-29 12:22:47.563 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:Application] Ignoring already applied deactivation reason: 13; deactivation reasons: 8192
+2026-09-29 12:22:47.564 Df NatacaoCriativa[17044:d2a7] [com.apple.UIKit:Application] Deactivation reason added: 12; deactivation reasons: 8192 -> 12288; animating application lifecycle event: 0
