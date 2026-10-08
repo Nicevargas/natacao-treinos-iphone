@@ -11,6 +11,10 @@ on:
         description: "Enviar para o TestFlight / App Store Connect"
         type: boolean
         default: false
+      atualizar_ficha:
+        description: "Atualizar a ficha da loja (textos e capturas)"
+        type: boolean
+        default: false
 
 concurrency:
   group: ios-${{ github.ref }}
@@ -311,6 +315,44 @@ jobs:
           fi
           grep -qE "Upload succeeded|EXPORT SUCCEEDED" "$RUNNER_TEMP/envio.log" || { echo "Sem confirmação de envio."; exit 1; }
           echo "Versão enviada: 1.0 (${{ github.run_number }}). Aparece no TestFlight depois do processamento da Apple (10 a 30 min)."
+
+      - name: Apagar a chave
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/apple"
+
+  # Envia os textos e as capturas da ficha da App Store (iosApp/fastlane) com a
+  # mesma chave de API. Não envia binário nem manda para revisão.
+  ficha:
+    if: github.event_name == 'workflow_dispatch' && inputs.atualizar_ficha
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Chave de API da Apple
+        env:
+          KEY_ID: ${{ secrets.APPSTORE_KEY_ID }}
+          ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
+          KEY_P8: ${{ secrets.APPSTORE_KEY_P8 }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/apple"
+          python3 - <<'PY'
+          import json, os
+          json.dump({"key_id": os.environ["KEY_ID"], "issuer_id": os.environ["ISSUER_ID"],
+                     "key": os.environ["KEY_P8"], "in_house": False},
+                    open(os.path.join(os.environ["RUNNER_TEMP"], "apple", "chave.json"), "w"))
+          PY
+
+      - name: Enviar a ficha
+        working-directory: iosApp
+        env:
+          FASTLANE_SKIP_UPDATE_CHECK: "1"
+          FASTLANE_HIDE_CHANGELOG: "1"
+          LC_ALL: en_US.UTF-8
+          LANG: en_US.UTF-8
+        run: |
+          fastlane --version | tail -1
+          fastlane deliver             --api_key_path "$RUNNER_TEMP/apple/chave.json"             --app_identifier com.natacaocriativa.treinos             --app_version 1.0             --metadata_path fastlane/metadata             --screenshots_path fastlane/screenshots             --skip_binary_upload true             --overwrite_screenshots true             --submit_for_review false             --run_precheck_before_submit false             --precheck_include_in_app_purchases false             --force true
 
       - name: Apagar a chave
         if: always()
