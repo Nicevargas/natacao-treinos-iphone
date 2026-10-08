@@ -230,7 +230,8 @@ jobs:
   # certificado e o perfil de distribuição na nuvem, sem Mac.
   apple:
     if: github.event_name == 'workflow_dispatch' && inputs.enviar_para_apple
-    runs-on: macos-15
+    # A Apple só aceita envio de app compilado com o Xcode 26 (SDK do iOS 26) ou mais novo.
+    runs-on: macos-26
     timeout-minutes: 60
     env:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
@@ -282,7 +283,9 @@ jobs:
         working-directory: iosApp
         run: |
           set -o pipefail
-          xcodebuild archive             -project iosApp.xcodeproj             -scheme iosApp             -configuration Release             -destination "generic/platform=iOS"             -archivePath "$RUNNER_TEMP/NatacaoCriativa.xcarchive"             DEVELOPMENT_TEAM="$APPLE_TEAM_ID"             CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""             CURRENT_PROJECT_VERSION="${{ github.run_number }}"             | grep -E "error:|warning: .*(sign|provision)|ARCHIVE (SUCCEEDED|FAILED)" || true
+          xcodebuild archive             -project iosApp.xcodeproj             -scheme iosApp             -configuration Release             -destination "generic/platform=iOS"             -archivePath "$RUNNER_TEMP/NatacaoCriativa.xcarchive"             DEVELOPMENT_TEAM="$APPLE_TEAM_ID"             CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""             CURRENT_PROJECT_VERSION="${{ github.run_number }}"             2>&1 | tee "$RUNNER_TEMP/arquivo.log" | grep -E "error:|ARCHIVE (SUCCEEDED|FAILED)" || true
+          grep -q "ARCHIVE SUCCEEDED" "$RUNNER_TEMP/arquivo.log" || { tail -40 "$RUNNER_TEMP/arquivo.log"; exit 1; }
+          xcodebuild -version
           test -d "$RUNNER_TEMP/NatacaoCriativa.xcarchive"
 
       - name: Enviar para o App Store Connect
@@ -301,7 +304,12 @@ jobs:
           </plist>
           PLIST
           set -o pipefail
-          xcodebuild -exportArchive             -archivePath "$RUNNER_TEMP/NatacaoCriativa.xcarchive"             -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist"             -exportPath "$RUNNER_TEMP/saida"             -allowProvisioningUpdates             -authenticationKeyPath "$CHAVE_P8"             -authenticationKeyID "$APPSTORE_KEY_ID"             -authenticationKeyIssuerID "$APPSTORE_ISSUER_ID"             | grep -E "error:|Upload|EXPORT (SUCCEEDED|FAILED)|Progress" || true
+          xcodebuild -exportArchive             -archivePath "$RUNNER_TEMP/NatacaoCriativa.xcarchive"             -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist"             -exportPath "$RUNNER_TEMP/saida"             -allowProvisioningUpdates             -authenticationKeyPath "$CHAVE_P8"             -authenticationKeyID "$APPSTORE_KEY_ID"             -authenticationKeyIssuerID "$APPSTORE_ISSUER_ID"             2>&1 | tee "$RUNNER_TEMP/envio.log" | grep -E "error:|Upload|EXPORT (SUCCEEDED|FAILED)|Progress|Validation|SDK" || true
+          # O grep acima esconde o código de saída: conferir o resultado pelo registro.
+          if grep -qE "Validation failed|Upload failed|error: exportArchive|EXPORT FAILED" "$RUNNER_TEMP/envio.log"; then
+            echo "A Apple recusou o envio."; exit 1
+          fi
+          grep -qE "Upload succeeded|EXPORT SUCCEEDED" "$RUNNER_TEMP/envio.log" || { echo "Sem confirmação de envio."; exit 1; }
           echo "Versão enviada: 1.0 (${{ github.run_number }}). Aparece no TestFlight depois do processamento da Apple (10 a 30 min)."
 
       - name: Apagar a chave
