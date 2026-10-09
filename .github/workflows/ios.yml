@@ -233,7 +233,10 @@ jobs:
   # A chave precisa do papel "Admin": é ela que deixa a Apple gerar o
   # certificado e o perfil de distribuição na nuvem, sem Mac.
   apple:
-    if: github.event_name == 'workflow_dispatch' && inputs.enviar_para_apple
+    # Pelo botão Run workflow, ou por um commit com a marca de envio na mensagem.
+    if: >-
+      (github.event_name == 'workflow_dispatch' && inputs.enviar_para_apple) ||
+      (github.event_name == 'push' && contains(github.event.head_commit.message, '[apple]'))
     # A Apple só aceita envio de app compilado com o Xcode 26 (SDK do iOS 26) ou mais novo.
     runs-on: macos-26
     timeout-minutes: 60
