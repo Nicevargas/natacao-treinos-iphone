@@ -269,7 +269,11 @@ fun AquagendaApp(
             onSalvarFormulario = ranking::salvarParticipacao,
             onCancelarFormulario = ranking::cancelarFormulario,
             onSairDoRanking = ranking::sairDoRanking,
-            onTentarDeNovo = ranking::carregar
+            onTentarDeNovo = ranking::carregar,
+            onDenunciar = ranking::denunciar,
+            onMotivoDaDenuncia = ranking::escolherMotivo,
+            onConfirmarDenuncia = ranking::confirmarDenuncia,
+            onCancelarDenuncia = ranking::cancelarDenuncia
         )
     } else if (estadoPlano.assistente != null) {
         CriarPlanoScreen(

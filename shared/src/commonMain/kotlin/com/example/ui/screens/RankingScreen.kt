@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -30,6 +31,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.outlined.Flag
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -39,6 +42,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -57,6 +61,7 @@ import androidx.compose.ui.unit.sp
 import com.example.data.compartilhar.TextosDoTreino
 import com.example.data.progresso.Pontuacao
 import com.example.data.ranking.LinhaDoRanking
+import com.example.data.ranking.MotivoDaDenuncia
 import com.example.data.ranking.OpcoesDoRanking
 import com.example.data.ranking.PeriodoDoRanking
 import com.example.ui.components.MensagemDeTela
@@ -69,6 +74,7 @@ import com.example.ui.theme.AquaSurfaceContainerLow
 import com.example.ui.theme.AquaTextMuted
 import com.example.ui.theme.AquaTextPrimary
 import com.example.ui.theme.AquaTextSecondary
+import com.example.viewmodel.DenunciaEmAberto
 import com.example.viewmodel.FiltrosDoRanking
 import com.example.viewmodel.FormularioDoRanking
 import com.example.viewmodel.RankingUiState
@@ -85,9 +91,14 @@ fun RankingScreen(
     onCancelarFormulario: () -> Unit,
     onSairDoRanking: () -> Unit,
     onTentarDeNovo: () -> Unit,
+    onDenunciar: (LinhaDoRanking) -> Unit,
+    onMotivoDaDenuncia: (MotivoDaDenuncia) -> Unit,
+    onConfirmarDenuncia: () -> Unit,
+    onCancelarDenuncia: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val formulario = estado.formulario
+    estado.denuncia?.let { DialogoDeDenuncia(it, onMotivoDaDenuncia, onConfirmarDenuncia, onCancelarDenuncia) }
     AoVoltar(aoVoltar = if (formulario != null) onCancelarFormulario else onVoltar)
 
     Column(
@@ -191,7 +202,7 @@ fun RankingScreen(
                     Cartao(padding = 0) {
                         estado.linhas.forEachIndexed { i, linha ->
                             if (i > 0) HorizontalDivider(color = AquaBorder)
-                            LinhaDoRankingItem(linha)
+                            LinhaDoRankingItem(linha, onDenunciar)
                         }
                     }
                 }
@@ -273,7 +284,7 @@ private fun Chip(texto: String, ativo: Boolean, onClick: () -> Unit) {
 }
 
 @Composable
-private fun LinhaDoRankingItem(linha: LinhaDoRanking) {
+private fun LinhaDoRankingItem(linha: LinhaDoRanking, onDenunciar: (LinhaDoRanking) -> Unit) {
     val medalha = when (linha.posicao) {
         1 -> Color(0xFFE5B100)
         2 -> Color(0xFF9AA5B1)
@@ -317,7 +328,78 @@ private fun LinhaDoRankingItem(linha: LinhaDoRanking) {
             Text("${linha.pontos}", fontSize = 18.sp, fontWeight = FontWeight.Black, color = AquaTextPrimary, softWrap = false)
             Text("pontos", fontSize = 11.sp, color = AquaTextMuted, softWrap = false)
         }
+        // Denunciar o nome: as lojas exigem em app que mostra conteúdo de usuários.
+        if (!linha.souEu) {
+            IconButton(
+                onClick = { onDenunciar(linha) },
+                modifier = Modifier
+                    .padding(start = 4.dp)
+                    .size(36.dp)
+                    .testTag("denunciar_${linha.posicao}")
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Flag,
+                    contentDescription = "Denunciar o nome ${linha.nome}",
+                    tint = AquaTextMuted,
+                    modifier = Modifier.size(18.dp)
+                )
+            }
+        }
     }
+}
+
+/** Pergunta o motivo antes de enviar. Quem denuncia deixa de ver o nome. */
+@Composable
+private fun DialogoDeDenuncia(
+    denuncia: DenunciaEmAberto,
+    onMotivo: (MotivoDaDenuncia) -> Unit,
+    onConfirmar: () -> Unit,
+    onCancelar: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onCancelar,
+        title = { Text("Denunciar este nome?", fontWeight = FontWeight.Bold) },
+        text = {
+            Column {
+                Text(
+                    text = "\"${denuncia.nome}\" deixa de aparecer no ranking para você, e a equipe do Natação Criativa analisa a denúncia.",
+                    fontSize = 14.sp,
+                    color = AquaTextSecondary,
+                    lineHeight = 20.sp
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                MotivoDaDenuncia.entries.forEach { motivo ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(10.dp))
+                            .selectable(
+                                selected = denuncia.motivo == motivo,
+                                enabled = !denuncia.enviando,
+                                role = Role.RadioButton
+                            ) { onMotivo(motivo) }
+                            .padding(vertical = 4.dp)
+                            .testTag("motivo_${motivo.chave}"),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(selected = denuncia.motivo == motivo, onClick = null)
+                        Text(motivo.rotulo, fontSize = 15.sp, color = AquaTextPrimary, modifier = Modifier.padding(start = 10.dp))
+                    }
+                }
+                denuncia.erro?.let { MensagemDeTela(texto = it, erro = true) }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = onConfirmar,
+                enabled = !denuncia.enviando,
+                modifier = Modifier.testTag("confirmar_denuncia")
+            ) { Text(if (denuncia.enviando) "Enviando…" else "Denunciar", color = AquaMagenta, fontWeight = FontWeight.Bold) }
+        },
+        dismissButton = {
+            TextButton(onClick = onCancelar, enabled = !denuncia.enviando) { Text("Cancelar") }
+        }
+    )
 }
 
 @Composable
@@ -410,7 +492,7 @@ private fun FormularioDeParticipacao(
                 modifier = Modifier.padding(10.dp)
             )
             Text(
-                text = "Aceito aparecer no ranking do app Natação Criativa com esse nome, meus pontos, metros e treinos. Posso sair quando quiser.",
+                text = "Aceito aparecer no ranking do app Natação Criativa com esse nome, meus pontos, metros e treinos. Posso sair quando quiser. Nomes ofensivos ou que finjam ser outra pessoa são removidos.",
                 fontSize = 13.sp,
                 color = AquaTextPrimary,
                 lineHeight = 19.sp,

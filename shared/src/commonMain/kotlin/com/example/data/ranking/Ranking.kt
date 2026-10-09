@@ -40,6 +40,20 @@ data class ParticipacaoDto(
     @SerialName("local_treino") val local: String? = null
 )
 
+/** Parâmetros de public.denunciar_nome_do_ranking(). */
+@Serializable
+data class DenunciaDoRanking(
+    @SerialName("p_nome") val nome: String,
+    @SerialName("p_motivo") val motivo: String
+)
+
+/** Por que alguém denuncia um nome. As chaves são as que o banco aceita. */
+enum class MotivoDaDenuncia(val chave: String, val rotulo: String) {
+    OFENSIVO("ofensivo", "Nome ofensivo ou impróprio"),
+    IMPOSTOR("se_passa_por_outro", "Finge ser outra pessoa"),
+    OUTRO("outro", "Outro motivo")
+}
+
 enum class PeriodoDoRanking(val chave: String, val rotulo: String) {
     SEMANA("semana", "Semana"), MES("mes", "Mês"), ANO("ano", "Ano"), TUDO("tudo", "Geral")
 }
@@ -75,4 +89,8 @@ object RankingRepository {
 
     suspend fun listar(parametros: ParametrosDoRanking): Resultado<List<LinhaDoRanking>> =
         chamarApi({ it.rankingNadadores(parametros) }) { lista -> Resultado.Ok(lista.orEmpty()) }
+
+    /** Denuncia o nome. Quem denuncia deixa de ver esse nome no ranking. */
+    suspend fun denunciar(nome: String, motivo: MotivoDaDenuncia): Resultado<Unit> =
+        chamarApi({ it.denunciarNomeDoRanking(DenunciaDoRanking(nome, motivo.chave)) }) { Resultado.Ok(Unit) }
 }

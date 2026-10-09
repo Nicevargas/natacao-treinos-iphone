@@ -313,7 +313,8 @@ class LayoutEstreitoScreenshotTest {
                 )
             ),
             onVoltar = {}, onFiltrar = {}, onParticipar = {}, onAlterarFormulario = {},
-            onSalvarFormulario = {}, onCancelarFormulario = {}, onSairDoRanking = {}, onTentarDeNovo = {}
+            onSalvarFormulario = {}, onCancelarFormulario = {}, onSairDoRanking = {}, onTentarDeNovo = {},
+            onDenunciar = {}, onMotivoDaDenuncia = {}, onConfirmarDenuncia = {}, onCancelarDenuncia = {}
         )
     }
 
@@ -325,7 +326,8 @@ class LayoutEstreitoScreenshotTest {
                 formulario = FormularioDoRanking(nome = "Ana S.", ano = "1990", sexo = "F", cidade = "São Paulo", erro = "Marque que você aceita aparecer no ranking.")
             ),
             onVoltar = {}, onFiltrar = {}, onParticipar = {}, onAlterarFormulario = {},
-            onSalvarFormulario = {}, onCancelarFormulario = {}, onSairDoRanking = {}, onTentarDeNovo = {}
+            onSalvarFormulario = {}, onCancelarFormulario = {}, onSairDoRanking = {}, onTentarDeNovo = {},
+            onDenunciar = {}, onMotivoDaDenuncia = {}, onConfirmarDenuncia = {}, onCancelarDenuncia = {}
         )
     }
 

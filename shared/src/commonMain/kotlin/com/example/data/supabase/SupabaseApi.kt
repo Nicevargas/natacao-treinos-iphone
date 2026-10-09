@@ -133,6 +133,12 @@ class SupabaseApi(private val http: HttpClient) {
     ): Resposta<List<com.example.data.ranking.LinhaDoRanking>> =
         pedir(HttpMethod.Post, "rest/v1/rpc/ranking_nadadores", corpo = parametros)
 
+    /** Devolve quantas pessoas com esse nome foram denunciadas. */
+    suspend fun denunciarNomeDoRanking(
+        denuncia: com.example.data.ranking.DenunciaDoRanking
+    ): Resposta<Int> =
+        pedir(HttpMethod.Post, "rest/v1/rpc/denunciar_nome_do_ranking", corpo = denuncia)
+
     // ---- Plano de treino. O RLS só deixa ver, criar e apagar os do usuário logado. ----
 
     suspend fun planoAtual(

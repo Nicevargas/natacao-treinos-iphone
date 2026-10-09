@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.Resultado
 import com.example.data.ciclo.DataCivil
+import com.example.data.ranking.MotivoDaDenuncia
 import com.example.data.ranking.LinhaDoRanking
 import com.example.data.ranking.OpcoesDoRanking
 import com.example.data.ranking.ParametrosDoRanking
@@ -38,10 +39,19 @@ data class FormularioDoRanking(
     val salvando: Boolean = false
 )
 
+/** A denúncia que a pessoa está fazendo: de quem, por quê, e se já está indo. */
+data class DenunciaEmAberto(
+    val nome: String,
+    val motivo: MotivoDaDenuncia = MotivoDaDenuncia.OFENSIVO,
+    val enviando: Boolean = false,
+    val erro: String? = null
+)
+
 data class RankingUiState(
     val aberto: Boolean = false,
     val participacao: ParticipacaoDto? = null,
     val formulario: FormularioDoRanking? = null,
+    val denuncia: DenunciaEmAberto? = null,
     val filtros: FiltrosDoRanking = FiltrosDoRanking(),
     val linhas: List<LinhaDoRanking> = emptyList(),
     val carregando: Boolean = false,
@@ -76,7 +86,7 @@ class RankingViewModel : ViewModel() {
     }
 
     fun fechar() {
-        _ui.update { it.copy(aberto = false, formulario = null) }
+        _ui.update { it.copy(aberto = false, formulario = null, denuncia = null) }
     }
 
     fun filtrar(mudanca: (FiltrosDoRanking) -> FiltrosDoRanking) {
@@ -185,6 +195,43 @@ class RankingViewModel : ViewModel() {
                         erro = if (s.formulario == null) r.mensagem else s.erro
                     )
                 }
+            }
+        }
+    }
+
+    // ---- Denúncia de nome: exigência das lojas para conteúdo de usuários. ----
+
+    fun denunciar(linha: LinhaDoRanking) {
+        if (linha.souEu) return
+        _ui.update { it.copy(denuncia = DenunciaEmAberto(nome = linha.nome)) }
+    }
+
+    fun escolherMotivo(motivo: MotivoDaDenuncia) {
+        _ui.update { s -> s.denuncia?.takeIf { !it.enviando }?.let { s.copy(denuncia = it.copy(motivo = motivo, erro = null)) } ?: s }
+    }
+
+    fun cancelarDenuncia() {
+        _ui.update { s -> if (s.denuncia?.enviando == true) s else s.copy(denuncia = null) }
+    }
+
+    fun confirmarDenuncia() {
+        val d = _ui.value.denuncia ?: return
+        if (d.enviando || usuario == null) return
+        _ui.update { it.copy(denuncia = d.copy(enviando = true, erro = null)) }
+        viewModelScope.launch {
+            when (val r = RankingRepository.denunciar(d.nome, d.motivo)) {
+                is Resultado.Ok -> {
+                    _ui.update {
+                        it.copy(
+                            denuncia = null,
+                            // Some na hora; o banco confirma no carregar() logo abaixo.
+                            linhas = it.linhas.filterNot { l -> !l.souEu && l.nome == d.nome },
+                            mensagem = "Denúncia enviada. Esse nome não aparece mais para você, e nós vamos analisar."
+                        )
+                    }
+                    carregar()
+                }
+                is Resultado.Falha -> _ui.update { it.copy(denuncia = d.copy(enviando = false, erro = r.mensagem)) }
             }
         }
     }
