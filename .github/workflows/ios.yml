@@ -323,7 +323,10 @@ jobs:
   # Envia os textos e as capturas da ficha da App Store (iosApp/fastlane) com a
   # mesma chave de API. Não envia binário nem manda para revisão.
   ficha:
-    if: github.event_name == 'workflow_dispatch' && inputs.atualizar_ficha
+    # Pelo botão Run workflow, ou por um commit com [ficha] na mensagem.
+    if: >-
+      (github.event_name == 'workflow_dispatch' && inputs.atualizar_ficha) ||
+      (github.event_name == 'push' && contains(github.event.head_commit.message, '[ficha]'))
     runs-on: macos-15
     timeout-minutes: 30
     steps:
