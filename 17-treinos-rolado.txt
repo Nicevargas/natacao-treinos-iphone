@@ -1,0 +1,109 @@
+Attributes: Application, 0x1028d8ed0, pid: 34145, label: 'Natação Criativa'
+Element subtree:
+ →Application, 0x1028d8ed0, pid: 34145, label: 'Natação Criativa'
+    Window (Main), 0x100b4c6f0, {{0.0, 0.0}, {440.0, 956.0}}
+      Other, 0x100b5b120, {{0.0, 0.0}, {440.0, 956.0}}
+        Other, 0x1029c4520, {{0.0, 0.0}, {440.0, 956.0}}
+          Other, 0x100b57210, {{0.0, 0.0}, {440.0, 956.0}}
+            Other, 0x100b57b50, {{0.0, 0.0}, {440.0, 956.0}}
+              Other, 0x100b4e3c0, {{0.0, 0.0}, {440.0, 956.0}}
+                Other, 0x100b4fb70, {{0.0, 0.0}, {440.0, 956.0}}
+                Other, 0x100b7e0a0, {{0.0, 0.0}, {440.0, 956.0}}
+                ScrollView, 0x100b8a610, {{0.0, 0.0}, {440.0, 956.0}}
+                  Other, 0x100b89640, {{0.0, 0.0}, {440.0, 956.0}}
+                    Other, 0x100b1e1e0, {{0.0, 0.0}, {440.0, 956.0}}
+                      Other, 0x100b6b500, {{0.0, 0.0}, {440.0, 126.0}}
+                      Image, 0x100b6b620, {{16.0, 68.0}, {368.0, 52.0}}, identifier: 'logo', label: 'Natação Criativa Treinos'
+                      Button, 0x100b6b740, {{380.0, 70.0}, {48.0, 48.0}}, identifier: 'notification_button', label: 'Notificações'
+                        Image, 0x100b6b860, {{393.0, 83.0}, {22.0, 22.0}}, label: 'Notificações'
+                        Other, 0x100b6b980, {{387.0, 63.0}, {48.0, 48.0}}
+                      Other, 0x100b6baa0, {{0.0, 0.0}, {440.0, 956.0}}
+                      Other, 0x100b6bbc0, {{0.0, 126.0}, {440.0, 723.0}}
+                      Other, 0x100b6bce0, {{0.0, 126.0}, {440.0, 723.0}}
+                        Image, 0x10284aa80, {{0.0, -479.0}, {440.0, 280.0}}, label: 'Swimmer mid-stroke'
+                        StaticText, 0x10284a180, {{32.0, -296.3}, {112.7, 24.0}}, label: 'SUGESTÃO DO DIA'
+                        StaticText, 0x1028d9ca0, {{20.0, -264.3}, {170.3, 33.3}}, label: 'Velocidade'
+                        StaticText, 0x1028d6cf0, {{20.0, -231.0}, {249.0, 24.0}}, label: 'Pré-condicionamento · Regeneração'
+                        StaticText, 0x1028d8150, {{156.0, -171.0}, {128.3, 24.0}}, label: 'DISTÂNCIA TOTAL'
+                        StaticText, 0x102842840, {{161.3, -143.0}, {92.3, 55.0}}, label: '760'
+                        StaticText, 0x1028d74d0, {{255.7, -122.7}, {23.0, 28.7}}, label: 'm'
+                        StaticText, 0x1028d6430, {{154.0, -68.0}, {42.7, 24.0}}, label: '31 min'
+                        StaticText, 0x102836ad0, {{251.7, -68.0}, {55.7, 24.0}}, label: '250 kcal'
+                        StaticText, 0x1028dae80, {{32.0, 14.0}, {114.3, 24.0}}, label: 'OBJETIVO DO DIA'
+                        StaticText, 0x1028867e0, {{38.0, 45.0}, {114.3, 24.0}}, label: 'A1 · Base aeróbia'
+                        StaticText, 0x102887020, {{32.0, 76.0}, {376.0, 48.0}}, label: 'Velocidade com qualidade: acelerações curtas (AA) e base aeróbia em A1.'
+                        Other, 0x1028c35b0, {{0.0, 126.0}, {440.0, 723.0}}
+                        Other, 0x1028c3190, {{16.0, 126.0}, {408.0, 96.0}}, identifier: 'cartao_objetivo'
+                        StaticText, 0x1028c2d70, {{32.0, 128.0}, {156.7, 24.0}}, label: 'Esforço (PSE) até 4 de 10'
+                        StaticText, 0x1028c4470, {{32.0, 158.0}, {376.0, 48.0}}, label: 'Ajuste: Se a PSE passar de 4 ou a braçada encurtar, aumente o intervalo em 10 s.'
+                        StaticText, 0x1028c4590, {{20.0, 246.0}, {243.7, 24.0}}, label: 'Equipamentos Necessários'
+                        Other, 0x1028c46b0, {{16.0, 282.0}, {408.0, 114.0}}
+                        Other, 0x1028c47d0, {{196.0, 298.0}, {48.0, 48.0}}
+                        Image, 0x1028c48f0, {{207.0, 309.0}, {26.0, 26.0}}, label: 'Prancha'
+                        StaticText, 0x10294c810, {{194.0, 356.0}, {52.0, 24.0}}, label: 'Prancha'
+                        StaticText, 0x102953330, {{20.0, 420.0}, {174.0, 24.0}}, label: 'Estrutura do Treino'
+                        Other, 0x102954110, {{16.0, 456.0}, {408.0, 140.0}}
+                        Other, 0x102953da0, {{8.7, 465.0}, {48.0, 48.0}}
+                        StaticText, 0x10294bd80, {{49.0, 470.0}, {130.3, 24.0}}, label: 'Ativação · 300m'
+                        StaticText, 0x102951b00, {{368.0, 474.0}, {32.0, 24.0}}, label: '40%'
+                        Other, 0x1029528a0, {{360.0, 462.0}, {48.0, 48.0}}
+                        StaticText, 0x102952c20, {{49.0, 501.0}, {114.0, 24.0}}, label: '200m Crawl leve'
+                        StaticText, 0x102951e70, {{175.0, 501.0}, {17.3, 24.0}}, label: 'A0'
+                        StaticText, 0x102952fb0, {{49.0, 533.0}, {183.3, 24.0}}, label: '4x25m Pernada c/ prancha'
+                        StaticText, 0x102952530, {{244.3, 533.0}, {17.3, 24.0}}, label: 'A0'
+                        StaticText, 0x102951760, {{49.0, 558.0}, {85.3, 24.0}}, label: 'Descanso 20"'
+                        Other, 0x102951070, {{16.0, 606.0}, {408.0, 132.0}}
+                        Other, 0x1029521d0, {{8.7, 615.0}, {48.0, 48.0}}
+                        StaticText, 0x1029513f0, {{49.0, 620.0}, {141.7, 24.0}}, label: 'Preparação · 60m'
+                        StaticText, 0x102950cf0, {{377.0, 624.0}, {23.0, 24.0}}, label: '8%'
+                        Other, 0x102950250, {{364.7, 612.0}, {48.0, 48.0}}
+                        StaticText, 0x10294fb90, {{49.0, 651.0}, {88.0, 24.0}}, label: '4x15m Crawl'
+                        StaticText, 0x102950950, {{149.0, 651.0}, {18.0, 24.0}}, label: 'AA'
+                        StaticText, 0x10294fef0, {{49.0, 676.0}, {318.0, 48.0}}, label: 'Acelerar só 6-8 s · Soltar até a parede · Descanso 45"'
+                        Other, 0x10294cef0, {{16.0, 748.0}, {408.0, 101.0}}
+                        Other, 0x1029505b0, {{8.7, 757.0}, {48.0, 48.0}}
+                        StaticText, 0x10294c100, {{49.0, 762.0}, {198.7, 24.0}}, label: 'Desenvolvimento · 300m'
+                        StaticText, 0x102942210, {{368.3, 766.0}, {31.7, 24.0}}, label: '39%'
+                        Other, 0x102940a50, {{360.3, 754.0}, {48.0, 48.0}}
+                        StaticText, 0x10294f830, {{49.0, 793.0}, {90.3, 24.0}}, label: '6x50m Crawl'
+                        StaticText, 0x102949dd0, {{151.3, 793.0}, {15.0, 24.0}}, label: 'A1'
+                        StaticText, 0x10294f4d0, {{49.0, 818.0}, {309.3, 31.0}}, label: '2º 25m um pouco mais rápido que o 1º · Descanso 20"'
+                        StaticText, 0x10294ee10, {{49.0, 904.0}, {162.7, 24.0}}, label: 'Recuperação · 100m'
+                        StaticText, 0x10294f180, {{370.3, 908.0}, {29.7, 24.0}}, label: '13%'
+                        StaticText, 0x10294dd50, {{49.0, 935.0}, {127.0, 24.0}}, label: '100m Costas solto'
+                        StaticText, 0x10294eaa0, {{188.0, 935.0}, {17.3, 24.0}}, label: 'A0'
+                        Button, 0x10294e750, {{16.0, 1000.0}, {199.0, 52.0}}, identifier: 'editar_este_treino'
+                        Button, 0x102941100, {{225.0, 1000.0}, {199.0, 52.0}}, identifier: 'compartilhar_este_treino'
+                        Button, 0x10294e410, {{16.0, 1064.0}, {408.0, 52.0}}, identifier: 'salvar_nos_meus_treinos'
+                        Button, 0x10294d240, {{16.0, 1128.0}, {408.0, 56.0}}, identifier: 'workouts_start_cta'
+                      Other, 0x10293d080, {{0.0, 849.0}, {440.0, 107.0}}
+                      Button, 0x102941450, {{4.0, 857.0}, {86.7, 57.0}}, identifier: 'nav_tab_home', label: 'Home, Home'
+                        Other, 0x102961a90, {{23.3, 854.0}, {48.0, 48.0}}
+                          Image, 0x1029605f0, {{36.3, 867.0}, {22.0, 22.0}}, label: 'Home'
+                        StaticText, 0x1029613b0, {{30.7, 895.0}, {33.3, 13.0}}, label: 'Home'
+                      Button, 0x102942920, {{90.7, 857.0}, {86.3, 57.0}}, identifier: 'nav_tab_plan', label: 'Plano, Plano'
+                        Other, 0x102943350, {{110.0, 854.0}, {48.0, 48.0}}
+                          Image, 0x102942fe0, {{123.0, 867.0}, {22.0, 22.0}}, label: 'Plano'
+                        StaticText, 0x102941e90, {{117.7, 895.0}, {32.3, 13.0}}, label: 'Plano'
+                      Button, 0x1029425b0, {{177.0, 857.0}, {86.3, 57.0}}, identifier: 'nav_tab_workouts', label: 'Treinos, Treinos'
+                        Other, 0x102941b40, {{196.3, 854.0}, {48.0, 48.0}}
+                          Image, 0x102940db0, {{209.3, 867.0}, {22.0, 22.0}}, label: 'Treinos'
+                        StaticText, 0x1029417e0, {{198.0, 895.0}, {44.7, 13.0}}, label: 'Treinos'
+                      Button, 0x102940700, {{263.3, 857.0}, {86.3, 57.0}}, identifier: 'nav_tab_my_workouts', label: 'Meus treinos, Meus treinos'
+                        Other, 0x10293f5e0, {{282.7, 854.0}, {48.0, 41.0}}
+                          Image, 0x102940030, {{295.7, 867.0}, {22.0, 22.0}}, label: 'Meus treinos'
+                        StaticText, 0x10293fcc0, {{269.3, 895.0}, {74.7, 13.0}}, label: 'Meus treinos'
+                      Button, 0x102940380, {{349.7, 857.0}, {86.3, 57.0}}, identifier: 'nav_tab_profile', label: 'Perfil, Perfil'
+                        Other, 0x100b6be00, {{369.0, 854.0}, {48.0, 48.0}}
+                          Image, 0x10293f930, {{382.0, 867.0}, {22.0, 22.0}}, label: 'Perfil'
+                        StaticText, 0x10293f280, {{377.3, 895.0}, {31.3, 13.0}}, label: 'Perfil'
+    Window, 0x10293ef20, {{0.0, 0.0}, {440.0, 956.0}}
+      Other, 0x1028c4a10, {{0.0, 0.0}, {440.0, 956.0}}
+        Other, 0x1028c4b30, {{0.0, 0.0}, {440.0, 956.0}}
+Path to element:
+ →Application, 0x1028d8ed0, pid: 34145, label: 'Natação Criativa'
+Query chain:
+ →Find: Target Application 'com.natacaocriativa.treinos'
+  Output: {
+    Application, 0x10285c770, pid: 34145, label: 'Natação Criativa'
+  }

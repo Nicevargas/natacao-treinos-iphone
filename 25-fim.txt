@@ -1,0 +1,139 @@
+Attributes: Application, 0x10284f7d0, pid: 37096, label: 'Natação Criativa'
+Element subtree:
+ →Application, 0x10284f7d0, pid: 37096, label: 'Natação Criativa'
+    Window (Main), 0x102861b30, {{0.0, 0.0}, {440.0, 956.0}}
+      Other, 0x10285fc30, {{0.0, 0.0}, {440.0, 956.0}}
+        Other, 0x1028f7540, {{0.0, 0.0}, {440.0, 956.0}}
+          Other, 0x1028fa5c0, {{0.0, 0.0}, {440.0, 956.0}}
+            Other, 0x1028f5340, {{0.0, 0.0}, {440.0, 956.0}}
+              Other, 0x1028f6d00, {{0.0, 0.0}, {440.0, 956.0}}
+                Other, 0x102861e90, {{0.0, 0.0}, {440.0, 956.0}}
+                Other, 0x1028f5b20, {{0.0, 0.0}, {440.0, 956.0}}
+                ScrollView, 0x1028f5700, {{0.0, 0.0}, {440.0, 956.0}}
+                  Other, 0x10285db10, {{0.0, 0.0}, {440.0, 956.0}}
+                    Other, 0x102856380, {{0.0, 0.0}, {440.0, 956.0}}
+                      Other, 0x102863990, {{0.0, 0.0}, {440.0, 126.0}}
+                      Image, 0x1028f4ec0, {{16.0, 68.0}, {368.0, 52.0}}, identifier: 'logo', label: 'Natação Criativa Treinos'
+                      Button, 0x10285df30, {{380.0, 70.0}, {48.0, 48.0}}, identifier: 'notification_button', label: 'Notificações'
+                        Image, 0x102860cb0, {{393.0, 83.0}, {22.0, 22.0}}, label: 'Notificações'
+                        Other, 0x1028610d0, {{387.0, 63.0}, {48.0, 48.0}}
+                      Other, 0x102852670, {{0.0, 0.0}, {440.0, 956.0}}
+                      Other, 0x102862910, {{0.0, 126.0}, {440.0, 723.0}}
+                      Other, 0x1028fc510, {{0.0, 126.0}, {440.0, 723.0}}
+                        Other, 0x1028fc630, {{0.0, 126.0}, {440.0, 723.0}}
+                        StaticText, 0x1028fc750, {{16.0, 138.0}, {408.0, 24.0}}, label: 'Outubro 2026'
+                        Other, 0x1028fc870, {{16.0, 166.0}, {408.0, 80.0}}
+                          Button, 0x1028fc990, {{-146.0, 166.0}, {48.0, 80.0}}, identifier: 'calendar_day_2'
+                          Button, 0x1028fcab0, {{-92.0, 166.0}, {48.0, 80.0}}, identifier: 'calendar_day_3'
+                          Other, 0x1028fcbd0, {{16.0, 166.0}, {408.0, 80.0}}, identifier: 'calendario'
+                          Button, 0x1028fccf0, {{0.0, 166.0}, {10.0, 80.0}}, identifier: 'calendar_day_4'
+                            Other, 0x1028fce10, {{0.0, 166.0}, {10.0, 80.0}}
+                          Button, 0x1028fcf30, {{16.0, 166.0}, {48.0, 80.0}}, identifier: 'calendar_day_5', label: 'SEG, 5'
+                            Other, 0x1028fd050, {{16.0, 166.0}, {48.0, 80.0}}
+                              StaticText, 0x1028fd170, {{27.0, 178.0}, {26.0, 24.0}}, label: 'SEG'
+                              StaticText, 0x1028fd290, {{34.0, 204.0}, {12.3, 24.0}}, label: '5'
+                          Button, 0x1028fd3b0, {{70.0, 166.0}, {48.0, 80.0}}, identifier: 'calendar_day_6', label: 'TER, 6'
+                            Other, 0x1028fd4d0, {{70.0, 166.0}, {48.0, 80.0}}
+                              StaticText, 0x1028fd5f0, {{81.7, 178.0}, {25.0, 24.0}}, label: 'TER'
+                              StaticText, 0x1028fd710, {{88.0, 204.0}, {12.7, 24.0}}, label: '6'
+                          Button, 0x1028fd830, {{124.0, 166.0}, {48.0, 80.0}}, identifier: 'calendar_day_7', label: 'QUA, 7'
+                            Other, 0x1028fd950, {{124.0, 166.0}, {48.0, 80.0}}
+                              StaticText, 0x1028fda70, {{134.0, 178.0}, {28.3, 24.0}}, label: 'QUA'
+                              StaticText, 0x1028fdb90, {{142.7, 204.0}, {11.3, 24.0}}, label: '7'
+                          Button, 0x1028fdcb0, {{178.0, 166.0}, {48.0, 80.0}}, identifier: 'calendar_day_8', label: 'QUI, 8'
+                            Other, 0x1028fddd0, {{178.0, 166.0}, {48.0, 80.0}}
+                              StaticText, 0x1028fdef0, {{190.0, 176.0}, {24.0, 24.0}}, label: 'QUI'
+                              StaticText, 0x1028fe010, {{195.7, 202.0}, {13.0, 24.0}}, label: '8'
+                              Other, 0x1028fe130, {{178.0, 209.0}, {48.0, 48.0}}
+                          Button, 0x1028fe250, {{232.0, 166.0}, {48.0, 80.0}}, identifier: 'calendar_day_9', label: 'SEX, 9'
+                            Other, 0x1028fe370, {{232.0, 166.0}, {48.0, 80.0}}
+                              StaticText, 0x1028fe490, {{243.3, 178.0}, {25.3, 24.0}}, label: 'SEX'
+                              StaticText, 0x1028fe5b0, {{249.7, 204.0}, {12.7, 24.0}}, label: '9'
+                          Button, 0x1028fe6d0, {{286.0, 166.0}, {48.0, 80.0}}, identifier: 'calendar_day_10', label: 'SÁB, 10'
+                            Other, 0x1028fe7f0, {{286.0, 166.0}, {48.0, 80.0}}
+                              StaticText, 0x1028fe910, {{297.0, 178.0}, {26.3, 24.0}}, label: 'SÁB'
+                              StaticText, 0x1028fea30, {{299.0, 204.0}, {22.3, 24.0}}, label: '10'
+                          Button, 0x1028feb50, {{340.0, 166.0}, {48.0, 80.0}}, identifier: 'calendar_day_11', label: 'DOM, 11'
+                            Other, 0x1028fec70, {{340.0, 166.0}, {48.0, 80.0}}
+                              StaticText, 0x1028fed90, {{348.7, 178.0}, {30.7, 24.0}}, label: 'DOM'
+                              StaticText, 0x1028feeb0, {{354.3, 204.0}, {19.3, 24.0}}, label: '11'
+                          Button, 0x1028fefd0, {{394.0, 166.0}, {46.0, 80.0}}, identifier: 'calendar_day_12', label: 'SEG, 12'
+                            Other, 0x1028ff0f0, {{394.0, 166.0}, {46.0, 80.0}}
+                              StaticText, 0x1028ff210, {{405.0, 178.0}, {19.0, 24.0}}, label: 'SEG'
+                              StaticText, 0x1028ff330, {{407.3, 204.0}, {16.7, 24.0}}, label: '12'
+                          Button, 0x1028ff450, {{448.0, 166.0}, {48.0, 80.0}}, identifier: 'calendar_day_13'
+                          Button, 0x1028ff570, {{502.0, 166.0}, {48.0, 80.0}}, identifier: 'calendar_day_14'
+                          Button, 0x1028ff690, {{556.0, 166.0}, {48.0, 80.0}}, identifier: 'calendar_day_15'
+                        Other, 0x1028ff7b0, {{16.0, 260.0}, {408.0, 242.0}}, identifier: 'plano_card'
+                        Other, 0x1028ff8d0, {{34.0, 278.0}, {48.0, 48.0}}
+                        Other, 0x1028ff9f0, {{34.0, 278.0}, {372.0, 206.0}}
+                        StaticText, 0x1028ffb10, {{94.0, 278.0}, {123.7, 24.0}}, label: 'PLANO DE TREINO'
+                        StaticText, 0x1028ffc30, {{94.0, 302.0}, {285.7, 24.0}}, label: '7 semanas · 3 por semana'
+                        Other, 0x1028ffd50, {{34.0, 340.0}, {372.0, 8.0}}, value: 0%
+                        StaticText, 0x1028ffe70, {{34.0, 354.0}, {139.7, 24.0}}, label: '0 de 21 treinos feitos'
+                        StaticText, 0x1028f5f40, {{34.0, 382.0}, {372.0, 40.0}}, label: 'Próximo: Semana 1 · Treino 1 · Resistência · 2.300m'
+                        Button, 0x1028f6060, {{34.0, 436.0}, {372.0, 48.0}}, identifier: 'plano_card_botao', label: 'Ver meu plano'
+                          StaticText, 0x1028f6180, {{162.0, 450.0}, {116.0, 20.0}}, label: 'Ver meu plano'
+                        Button, 0x1028f62a0, {{20.0, 518.0}, {198.0, 48.0}}, identifier: 'modo_piscina', label: 'Piscina'
+                          StaticText, 0x1028f63c0, {{92.0, 530.0}, {54.3, 24.0}}, label: 'Piscina'
+                        Other, 0x1028f64e0, {{20.0, 518.0}, {400.0, 48.0}}
+                        Button, 0x1028db900, {{222.0, 518.0}, {198.0, 48.0}}, identifier: 'modo_aguas_abertas', label: 'Águas abertas'
+                          StaticText, 0x1028dba20, {{267.0, 530.0}, {108.0, 24.0}}, label: 'Águas abertas'
+                        Button, 0x1028dbb40, {{16.0, 578.0}, {408.0, 68.0}}, identifier: 'training_level_toggle', label: 'SEU NÍVEL, Trocar o nível, Pré-condicionamento'
+                          Other, 0x1028dbc60, {{12.0, 588.0}, {42.0, 48.0}}
+                          StaticText, 0x1028dbd80, {{54.0, 588.0}, {60.7, 24.0}}, label: 'SEU NÍVEL'
+                          Image, 0x1028dbea0, {{386.0, 600.0}, {24.0, 24.0}}, label: 'Trocar o nível'
+                          StaticText, 0x1028dbfc0, {{54.0, 612.0}, {172.3, 24.0}}, label: 'Pré-condicionamento'
+                        Button, 0x1028dc0e0, {{16.0, 660.0}, {408.0, 189.0}}, identifier: 'hero_workout_card', label: 'Nadador em treino de alta performance'
+                          Other, 0x1028dc200, {{46.0, 846.3}, {150.7, 2.7}}
+                          Image, 0x1028dc320, {{16.0, 660.0}, {408.0, 189.0}}, label: 'Nadador em treino de alta performance'
+                          Other, 0x1028dc440, {{16.0, 660.0}, {408.0, 189.0}}
+                        Image, 0x1028dc560, {{40.0, 1008.0}, {20.0, 20.0}}, label: 'Distância'
+                        StaticText, 0x1028dc680, {{76.0, 1006.0}, {67.3, 24.0}}, label: 'DISTÂNCIA'
+                        Image, 0x1028dc7a0, {{251.0, 1008.0}, {20.0, 20.0}}, label: 'Tempo Estimado'
+                        StaticText, 0x1028dc8c0, {{287.0, 1006.0}, {43.3, 24.0}}, label: 'TEMPO'
+                        StaticText, 0x1028dc9e0, {{32.0, 1050.0}, {60.0, 35.7}}, label: '760'
+                        StaticText, 0x1028dcb00, {{243.0, 1050.0}, {36.3, 35.7}}, label: '31'
+                        StaticText, 0x1028dcc20, {{94.0, 1058.7}, {15.7, 24.0}}, label: 'm'
+                        StaticText, 0x1028dcd40, {{281.3, 1058.7}, {31.3, 24.0}}, label: 'min'
+                        Button, 0x1028dce60, {{16.0, 1117.7}, {408.0, 58.0}}, identifier: 'start_workout_cta'
+                        StaticText, 0x1028dcf80, {{34.0, 1229.7}, {251.7, 24.0}}, label: 'SUA SEMANA'
+                        Button, 0x1028dd1f0, {{285.7, 1221.7}, {120.3, 40.0}}
+                        StaticText, 0x1028dd310, {{40.7, 1309.7}, {22.7, 24.0}}, label: 'SEX'
+                        StaticText, 0x1028dd430, {{96.3, 1309.7}, {23.3, 24.0}}, label: 'SÁB'
+                        StaticText, 0x1028dd550, {{150.3, 1309.7}, {27.7, 24.0}}, label: 'DOM'
+                        StaticText, 0x1028dd670, {{208.3, 1309.7}, {23.3, 24.0}}, label: 'SEG'
+                        StaticText, 0x1028dd790, {{265.0, 1309.7}, {22.3, 24.0}}, label: 'TER'
+                        StaticText, 0x1028dd8b0, {{319.3, 1309.7}, {25.7, 24.0}}, label: 'QUA'
+                        StaticText, 0x1028dd9d0, {{377.0, 1309.7}, {22.3, 24.0}}, label: 'QUI'
+                        StaticText, 0x1028ddaf0, {{64.0, 1348.7}, {314.3, 20.0}}, label: 'Nade esta semana para começar sua série.'
+                        StaticText, 0x1028ddc10, {{34.0, 1421.7}, {372.0, 24.0}}, label: 'ÚLTIMAS ATIVIDADES'
+                        StaticText, 0x1028ddd30, {{34.0, 1453.7}, {372.0, 40.0}}, label: 'Nenhum treino registrado ainda. Conclua o seu primeiro treino e ele aparece aqui.'
+                      Other, 0x1028de050, {{0.0, 849.0}, {440.0, 107.0}}
+                      Button, 0x1028de170, {{4.0, 857.0}, {86.7, 57.0}}, identifier: 'nav_tab_home', label: 'Home, Home'
+                        Other, 0x1028de290, {{23.3, 854.0}, {48.0, 48.0}}
+                          Image, 0x1028de3b0, {{36.3, 867.0}, {22.0, 22.0}}, label: 'Home'
+                        StaticText, 0x1028de4d0, {{30.3, 895.0}, {34.3, 13.0}}, label: 'Home'
+                      Button, 0x1028de5f0, {{90.7, 857.0}, {86.3, 57.0}}, identifier: 'nav_tab_plan', label: 'Plano, Plano'
+                        Other, 0x1028de710, {{110.0, 854.0}, {48.0, 48.0}}
+                          Image, 0x1028de830, {{123.0, 867.0}, {22.0, 22.0}}, label: 'Plano'
+                        StaticText, 0x1028de950, {{117.7, 895.0}, {32.3, 13.0}}, label: 'Plano'
+                      Button, 0x1028dea70, {{177.0, 857.0}, {86.3, 57.0}}, identifier: 'nav_tab_workouts', label: 'Treinos, Treinos'
+                        Other, 0x1028deb90, {{196.3, 854.0}, {48.0, 48.0}}
+                          Image, 0x1028decb0, {{209.3, 867.0}, {22.0, 22.0}}, label: 'Treinos'
+                        StaticText, 0x1028dedd0, {{199.0, 895.0}, {42.7, 13.0}}, label: 'Treinos'
+                      Button, 0x1028deef0, {{263.3, 857.0}, {86.3, 57.0}}, identifier: 'nav_tab_my_workouts', label: 'Meus treinos, Meus treinos'
+                        Other, 0x1028df010, {{282.7, 854.0}, {48.0, 41.0}}
+                          Image, 0x1028df130, {{295.7, 867.0}, {22.0, 22.0}}, label: 'Meus treinos'
+                        StaticText, 0x1028df250, {{269.3, 895.0}, {74.7, 13.0}}, label: 'Meus treinos'
+                      Button, 0x1028df370, {{349.7, 857.0}, {86.3, 57.0}}, identifier: 'nav_tab_profile', label: 'Perfil, Perfil'
+                        Other, 0x1028df490, {{369.0, 854.0}, {48.0, 48.0}}
+                          Image, 0x1028df5b0, {{382.0, 867.0}, {22.0, 22.0}}, label: 'Perfil'
+                        StaticText, 0x1028df6d0, {{377.3, 895.0}, {31.3, 13.0}}, label: 'Perfil'
+Path to element:
+ →Application, 0x10284f7d0, pid: 37096, label: 'Natação Criativa'
+Query chain:
+ →Find: Target Application 'com.natacaocriativa.treinos'
+  Output: {
+    Application, 0x1028fc2f0, pid: 37096, label: 'Natação Criativa'
+  }

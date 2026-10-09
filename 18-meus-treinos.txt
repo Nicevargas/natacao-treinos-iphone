@@ -1,0 +1,63 @@
+Attributes: Application, 0x100b97210, pid: 34145, label: 'Natação Criativa'
+Element subtree:
+ →Application, 0x100b97210, pid: 34145, label: 'Natação Criativa'
+    Window (Main), 0x100b5b120, {{0.0, 0.0}, {440.0, 956.0}}
+      Other, 0x100b4fb70, {{0.0, 0.0}, {440.0, 956.0}}
+        Other, 0x100b1e1e0, {{0.0, 0.0}, {440.0, 956.0}}
+          Other, 0x100b57210, {{0.0, 0.0}, {440.0, 956.0}}
+            Other, 0x100b7e0a0, {{0.0, 0.0}, {440.0, 956.0}}
+              Other, 0x100b8d8f0, {{0.0, 0.0}, {440.0, 956.0}}
+                Other, 0x100b8da10, {{0.0, 0.0}, {440.0, 956.0}}
+                Other, 0x100b8db30, {{0.0, 0.0}, {440.0, 956.0}}
+                ScrollView, 0x100b8dc50, {{0.0, 0.0}, {440.0, 956.0}}
+                  Other, 0x100b8dd70, {{0.0, 0.0}, {440.0, 956.0}}
+                    Other, 0x100b8de90, {{0.0, 0.0}, {440.0, 956.0}}
+                      Other, 0x100b8dfb0, {{0.0, 0.0}, {440.0, 126.0}}
+                      Image, 0x100b8e0d0, {{16.0, 68.0}, {368.0, 52.0}}, identifier: 'logo', label: 'Natação Criativa Treinos'
+                      Button, 0x100b8e1f0, {{380.0, 70.0}, {48.0, 48.0}}, identifier: 'notification_button', label: 'Notificações'
+                        Image, 0x100b8e310, {{393.0, 83.0}, {22.0, 22.0}}, label: 'Notificações'
+                        Other, 0x100b8e430, {{387.0, 63.0}, {48.0, 48.0}}
+                      Other, 0x100b8e550, {{0.0, 0.0}, {440.0, 956.0}}
+                      Other, 0x100b8e670, {{0.0, 126.0}, {440.0, 723.0}}
+                      Other, 0x100b8e790, {{0.0, 126.0}, {440.0, 723.0}}
+                        Other, 0x100b8e8b0, {{0.0, 126.0}, {440.0, 723.0}}
+                        StaticText, 0x100b8e9d0, {{16.0, 138.0}, {172.0, 28.7}}, label: 'Meus treinos'
+                        Button, 0x100b8eaf0, {{315.7, 140.3}, {108.3, 48.0}}, identifier: 'botao_novo_treino', label: 'Novo'
+                          StaticText, 0x100b8ec10, {{363.7, 154.3}, {36.3, 20.0}}, label: 'Novo'
+                        StaticText, 0x100b8ed30, {{16.0, 166.7}, {104.3, 24.0}}, label: '0 treinos salvos'
+                        Button, 0x100b8ee50, {{4.0, 190.7}, {330.7, 48.0}}, identifier: 'botao_treino_recebido', label: 'Recebeu um treino? Abrir pelo link ou código'
+                          StaticText, 0x100b8ef70, {{16.0, 204.7}, {306.7, 20.0}}, label: 'Recebeu um treino? Abrir pelo link ou código'
+                        Other, 0x100b8f090, {{16.0, 250.7}, {408.0, 116.0}}
+                        StaticText, 0x100b8f1b0, {{36.0, 270.7}, {225.7, 24.0}}, label: 'Nenhum treino salvo ainda'
+                        StaticText, 0x100b8f2d0, {{36.0, 298.7}, {368.0, 48.0}}, label: 'Crie um treino seu em "Novo treino", ou abra a aba Treinos e salve a sugestão do dia.'
+                      Other, 0x100b8f3f0, {{0.0, 849.0}, {440.0, 107.0}}
+                      Button, 0x100b8f510, {{4.0, 857.0}, {86.7, 57.0}}, identifier: 'nav_tab_home', label: 'Home, Home'
+                        Other, 0x100b8f630, {{23.3, 854.0}, {48.0, 48.0}}
+                          Image, 0x100b8f750, {{36.3, 867.0}, {22.0, 22.0}}, label: 'Home'
+                        StaticText, 0x100b8f870, {{30.7, 895.0}, {33.3, 13.0}}, label: 'Home'
+                      Button, 0x100b8f990, {{90.7, 857.0}, {86.3, 57.0}}, identifier: 'nav_tab_plan', label: 'Plano, Plano'
+                        Other, 0x100b8fab0, {{110.0, 854.0}, {48.0, 48.0}}
+                          Image, 0x100b8fbd0, {{123.0, 867.0}, {22.0, 22.0}}, label: 'Plano'
+                        StaticText, 0x100b8fcf0, {{117.7, 895.0}, {32.3, 13.0}}, label: 'Plano'
+                      Button, 0x100b8fe10, {{177.0, 857.0}, {86.3, 57.0}}, identifier: 'nav_tab_workouts', label: 'Treinos, Treinos'
+                        Other, 0x100b8ff30, {{196.3, 854.0}, {48.0, 48.0}}
+                          Image, 0x100b90050, {{209.3, 867.0}, {22.0, 22.0}}, label: 'Treinos'
+                        StaticText, 0x100b90170, {{199.0, 895.0}, {42.7, 13.0}}, label: 'Treinos'
+                      Button, 0x100b90290, {{263.3, 857.0}, {86.3, 57.0}}, identifier: 'nav_tab_my_workouts', label: 'Meus treinos, Meus treinos'
+                        Other, 0x100b903b0, {{282.7, 854.0}, {48.0, 41.0}}
+                          Image, 0x100b904d0, {{295.7, 867.0}, {22.0, 22.0}}, label: 'Meus treinos'
+                        StaticText, 0x100b905f0, {{267.7, 895.0}, {77.7, 13.0}}, label: 'Meus treinos'
+                      Button, 0x100b90710, {{349.7, 857.0}, {86.3, 57.0}}, identifier: 'nav_tab_profile', label: 'Perfil, Perfil'
+                        Other, 0x100b90830, {{369.0, 854.0}, {48.0, 48.0}}
+                          Image, 0x100b90950, {{382.0, 867.0}, {22.0, 22.0}}, label: 'Perfil'
+                        StaticText, 0x1028d0a90, {{377.3, 895.0}, {31.3, 13.0}}, label: 'Perfil'
+    Window, 0x10288dbd0, {{0.0, 0.0}, {440.0, 956.0}}
+      Other, 0x1028d4b10, {{0.0, 0.0}, {440.0, 956.0}}
+        Other, 0x10288fc60, {{0.0, 0.0}, {440.0, 956.0}}
+Path to element:
+ →Application, 0x100b97210, pid: 34145, label: 'Natação Criativa'
+Query chain:
+ →Find: Target Application 'com.natacaocriativa.treinos'
+  Output: {
+    Application, 0x100b6df90, pid: 34145, label: 'Natação Criativa'
+  }

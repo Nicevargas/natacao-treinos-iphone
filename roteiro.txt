@@ -1,0 +1,6 @@
+Test Case '-[iosAppUITests.PercorrerTelas testPercorrerTelas]' started.
+Test Case '-[iosAppUITests.PercorrerTelas testPercorrerTelas]' passed (120.771 seconds).
+	 Executed 1 test, with 0 failures (0 unexpected) in 120.771 (120.773) seconds
+	 Executed 1 test, with 0 failures (0 unexpected) in 120.771 (120.774) seconds
+	 Executed 1 test, with 0 failures (0 unexpected) in 120.771 (120.775) seconds
+** TEST SUCCEEDED **

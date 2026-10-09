@@ -1,0 +1,181 @@
+Attributes: Application, 0x100b4cac0, pid: 34145, label: 'Natação Criativa'
+Element subtree:
+ →Application, 0x100b4cac0, pid: 34145, label: 'Natação Criativa'
+    Window (Main), 0x100b57bb0, {{0.0, 0.0}, {440.0, 956.0}}
+      Other, 0x100b4c2a0, {{0.0, 0.0}, {440.0, 956.0}}
+        Other, 0x100b4dc00, {{0.0, 0.0}, {440.0, 956.0}}
+          Other, 0x100b583b0, {{0.0, 0.0}, {440.0, 956.0}}
+            Other, 0x100b69da0, {{0.0, 0.0}, {440.0, 956.0}}
+              Other, 0x100b8a610, {{0.0, 0.0}, {440.0, 956.0}}
+                Other, 0x100b4e3c0, {{0.0, 0.0}, {440.0, 956.0}}
+                Other, 0x100b5a4a0, {{0.0, 0.0}, {440.0, 956.0}}
+                ScrollView, 0x100b57210, {{0.0, 0.0}, {440.0, 956.0}}
+                  Other, 0x100b5a8c0, {{0.0, 0.0}, {440.0, 956.0}}
+                    Other, 0x100b5b120, {{0.0, 0.0}, {440.0, 956.0}}
+                      Other, 0x100b4c6c0, {{0.0, 0.0}, {440.0, 126.0}}
+                      Image, 0x100b478f0, {{16.0, 68.0}, {368.0, 52.0}}, identifier: 'logo', label: 'Natação Criativa Treinos'
+                      Button, 0x100b89640, {{380.0, 70.0}, {48.0, 48.0}}, identifier: 'notification_button', label: 'Notificações'
+                        Image, 0x100b4fb70, {{393.0, 83.0}, {22.0, 22.0}}, label: 'Notificações'
+                        Other, 0x100b68240, {{387.0, 63.0}, {48.0, 48.0}}
+                      Other, 0x100b1e1e0, {{0.0, 0.0}, {440.0, 956.0}}
+                      Other, 0x100b5e070, {{0.0, 126.0}, {440.0, 723.0}}
+                      Other, 0x10284a180, {{0.0, 126.0}, {440.0, 723.0}}
+                      StaticText, 0x10284aa80, {{16.0, 142.0}, {372.0, 16.0}}, label: 'Plano de Treino'
+                      Button, 0x102842840, {{388.0, 130.0}, {48.0, 48.0}}, identifier: 'plano_excluir', label: 'Excluir plano'
+                        Image, 0x1028867e0, {{400.0, 142.0}, {24.0, 16.0}}, label: 'Excluir plano'
+                      Other, 0x102833a80, {{0.0, 182.0}, {440.0, 667.0}}
+                        StaticText, 0x102887c80, {{32.0, -403.3}, {221.7, 24.0}}, label: '7 SEMANAS · 3 TREINOS/SEMANA'
+                        StaticText, 0x102889120, {{32.0, -375.3}, {176.7, 24.0}}, label: 'Condicionamento'
+                        StaticText, 0x1028423b0, {{32.0, -349.3}, {152.7, 24.0}}, label: 'Melhorar: Resistência'
+                        StaticText, 0x102886c00, {{54.3, -259.3}, {5.3, 24.0}}, label: '1'
+                        StaticText, 0x102887020, {{108.0, -259.3}, {6.7, 24.0}}, label: '2'
+                        StaticText, 0x102836ad0, {{162.0, -259.3}, {7.0, 24.0}}, label: '3'
+                        StaticText, 0x10284da00, {{216.3, -259.3}, {7.0, 24.0}}, label: '4'
+                        StaticText, 0x10284db20, {{270.7, -259.3}, {7.0, 24.0}}, label: '5'
+                        StaticText, 0x10284dc40, {{325.0, -259.3}, {7.0, 24.0}}, label: '6'
+                        StaticText, 0x10284dd60, {{379.7, -259.3}, {6.3, 24.0}}, label: '7'
+                        Other, 0x10284de80, {{32.0, -231.3}, {376.0, 28.0}}, value: 0%
+                        StaticText, 0x10284dfa0, {{32.0, -207.3}, {142.7, 24.0}}, label: '0 de 21 treinos feitos'
+                        StaticText, 0x10284e0c0, {{64.0, -141.3}, {346.0, 38.0}}, label: 'Quer outro treino em algum dia? Toque em Trocar e escolha do Método NC ou de Meus treinos.'
+                        StaticText, 0x10284e1e0, {{32.0, -61.3}, {76.0, 24.0}}, label: 'SEMANA 1'
+                        StaticText, 0x10284e300, {{124.0, -61.3}, {31.0, 24.0}}, label: 'Base'
+                        StaticText, 0x10284e420, {{357.7, -61.3}, {50.3, 24.0}}, label: '6.600m'
+                        Button, 0x10284e540, {{16.0, -29.3}, {408.0, 80.0}}, identifier: 'plano_treino_1_1'
+                        Button, 0x10284e660, {{343.0, -9.3}, {65.0, 40.0}}, identifier: 'plano_trocar_1_1'
+                        Button, 0x10284e780, {{16.0, 51.7}, {408.0, 80.0}}, identifier: 'plano_treino_1_2'
+                        Button, 0x10284e8a0, {{343.0, 71.7}, {65.0, 40.0}}, identifier: 'plano_trocar_1_2'
+                        Other, 0x10284e9c0, {{0.0, 182.0}, {440.0, 667.0}}
+                        Button, 0x10284eae0, {{16.0, 158.0}, {408.0, 54.7}}, identifier: 'plano_treino_1_3', label: 'Resistência'
+                          Other, 0x10284ec00, {{24.0, 158.0}, {48.0, 38.7}}
+                          Other, 0x10284ed20, {{76.0, 182.0}, {89.3, 18.7}}
+                            StaticText, 0x10284ee40, {{84.0, 182.0}, {73.3, 16.7}}, label: 'Resistência'
+                        Other, 0x10284ef60, {{16.0, 182.0}, {408.0, 34.7}}
+                        Button, 0x10284f080, {{343.0, 158.0}, {65.0, 38.7}}, identifier: 'plano_trocar_1_3', label: 'Trocar'
+                          StaticText, 0x10284f1a0, {{355.0, 182.0}, {41.0, 0.7}}, label: 'Trocar'
+                        Other, 0x1029c0ad0, {{16.0, 228.7}, {408.0, 294.0}}
+                        StaticText, 0x102961750, {{32.0, 244.7}, {77.7, 24.0}}, label: 'SEMANA 2'
+                        Other, 0x10293d080, {{117.7, 242.7}, {89.3, 28.0}}
+                        StaticText, 0x10284f410, {{125.7, 244.7}, {73.3, 24.0}}, label: 'Construção'
+                        StaticText, 0x10284f530, {{359.0, 244.7}, {49.0, 24.0}}, label: '6.740m'
+                        Button, 0x10284f650, {{16.0, 276.7}, {408.0, 80.0}}, identifier: 'plano_treino_2_1', label: 'Por fazer, Treino 1 · 2.400m, Resistência'
+                          Other, 0x10284f770, {{24.0, 292.7}, {48.0, 48.0}}
+                            Image, 0x10284f890, {{39.0, 307.7}, {18.0, 18.0}}, label: 'Por fazer'
+                          StaticText, 0x10284f9b0, {{76.0, 288.7}, {136.7, 24.0}}, label: 'Treino 1 · 2.400m'
+                          Other, 0x10284fad0, {{76.0, 316.7}, {89.3, 28.0}}
+                            StaticText, 0x10284fbf0, {{84.0, 318.7}, {73.3, 24.0}}, label: 'Resistência'
+                        Button, 0x10284fd10, {{343.0, 292.7}, {65.0, 48.0}}, identifier: 'plano_trocar_2_1', label: 'Trocar'
+                          StaticText, 0x10284fe30, {{355.0, 306.7}, {41.0, 20.0}}, label: 'Trocar'
+                        Button, 0x10284ff50, {{16.0, 357.7}, {408.0, 80.0}}, identifier: 'plano_treino_2_2', label: 'Por fazer, Treino 2 · 1.940m, Velocidade'
+                          Other, 0x102850070, {{24.0, 373.7}, {48.0, 48.0}}
+                            Image, 0x102850190, {{39.0, 388.7}, {18.0, 18.0}}, label: 'Por fazer'
+                          StaticText, 0x1028502b0, {{76.0, 369.7}, {136.0, 24.0}}, label: 'Treino 2 · 1.940m'
+                          Other, 0x100b5e190, {{76.0, 397.7}, {86.3, 28.0}}
+                            StaticText, 0x100b5e2b0, {{84.0, 399.7}, {70.3, 24.0}}, label: 'Velocidade'
+                        Button, 0x100b5e3d0, {{343.0, 373.7}, {65.0, 48.0}}, identifier: 'plano_trocar_2_2', label: 'Trocar'
+                          StaticText, 0x1028503d0, {{355.0, 387.7}, {41.0, 20.0}}, label: 'Trocar'
+                        Button, 0x100b5e4f0, {{16.0, 438.7}, {408.0, 80.0}}, identifier: 'plano_treino_2_3', label: 'Por fazer, Treino 3 · 2.400m, Resistência'
+                          Other, 0x100b5e610, {{24.0, 454.7}, {48.0, 48.0}}
+                            Image, 0x100b5e730, {{39.0, 469.7}, {18.0, 18.0}}, label: 'Por fazer'
+                          StaticText, 0x100b5e850, {{76.0, 450.7}, {139.0, 24.0}}, label: 'Treino 3 · 2.400m'
+                          Other, 0x100b5e970, {{76.0, 478.7}, {89.3, 28.0}}
+                            StaticText, 0x100b5ea90, {{84.0, 480.7}, {73.3, 24.0}}, label: 'Resistência'
+                        Button, 0x100b5ebb0, {{343.0, 454.7}, {65.0, 48.0}}, identifier: 'plano_trocar_2_3', label: 'Trocar'
+                          StaticText, 0x100b5ecd0, {{355.0, 468.7}, {41.0, 20.0}}, label: 'Trocar'
+                        Other, 0x100b5edf0, {{16.0, 534.7}, {408.0, 294.0}}
+                        StaticText, 0x100b5ef10, {{32.0, 550.7}, {78.0, 24.0}}, label: 'SEMANA 3'
+                        Other, 0x100b5f030, {{118.0, 548.7}, {43.7, 28.0}}
+                        StaticText, 0x100b5f150, {{126.0, 550.7}, {27.7, 24.0}}, label: 'Pico'
+                        StaticText, 0x100b5f270, {{357.7, 550.7}, {50.3, 24.0}}, label: '6.800m'
+                        Button, 0x100b5f390, {{16.0, 582.7}, {408.0, 80.0}}, identifier: 'plano_treino_3_1', label: 'Por fazer, Treino 1 · 2.400m, Resistência'
+                          Other, 0x100b5f4b0, {{24.0, 598.7}, {48.0, 48.0}}
+                            Image, 0x100b5f5d0, {{39.0, 613.7}, {18.0, 18.0}}, label: 'Por fazer'
+                          StaticText, 0x100b5f6f0, {{76.0, 594.7}, {136.7, 24.0}}, label: 'Treino 1 · 2.400m'
+                          Other, 0x100b5f810, {{76.0, 622.7}, {89.3, 28.0}}
+                            StaticText, 0x100b5f930, {{84.0, 624.7}, {73.3, 24.0}}, label: 'Resistência'
+                        Button, 0x100b5fa50, {{343.0, 598.7}, {65.0, 48.0}}, identifier: 'plano_trocar_3_1', label: 'Trocar'
+                          StaticText, 0x100b5fb70, {{355.0, 612.7}, {41.0, 20.0}}, label: 'Trocar'
+                        Button, 0x100b5fc90, {{16.0, 663.7}, {408.0, 80.0}}, identifier: 'plano_treino_3_2', label: 'Por fazer, Treino 2 · 2.000m, Estilos'
+                          Other, 0x100b5fdb0, {{24.0, 679.7}, {48.0, 48.0}}
+                            Image, 0x100b5fed0, {{39.0, 694.7}, {18.0, 18.0}}, label: 'Por fazer'
+                          StaticText, 0x100b5fff0, {{76.0, 675.7}, {138.3, 24.0}}, label: 'Treino 2 · 2.000m'
+                          Other, 0x100b60110, {{76.0, 703.7}, {59.0, 28.0}}
+                            StaticText, 0x100b60230, {{84.0, 705.7}, {43.0, 24.0}}, label: 'Estilos'
+                        Button, 0x100b60570, {{343.0, 679.7}, {65.0, 48.0}}, identifier: 'plano_trocar_3_2', label: 'Trocar'
+                          StaticText, 0x100b60690, {{355.0, 693.7}, {41.0, 20.0}}, label: 'Trocar'
+                        Button, 0x100b607b0, {{16.0, 744.7}, {408.0, 80.0}}, identifier: 'plano_treino_3_3', label: 'Por fazer, Treino 3 · 2.400m, Resistência'
+                          Other, 0x100b608d0, {{24.0, 760.7}, {48.0, 48.0}}
+                            Image, 0x100b609f0, {{39.0, 775.7}, {18.0, 18.0}}, label: 'Por fazer'
+                          StaticText, 0x100b60b10, {{76.0, 756.7}, {139.0, 24.0}}, label: 'Treino 3 · 2.400m'
+                          Other, 0x100b60c30, {{76.0, 784.7}, {89.3, 28.0}}
+                            StaticText, 0x100b60d50, {{84.0, 786.7}, {73.3, 24.0}}, label: 'Resistência'
+                        Button, 0x100b60e70, {{343.0, 760.7}, {65.0, 48.0}}, identifier: 'plano_trocar_3_3', label: 'Trocar'
+                          StaticText, 0x100b60f90, {{355.0, 774.7}, {41.0, 20.0}}, label: 'Trocar'
+                        Other, 0x100b610b0, {{16.0, 840.7}, {408.0, 8.3}}
+                        StaticText, 0x100b611d0, {{32.0, 856.7}, {78.3, 24.0}}, label: 'SEMANA 4'
+                        StaticText, 0x102941450, {{126.3, 856.7}, {80.0, 24.0}}, label: 'Semana leve'
+                        StaticText, 0x102961a90, {{358.0, 856.7}, {50.0, 24.0}}, label: '5.000m'
+                        Button, 0x1029605f0, {{16.0, 888.7}, {408.0, 80.0}}, identifier: 'plano_treino_4_1'
+                        Button, 0x1029613b0, {{343.0, 908.7}, {65.0, 40.0}}, identifier: 'plano_trocar_4_1'
+                        Button, 0x102942920, {{16.0, 969.7}, {408.0, 80.0}}, identifier: 'plano_treino_4_2'
+                        Button, 0x102943350, {{343.0, 989.7}, {65.0, 40.0}}, identifier: 'plano_trocar_4_2'
+                        Button, 0x102942fe0, {{16.0, 1050.7}, {408.0, 80.0}}, identifier: 'plano_treino_4_3'
+                        Button, 0x102941e90, {{343.0, 1070.7}, {65.0, 40.0}}, identifier: 'plano_trocar_4_3'
+                        StaticText, 0x1029425b0, {{32.0, 1162.7}, {78.0, 24.0}}, label: 'SEMANA 5'
+                        StaticText, 0x102941b40, {{126.0, 1162.7}, {31.0, 24.0}}, label: 'Base'
+                        StaticText, 0x102940db0, {{358.7, 1162.7}, {49.3, 24.0}}, label: '6.700m'
+                        Button, 0x1029417e0, {{16.0, 1194.7}, {408.0, 80.0}}, identifier: 'plano_treino_5_1'
+                        Button, 0x102940700, {{343.0, 1214.7}, {65.0, 40.0}}, identifier: 'plano_trocar_5_1'
+                        Button, 0x102941100, {{16.0, 1275.7}, {408.0, 80.0}}, identifier: 'plano_treino_5_2'
+                        Button, 0x10293f5e0, {{343.0, 1295.7}, {65.0, 40.0}}, identifier: 'plano_trocar_5_2'
+                        Button, 0x102940030, {{16.0, 1356.7}, {408.0, 80.0}}, identifier: 'plano_treino_5_3'
+                        Button, 0x10293fcc0, {{343.0, 1376.7}, {65.0, 40.0}}, identifier: 'plano_trocar_5_3'
+                        StaticText, 0x102940380, {{32.0, 1468.7}, {78.3, 24.0}}, label: 'SEMANA 6'
+                        StaticText, 0x10293f930, {{126.3, 1468.7}, {73.3, 24.0}}, label: 'Construção'
+                        StaticText, 0x10293f280, {{357.7, 1468.7}, {50.3, 24.0}}, label: '6.900m'
+                        Button, 0x10284f2c0, {{16.0, 1500.7}, {408.0, 80.0}}, identifier: 'plano_treino_6_1'
+                        Button, 0x102850860, {{343.0, 1520.7}, {65.0, 40.0}}, identifier: 'plano_trocar_6_1'
+                        Button, 0x102850980, {{16.0, 1581.7}, {408.0, 80.0}}, identifier: 'plano_treino_6_2'
+                        Button, 0x102850aa0, {{343.0, 1601.7}, {65.0, 40.0}}, identifier: 'plano_trocar_6_2'
+                        Button, 0x102850bc0, {{16.0, 1662.7}, {408.0, 80.0}}, identifier: 'plano_treino_6_3'
+                        Button, 0x10293ef20, {{343.0, 1682.7}, {65.0, 40.0}}, identifier: 'plano_trocar_6_3'
+                        StaticText, 0x10293ebc0, {{32.0, 1774.7}, {77.0, 24.0}}, label: 'SEMANA 7'
+                        StaticText, 0x10293dac0, {{125.0, 1774.7}, {80.0, 24.0}}, label: 'Semana leve'
+                        StaticText, 0x10293d740, {{358.7, 1774.7}, {49.3, 24.0}}, label: '4.675m'
+                        Button, 0x102947190, {{16.0, 1806.7}, {408.0, 80.0}}, identifier: 'plano_treino_7_1'
+                        Button, 0x1029455c0, {{343.0, 1826.7}, {65.0, 40.0}}, identifier: 'plano_trocar_7_1'
+                        Button, 0x102946030, {{16.0, 1887.7}, {408.0, 80.0}}, identifier: 'plano_treino_7_2'
+                        Button, 0x1029463a0, {{343.0, 1907.7}, {65.0, 40.0}}, identifier: 'plano_trocar_7_2'
+                        Button, 0x102946e10, {{16.0, 1968.7}, {408.0, 80.0}}, identifier: 'plano_treino_7_3'
+                        Button, 0x102946aa0, {{343.0, 1988.7}, {65.0, 40.0}}, identifier: 'plano_trocar_7_3'
+                        Button, 0x102947860, {{16.0, 2068.7}, {408.0, 50.0}}, identifier: 'plano_novo'
+                      Other, 0x102947bb0, {{0.0, 849.0}, {440.0, 107.0}}
+                      Button, 0x1029482b0, {{4.0, 857.0}, {86.7, 57.0}}, identifier: 'nav_tab_home', label: 'Home, Home'
+                        Other, 0x102947500, {{23.3, 854.0}, {48.0, 48.0}}
+                          Image, 0x1029493a0, {{36.3, 867.0}, {22.0, 22.0}}, label: 'Home'
+                        StaticText, 0x102947f30, {{30.7, 895.0}, {33.3, 13.0}}, label: 'Home'
+                      Button, 0x102948ce0, {{90.7, 857.0}, {86.3, 57.0}}, identifier: 'nav_tab_plan', label: 'Plano, Plano'
+                        Other, 0x102948970, {{110.0, 854.0}, {48.0, 48.0}}
+                          Image, 0x102949040, {{123.0, 867.0}, {22.0, 22.0}}, label: 'Plano'
+                        StaticText, 0x102949a60, {{117.0, 895.0}, {33.7, 13.0}}, label: 'Plano'
+                      Button, 0x102948600, {{177.0, 857.0}, {86.3, 57.0}}, identifier: 'nav_tab_workouts', label: 'Treinos, Treinos'
+                        Other, 0x102949710, {{196.3, 854.0}, {48.0, 48.0}}
+                          Image, 0x102949dd0, {{209.3, 867.0}, {22.0, 22.0}}, label: 'Treinos'
+                        StaticText, 0x10294a170, {{199.0, 895.0}, {42.7, 13.0}}, label: 'Treinos'
+                      Button, 0x10294a4d0, {{263.3, 857.0}, {86.3, 57.0}}, identifier: 'nav_tab_my_workouts', label: 'Meus treinos, Meus treinos'
+                        Other, 0x10294a850, {{282.7, 854.0}, {48.0, 41.0}}
+                          Image, 0x10294abe0, {{295.7, 867.0}, {22.0, 22.0}}, label: 'Meus treinos'
+                        StaticText, 0x10294af80, {{269.3, 895.0}, {74.7, 13.0}}, label: 'Meus treinos'
+                      Button, 0x10294b300, {{349.7, 857.0}, {86.3, 57.0}}, identifier: 'nav_tab_profile', label: 'Perfil, Perfil'
+                        Other, 0x10294b6a0, {{369.0, 854.0}, {48.0, 48.0}}
+                          Image, 0x10294ba00, {{382.0, 867.0}, {22.0, 22.0}}, label: 'Perfil'
+                        StaticText, 0x10294bd80, {{377.3, 895.0}, {31.3, 13.0}}, label: 'Perfil'
+    Window, 0x10294c470, {{0.0, 0.0}, {440.0, 956.0}}
+      Other, 0x10294c810, {{0.0, 0.0}, {440.0, 956.0}}
+        Other, 0x10294cb90, {{0.0, 0.0}, {440.0, 956.0}}
+Path to element:
+ →Application, 0x100b4cac0, pid: 34145, label: 'Natação Criativa'
+Query chain:
+ →Find: Target Application 'com.natacaocriativa.treinos'
+  Output: {
+    Application, 0x100b7e0a0, pid: 34145, label: 'Natação Criativa'
+  }

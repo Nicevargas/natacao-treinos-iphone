@@ -1,0 +1,66 @@
+Attributes: Application, 0x10631d130, pid: 37096, label: 'Natação Criativa'
+Element subtree:
+ →Application, 0x10631d130, pid: 37096, label: 'Natação Criativa'
+    Window (Main), 0x106320480, {{0.0, 0.0}, {440.0, 956.0}}
+      Other, 0x106320840, {{0.0, 0.0}, {440.0, 956.0}}
+        Other, 0x106320960, {{0.0, 0.0}, {440.0, 956.0}}
+          Other, 0x1063205a0, {{0.0, 0.0}, {440.0, 956.0}}
+            Other, 0x1063206c0, {{0.0, 0.0}, {440.0, 956.0}}
+              Other, 0x106320a80, {{0.0, 0.0}, {440.0, 956.0}}
+                Other, 0x106320ba0, {{0.0, 0.0}, {440.0, 956.0}}
+                Other, 0x106320cc0, {{0.0, 0.0}, {440.0, 956.0}}
+                ScrollView, 0x106320de0, {{0.0, 0.0}, {440.0, 956.0}}
+                  Other, 0x106320f00, {{0.0, 0.0}, {440.0, 956.0}}
+                    Other, 0x100bc5dd0, {{0.0, 0.0}, {440.0, 956.0}}
+                      Other, 0x100b4cac0, {{0.0, 62.0}, {440.0, 860.0}}
+                        Other, 0x100b583b0, {{0.0, 62.0}, {440.0, 860.0}}
+                        Button, 0x100bc9c90, {{4.0, 70.0}, {48.0, 48.0}}, identifier: 'parq_fechar', label: 'Fechar sem responder'
+                          Image, 0x100bcb2d0, {{16.0, 82.0}, {24.0, 24.0}}, label: 'Fechar sem responder'
+                        StaticText, 0x100bca410, {{16.0, 118.0}, {114.0, 38.3}}, label: 'PAR-Q'
+                        StaticText, 0x100bcfd00, {{16.0, 156.3}, {336.3, 24.0}}, label: 'Questionário de Prontidão para Atividade Física'
+                        Other, 0x100bd0de0, {{16.0, 196.3}, {408.0, 241.0}}
+                        StaticText, 0x100bd0f00, {{32.0, 212.3}, {376.0, 63.0}}, label: 'Este questionário tem o objetivo de identificar a necessidade de avaliação por um médico antes do início da atividade física.'
+                        StaticText, 0x100bd1140, {{32.0, 285.3}, {376.0, 63.0}}, label: 'Caso você responda SIM a uma ou mais perguntas, converse com seu médico ANTES de aumentar seu nível atual de atividade física.'
+                        StaticText, 0x100bd1380, {{32.0, 358.3}, {376.0, 63.0}}, label: 'Mencione este questionário e as perguntas às quais você respondeu SIM. Por favor, assinale SIM ou NÃO às seguintes perguntas:'
+                        Other, 0x100bd15c0, {{16.0, 449.3}, {408.0, 472.7}}
+                        StaticText, 0x100bd16e0, {{32.0, 465.3}, {376.0, 88.0}}, label: '1) Algum médico já disse que você possui algum problema de coração e que só deveria realizar atividade física supervisionado por profissionais de saúde?'
+                        Button, 0x100bd1950, {{32.0, 559.3}, {88.0, 48.0}}, identifier: 'parq_1_sim', label: 'Sim'
+                          StaticText, 0x100bd1a70, {{80.0, 571.3}, {28.0, 24.0}}, label: 'Sim'
+                        Other, 0x100bd1b90, {{32.0, 559.3}, {194.0, 48.0}}
+                        Button, 0x100bd1cb0, {{136.0, 559.3}, {90.0, 48.0}}, identifier: 'parq_1_nao', label: 'Não'
+                          StaticText, 0x100bd1dd0, {{184.0, 571.3}, {30.0, 24.0}}, label: 'Não'
+                        StaticText, 0x100bd1ef0, {{32.0, 632.3}, {376.0, 44.0}}, label: '2) Você sente dores no peito quando pratica atividade física?'
+                        Button, 0x100bd2010, {{32.0, 682.3}, {88.0, 48.0}}, identifier: 'parq_2_sim', label: 'Sim'
+                          StaticText, 0x100bd2130, {{80.0, 694.3}, {28.0, 24.0}}, label: 'Sim'
+                        Other, 0x100bd2250, {{32.0, 682.3}, {194.0, 48.0}}
+                        Button, 0x100bd2370, {{136.0, 682.3}, {90.0, 48.0}}, identifier: 'parq_2_nao', label: 'Não'
+                          StaticText, 0x100bd2490, {{184.0, 694.3}, {30.0, 24.0}}, label: 'Não'
+                        StaticText, 0x100bd25b0, {{32.0, 755.3}, {376.0, 44.0}}, label: '3) No último mês, você sentiu dores no peito quando praticou atividade física?'
+                        Button, 0x100bd26d0, {{32.0, 805.3}, {88.0, 48.0}}, identifier: 'parq_3_sim', label: 'Sim'
+                          StaticText, 0x100bd27f0, {{80.0, 817.3}, {28.0, 24.0}}, label: 'Sim'
+                        Other, 0x100bd2910, {{32.0, 805.3}, {194.0, 48.0}}
+                        Button, 0x100bd2a30, {{136.0, 805.3}, {90.0, 48.0}}, identifier: 'parq_3_nao', label: 'Não'
+                          StaticText, 0x100bd2b50, {{184.0, 817.3}, {30.0, 24.0}}, label: 'Não'
+                        StaticText, 0x100bd2c70, {{32.0, 878.3}, {376.0, 43.7}}, label: '4) Você apresenta desequilíbrio devido à tontura e/ou perda de consciência?'
+                        Button, 0x100bd2d90, {{32.0, 928.3}, {88.0, 48.0}}, identifier: 'parq_4_sim'
+                        Button, 0x100bd2eb0, {{136.0, 928.3}, {90.0, 48.0}}, identifier: 'parq_4_nao'
+                        StaticText, 0x100bd2fd0, {{32.0, 1001.3}, {376.0, 66.0}}, label: '5) Você possui algum problema ósseo ou articular que poderia ser piorado pela atividade física?'
+                        Button, 0x100bd30f0, {{32.0, 1073.3}, {88.0, 48.0}}, identifier: 'parq_5_sim'
+                        Button, 0x100bd3210, {{136.0, 1073.3}, {90.0, 48.0}}, identifier: 'parq_5_nao'
+                        StaticText, 0x100bd3480, {{32.0, 1146.3}, {376.0, 44.0}}, label: '6) Você toma atualmente algum medicamento para pressão arterial e/ou problema de coração?'
+                        Button, 0x100bd35a0, {{32.0, 1196.3}, {88.0, 48.0}}, identifier: 'parq_6_sim'
+                        Button, 0x100bd36c0, {{136.0, 1196.3}, {90.0, 48.0}}, identifier: 'parq_6_nao'
+                        StaticText, 0x100bd37e0, {{32.0, 1269.3}, {376.0, 44.0}}, label: '7) Sabe de alguma outra razão pela qual você não deve praticar atividade física?'
+                        Button, 0x100bd3900, {{32.0, 1319.3}, {88.0, 48.0}}, identifier: 'parq_7_sim'
+                        Button, 0x100bd3a20, {{136.0, 1319.3}, {90.0, 48.0}}, identifier: 'parq_7_nao'
+                        Button, 0x100bd3b40, {{16.0, 1395.3}, {408.0, 81.0}}, identifier: 'parq_declaracao'
+                        StaticText, 0x100bd3c60, {{16.0, 1492.3}, {124.7, 24.0}}, label: 'Faltam 7 respostas'
+                        Button, 0x100bd3d80, {{16.0, 1524.3}, {408.0, 54.0}}, identifier: 'parq_enviar', Disabled
+                        StaticText, 0x100bd3ea0, {{16.0, 1588.3}, {408.0, 36.0}}, label: 'Suas respostas valem por 12 meses. Se sua saúde mudar antes disso, responda de novo pelo Perfil.'
+Path to element:
+ →Application, 0x10631d130, pid: 37096, label: 'Natação Criativa'
+Query chain:
+ →Find: Target Application 'com.natacaocriativa.treinos'
+  Output: {
+    Application, 0x106360930, pid: 37096, label: 'Natação Criativa'
+  }

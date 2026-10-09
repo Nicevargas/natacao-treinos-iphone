@@ -1,0 +1,46 @@
+Attributes: Application, 0x102926eb0, pid: 34145, label: 'Natação Criativa'
+Element subtree:
+ →Application, 0x102926eb0, pid: 34145, label: 'Natação Criativa'
+    Window (Main), 0x1028442c0, {{0.0, 0.0}, {440.0, 956.0}}
+      Other, 0x102844990, {{0.0, 0.0}, {440.0, 956.0}}
+        Other, 0x102844ab0, {{0.0, 0.0}, {440.0, 956.0}}
+          Other, 0x1028443e0, {{0.0, 0.0}, {440.0, 956.0}}
+            Other, 0x102844500, {{0.0, 0.0}, {440.0, 956.0}}
+              Other, 0x102844620, {{0.0, 0.0}, {440.0, 956.0}}
+                Other, 0x102844bd0, {{0.0, 0.0}, {440.0, 956.0}}
+                Other, 0x102844cf0, {{0.0, 0.0}, {440.0, 956.0}}
+                ScrollView, 0x102844e10, {{0.0, 0.0}, {440.0, 956.0}}
+                  Other, 0x102844f30, {{0.0, 0.0}, {440.0, 956.0}}
+                    Other, 0x102845050, {{0.0, 0.0}, {440.0, 956.0}}
+                      Other, 0x102845170, {{0.0, 62.0}, {440.0, 860.0}}
+                        Other, 0x102845290, {{0.0, 62.0}, {440.0, 860.0}}
+                        Image, 0x1028453b0, {{24.0, 102.0}, {215.0, 120.0}}, label: 'Natação Criativa Treinos'
+                        StaticText, 0x1028454d0, {{24.0, 226.0}, {384.7, 24.0}}, label: 'Entre para ver o treino do dia e os seus treinos salvos.'
+                        Other, 0x1028455f0, {{24.0, 278.0}, {392.0, 52.0}}
+                        Button, 0x102845710, {{28.0, 280.0}, {192.0, 48.0}}, identifier: 'aba_entrar', label: 'Entrar', Disabled
+                          StaticText, 0x102845830, {{100.7, 292.0}, {46.7, 24.0}}, label: 'Entrar'
+                        Button, 0x102845950, {{220.0, 280.0}, {192.0, 48.0}}, identifier: 'aba_cadastro', label: 'Criar conta'
+                          StaticText, 0x102845a70, {{274.3, 292.0}, {83.7, 24.0}}, label: 'Criar conta'
+                        TextView, 0x102845b90, {{24.0, 350.0}, {392.0, 65.3}}, identifier: 'campo_email', label: 'E-mail'
+                          Other, 0x102845cb0, {{24.0, 358.0}, {392.0, 57.3}}
+                          Other, 0x102845dd0, {{40.0, 362.7}, {360.0, 48.0}}
+                          StaticText, 0x102845ef0, {{40.0, 374.7}, {51.0, 24.0}}, label: 'E-mail'
+                        TextView, 0x102846010, {{24.0, 427.3}, {392.0, 65.3}}, identifier: 'campo_senha', label: 'Senha'
+                          Other, 0x102846130, {{24.0, 435.3}, {392.0, 57.3}}
+                          Other, 0x102846250, {{40.0, 440.0}, {324.0, 48.0}}
+                          StaticText, 0x102846370, {{40.0, 452.0}, {49.7, 24.0}}, label: 'Senha'
+                        Button, 0x102846490, {{368.0, 440.0}, {48.0, 48.0}}, label: 'Mostrar senha'
+                          Image, 0x1028465b0, {{380.0, 452.0}, {24.0, 24.0}}, label: 'Mostrar senha'
+                        Button, 0x1028466d0, {{257.7, 492.7}, {170.3, 48.0}}, identifier: 'esqueci_senha', label: 'Esqueci minha senha'
+                          StaticText, 0x1028467f0, {{269.7, 506.7}, {146.3, 20.0}}, label: 'Esqueci minha senha'
+                        Button, 0x102846910, {{24.0, 560.7}, {392.0, 54.0}}, identifier: 'botao_enviar', label: 'Entrar'
+                          StaticText, 0x102846a30, {{194.7, 577.7}, {50.7, 20.0}}, label: 'Entrar'
+                        Button, 0x102846b50, {{134.7, 626.7}, {171.0, 48.0}}, identifier: 'politica_de_privacidade', label: 'Política de privacidade'
+                          StaticText, 0x102846c70, {{146.7, 640.7}, {147.0, 20.0}}, label: 'Política de privacidade'
+Path to element:
+ →Application, 0x102926eb0, pid: 34145, label: 'Natação Criativa'
+Query chain:
+ →Find: Target Application 'com.natacaocriativa.treinos'
+  Output: {
+    Application, 0x1029370c0, pid: 34145, label: 'Natação Criativa'
+  }
